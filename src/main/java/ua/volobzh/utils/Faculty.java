@@ -16,6 +16,9 @@ public class Faculty {
         this.shortName = shortName;
         this.decan = decan;
         this.contacts = contacts;
+
+        this.departments = new Department[3];
+        this.departmentCount = 0;
     }
 
     public int getId() {
