@@ -1,4 +1,4 @@
-package ua.sopsany.Models;
+package ua.sopsany.models;
 
 import java.util.Scanner;
 
@@ -28,7 +28,11 @@ public class InputHandler {
 
             if (!input.isEmpty()) {
                 try {
-                    return Integer.parseInt(input);
+                    int value = Integer.parseInt(input);
+                    if (value >= min && value <= max)
+                        return value;
+                    else
+                        System.out.println("Error: number must be between " + min + " and " + max);
                 } catch (NumberFormatException e) {
                     System.out.println("Error, input is not a number");
                 }

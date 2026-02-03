@@ -1,4 +1,4 @@
-package ua.sopsany.Models;
+package ua.sopsany.models;
 
 import java.util.Arrays;
 
@@ -36,7 +36,7 @@ public class Faculty {
             departments = Arrays.copyOf(departments, departments.length + 5);
 
 
-        departments[departmentCount++] = department;
+        departments[departmentCount] = department;
         departmentCount++;
     }
 
