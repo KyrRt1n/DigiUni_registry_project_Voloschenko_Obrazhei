@@ -1,7 +1,7 @@
-package ua.sopsany.Repositories;
+package ua.sopsany.repositories;
 
-import ua.sopsany.Models.Student;
-import ua.sopsany.Models.Teacher;
+import ua.sopsany.models.Student;
+import ua.sopsany.models.Teacher;
 
 import java.util.Arrays;
 
