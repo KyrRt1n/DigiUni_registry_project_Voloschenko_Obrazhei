@@ -1,4 +1,4 @@
-package ua.sopsany.Models;
+package ua.sopsany.models;
 
 public abstract class Person {
 
