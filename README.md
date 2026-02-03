@@ -5,13 +5,16 @@
 └── DigiUni Registry
     └── main
         └── java
-            └── ua.sopsany
-                ├── utils
-                │   ├── Department.java
-                │   ├── Faculty.java
-                │   ├── InputHandler.java
-                │   └── University.java
-                └── Models
+            └── ua.sopsany   
+                ├── Models
+                │   ├── Person.java
+                │   ├── Student.java
+                │   └── Teacher.java
+                └── utils
+                    ├── Department.java
+                    ├── Faculty.java
+                    ├── InputHandler.java
+                    └── University.java
 ```
 
 
