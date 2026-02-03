@@ -1,4 +1,4 @@
-package ua.volobzh.utils;
+package ua.sopsany.utils;
 
 import java.util.Scanner;
 
