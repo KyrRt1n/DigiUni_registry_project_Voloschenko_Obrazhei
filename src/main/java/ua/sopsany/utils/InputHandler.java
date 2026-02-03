@@ -1,4 +1,4 @@
-package ua.sopsany.models;
+package ua.sopsany.utils;
 
 import java.util.Scanner;
 
