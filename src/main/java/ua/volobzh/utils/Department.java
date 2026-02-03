@@ -8,10 +8,10 @@ public class Department {
     private String office;
 
     private Object[] students; //There you need replace Object with Student class
-    private int studentCount;
+    private int studentsCount;
 
     private Object[] teachers; //analogichno
-    private int teacherCount;
+    private int teachersCount;
 
     public Department(int ID, String Name, String office) {
         this.ID = ID;
@@ -19,9 +19,9 @@ public class Department {
         this.office = office;
 
         this.students = new Object[10];
-        this.studentCount = 0;
+        this.studentsCount = 0;
         this.teachers = new Object[10];
-        this.teacherCount = 0;
+        this.teachersCount = 0;
     }
 
     public int getID() {
