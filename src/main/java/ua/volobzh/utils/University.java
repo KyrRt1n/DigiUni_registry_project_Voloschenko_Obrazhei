@@ -21,6 +21,23 @@ public class University {
         this.facultyCount = 0;
     }
 
+    public Faculty[] getFaculties() {
+        return Arrays.copyOf(faculties, facultyCount);
+    }
+
+    public int getFacultyCount() {
+        return facultyCount;
+    }
+
+    public void addFaculty(Faculty faculty) {
+        if(facultyCount == faculties.length) {
+            faculties = Arrays.copyOf(faculties, faculties.length + 5);
+        }
+
+        faculties[facultyCount++] = faculty;
+        facultyCount++;
+    }
+
     public String getFullName() {
         return fullName;
     }
