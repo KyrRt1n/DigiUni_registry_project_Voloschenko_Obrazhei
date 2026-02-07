@@ -1,10 +1,14 @@
 package ua.sopsany.utils;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 public class InputHandler {
 
     private final Scanner scanner;
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     public InputHandler() {
         this.scanner = new Scanner(System.in);
@@ -18,6 +22,24 @@ public class InputHandler {
                 return input;
             }
             System.out.println("Error, field is empty");
+        }
+    }
+
+    public LocalDate readDate(String prompt) {
+        while (true) {
+            System.out.print(prompt + " (dd.MM.yyyy): ");
+            String input = scanner.nextLine().trim();
+
+            if (input.isEmpty()) {
+                System.out.println("Помилка: дата не може бути порожньою.");
+                continue;
+            }
+
+            try {
+                return LocalDate.parse(input, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("Помилка! Неправильний формат дати. Спробуйте дд.мм.рррр (наприклад, 25.01.2005)");
+            }
         }
     }
 
