@@ -20,7 +20,7 @@ public class Faculty {
         return departmentCount;
     }
 
-    public Faculty(int id, String fullName, String shortName, String decan, String contacts) {
+    public Faculty(int id, String fullName, String shortName, Teacher decan, String contacts) {
         this.id = id;
         this.fullName = fullName;
         this.shortName = shortName;
