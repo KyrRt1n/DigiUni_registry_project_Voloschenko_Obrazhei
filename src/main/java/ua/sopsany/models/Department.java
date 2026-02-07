@@ -36,6 +36,18 @@ public class Department {
         return office;
     }
 
+    public void addStudent(Student student) {
+        if (studentsCount == students.length) {
+            students = java.util.Arrays.copyOf(students, students.length + 5);
+        }
+        students[studentsCount] = student;
+        studentsCount++;
+    }
+
+    public Student[] getStudents() {
+        return java.util.Arrays.copyOf(students, studentsCount);
+    }
+
     @Override
     public String toString() {
         return "Department" + name;
