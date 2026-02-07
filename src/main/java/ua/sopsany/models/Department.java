@@ -4,13 +4,13 @@ public class Department {
 
     private int ID;
     private String name;
-    //private String head; Sanya there must be zav kafedry
+    private Teacher head;
     private String office;
 
-    private Object[] students; //There you need replace Object with Student class
+    private Student[] students;
     private int studentsCount;
 
-    private Object[] teachers; //analogichno
+    private Teacher[] teachers;
     private int teachersCount;
 
     public Department(int ID, String Name, String office) {
@@ -18,9 +18,9 @@ public class Department {
         this.name = Name;
         this.office = office;
 
-        this.students = new Object[10];
+        this.students = new Student[10];
         this.studentsCount = 0;
-        this.teachers = new Object[10];
+        this.teachers = new Teacher[10];
         this.teachersCount = 0;
     }
 
