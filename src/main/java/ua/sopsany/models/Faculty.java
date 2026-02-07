@@ -6,7 +6,7 @@ public class Faculty {
     private int id;
     private String fullName;
     private String shortName;
-    private String decan; //Must be teacher class instead of String
+    private Teacher decan;
     private String contacts;
 
     private Department[] departments;
@@ -52,7 +52,7 @@ public class Faculty {
         return shortName;
     }
 
-    public String getDecan() {
+    public Teacher getDecan() {
         return decan;
     }
 
