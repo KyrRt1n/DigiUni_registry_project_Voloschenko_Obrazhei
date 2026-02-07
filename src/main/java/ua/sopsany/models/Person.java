@@ -1,26 +1,28 @@
 package ua.sopsany.models;
 
+import java.time.LocalDate;
+
 public abstract class Person {
 
     private String name;
     private String surname;
     private String lastname;
-    private String birthday;
+    private LocalDate birthday;
     private String email;
-    private int phone;
+    private String phone;
     private int id;
 
 
 
-        public Person(String name, String surname, String lastname, String birthday, String email, int phone, int id) {
-            this.name = name;
-            this.surname = surname;
-            this.lastname = lastname;
-            this.birthday = birthday;
-            this.email = email;
-            this.phone = phone;
-            this.id = id;
-        }
+    public Person(String name, String surname, String lastname, LocalDate birthday, String email, String phone, int id) {
+        this.name = name;
+        this.surname = surname;
+        this.lastname = lastname;
+        this.birthday = birthday;
+        this.email = email;
+        this.phone = phone;
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -34,7 +36,7 @@ public abstract class Person {
         return lastname;
     }
 
-    public String getBirthday() {
+    public LocalDate getBirthday() {
         return birthday;
     }
 
@@ -42,7 +44,7 @@ public abstract class Person {
         return email;
     }
 
-    public int getPhone() {
+    public String getPhone() {
         return phone;
     }
 
@@ -52,7 +54,7 @@ public abstract class Person {
 
     @Override
     public String toString() {
-        return id + ": " + surname + " " + name + " (" + phone + ")";
+        return "№" +id + ": " + name + ", " + surname + " (" + phone + ")";
     }
 
 }
