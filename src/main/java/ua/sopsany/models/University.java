@@ -16,9 +16,29 @@ public class University {
         this.shortName = shortName;
         this.city = city;
         this.address = address;
-
         this.faculties = new Faculty[3];
         this.facultyCount = 0;
+    }
+
+    public University(String fullName, String shortName) {
+        this.fullName = fullName;
+        this.shortName = shortName;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setFaculties(Faculty[] faculties) {
+        this.faculties = faculties;
+    }
+
+    public void setFacultyCount(int facultyCount) {
+        this.facultyCount = facultyCount;
     }
 
     public Faculty[] getFaculties() {

@@ -26,6 +26,34 @@ public class Student extends Person {
         this.studentID = studentID;
     }
 
+    public void setCourse(int course) {
+        this.course = course;
+    }
+
+    public void setGroup(String group) {
+        this.group = group;
+    }
+
+    public void setEntryYear(int entryYear) {
+        this.entryYear = entryYear;
+    }
+
+    public void setStudentID(String studentID) {
+        this.studentID = studentID;
+    }
+
+    public void setEducationForm(FormEducation educationForm) {
+        this.educationForm = educationForm;
+    }
+
+    public void setStudentState(StudentState studentState) {
+        this.studentState = studentState;
+    }
+
+    public Student(String surname, String name, String lastname) {
+        super(surname, name, lastname);
+    }
+
     public int getCourse() { return course; }
     public String getGroup() { return group; }
     public int getEntryYear() { return entryYear; }
