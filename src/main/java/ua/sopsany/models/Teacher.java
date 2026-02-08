@@ -10,8 +10,6 @@ public class Teacher extends Person {
     private LocalDate dateOfEmployment;
     private int workLoad;
 
-
-
     public Teacher(String name, String surname, String lastname, LocalDate birthday, String email, String phone, int id,
                    String position, String academicDegree, String academicTitle, LocalDate dateOfEmployment, int workLoad) {
         super(name, surname, lastname, birthday, email, phone, id);
@@ -19,6 +17,30 @@ public class Teacher extends Person {
         this.academicDegree = academicDegree;
         this.academicTitle = academicTitle;
         this.dateOfEmployment = dateOfEmployment;
+        this.workLoad = workLoad;
+    }
+
+    public Teacher(String surname, String name, String lastname) {
+        super(surname, name, lastname);
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setAcademicDegree(String academicDegree) {
+        this.academicDegree = academicDegree;
+    }
+
+    public void setAcademicTitle(String academicTitle) {
+        this.academicTitle = academicTitle;
+    }
+
+    public void setDateOfEmployment(LocalDate dateOfEmployment) {
+        this.dateOfEmployment = dateOfEmployment;
+    }
+
+    public void setWorkLoad(int workLoad) {
         this.workLoad = workLoad;
     }
 
