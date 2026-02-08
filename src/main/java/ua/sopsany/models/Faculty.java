@@ -12,6 +12,22 @@ public class Faculty {
     private Department[] departments;
     private int departmentCount;
 
+    public Faculty(int id, String fullName, String shortName, Teacher decan, String contacts) {
+        this.id = id;
+        this.fullName = fullName;
+        this.shortName = shortName;
+        this.decan = decan;
+        this.contacts = contacts;
+        this.departments = new Department[3];
+        this.departmentCount = 0;
+    }
+
+    public Faculty(int id, String fullName, String shortName) {
+        this.id = id;
+        this.fullName = fullName;
+        this.shortName = shortName;
+    }
+
     public Department[] getDepartments() {
         return Arrays.copyOf(this.departments, this.departmentCount);
     }
@@ -20,15 +36,20 @@ public class Faculty {
         return departmentCount;
     }
 
-    public Faculty(int id, String fullName, String shortName, Teacher decan, String contacts) {
-        this.id = id;
-        this.fullName = fullName;
-        this.shortName = shortName;
-        this.decan = decan;
-        this.contacts = contacts;
+    public void setDepartmentCount(int departmentCount) {
+        this.departmentCount = departmentCount;
+    }
 
-        this.departments = new Department[3];
-        this.departmentCount = 0;
+    public void setDepartments(Department[] departments) {
+        this.departments = departments;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts;
+    }
+
+    public void setDecan(Teacher decan) {
+        this.decan = decan;
     }
 
     public void addDepartment(Department department) {
