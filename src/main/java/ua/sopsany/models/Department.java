@@ -25,6 +25,18 @@ public class Department {
     public Department(int ID, String name) {
         this.ID = ID;
         this.name = name;
+        this.students = new Student[10];
+        this.studentsCount = 0;
+        this.teachers = new Teacher[10];
+        this.teachersCount = 0;
+    }
+
+    public void addStudent(Student student) {
+        if (studentsCount == students.length) {
+            students = java.util.Arrays.copyOf(students, students.length + 5);
+        }
+        students[studentsCount] = student;
+        studentsCount++;
     }
 
     public void setOffice(String office) {
@@ -59,21 +71,13 @@ public class Department {
         return office;
     }
 
-    public void addStudent(Student student) {
-        if (studentsCount == students.length) {
-            students = java.util.Arrays.copyOf(students, students.length + 5);
-        }
-        students[studentsCount] = student;
-        studentsCount++;
-    }
-
     public Student[] getStudents() {
         return java.util.Arrays.copyOf(students, studentsCount);
     }
 
     @Override
     public String toString() {
-        return "Department" + name;
+        return "Department " + name;
     }
 
 }

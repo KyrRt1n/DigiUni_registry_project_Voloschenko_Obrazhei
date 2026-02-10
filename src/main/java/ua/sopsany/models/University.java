@@ -25,6 +25,15 @@ public class University {
         this.shortName = shortName;
     }
 
+    public void addFaculty(Faculty faculty) {
+        if(facultyCount == faculties.length) {
+            faculties = Arrays.copyOf(faculties, faculties.length + 5);
+        }
+
+        faculties[facultyCount] = faculty;
+        facultyCount++;
+    }
+
     public void setCity(String city) {
         this.city = city;
     }
@@ -47,15 +56,6 @@ public class University {
 
     public int getFacultyCount() {
         return facultyCount;
-    }
-
-    public void addFaculty(Faculty faculty) {
-        if(facultyCount == faculties.length) {
-            faculties = Arrays.copyOf(faculties, faculties.length + 5);
-        }
-
-        faculties[facultyCount] = faculty;
-        facultyCount++;
     }
 
     public String getFullName() {
