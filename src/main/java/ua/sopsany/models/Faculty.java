@@ -26,6 +26,17 @@ public class Faculty {
         this.id = id;
         this.fullName = fullName;
         this.shortName = shortName;
+        this.departments = new Department[3];
+        this.departmentCount = 0;
+    }
+
+    public void addDepartment(Department department) {
+        if(departmentCount == departments.length)
+            departments = Arrays.copyOf(departments, departments.length + 5);
+
+
+        departments[departmentCount] = department;
+        departmentCount++;
     }
 
     public Department[] getDepartments() {
@@ -50,15 +61,6 @@ public class Faculty {
 
     public void setDecan(Teacher decan) {
         this.decan = decan;
-    }
-
-    public void addDepartment(Department department) {
-        if(departmentCount == departments.length)
-            departments = Arrays.copyOf(departments, departments.length + 5);
-
-
-        departments[departmentCount] = department;
-        departmentCount++;
     }
 
     public int getId() {
