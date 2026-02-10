@@ -50,6 +50,18 @@ public class Main {
                     break;
 
                 case 2:
+                    System.out.println("Select faculty you want add Student to:");
+                    for (int i = 0; i < university.getFacultyCount(); i++) {
+                        System.out.println(i +". " + university.getFaculties()[i]);
+                    }
+                    int chosenFaculty = input.readInt("Your choice:" );
+
+                    System.out.println("Now select department you want add Student to:");
+                    for (int i = 0; i < university.getFaculties()[chosenFaculty].getDepartmentCount(); i++) {
+                        System.out.println(i +". " + university.getFaculties()[chosenFaculty].getDepartments()[i]);
+                    }
+                    int chosenDepartment =  input.readInt("Your choice:" );
+
                     System.out.println("--- Adding New Student ---");
                     String name = input.readString("Name");
                     String surname = input.readString("Surname");
