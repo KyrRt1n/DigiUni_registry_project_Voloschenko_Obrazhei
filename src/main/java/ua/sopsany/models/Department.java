@@ -39,6 +39,27 @@ public class Department {
         studentsCount++;
     }
 
+    public boolean removeStudentByLastName(String lastname) {
+        int indexToRemove = -1;
+
+        for (int i = 0; i < studentsCount; i++) {
+            if (students[i].getLastname().equals(lastname)) {
+                indexToRemove = i;
+                break;
+            }
+        }
+
+        if (indexToRemove == -1) return false;
+
+        for (int i = indexToRemove; i < studentsCount - 1; i++)
+            students[i] = students[i + 1];
+
+        students[studentsCount - 1] = null;
+        studentsCount--;
+
+        return true;
+    }
+
     public void setOffice(String office) {
         this.office = office;
     }
