@@ -8,16 +8,10 @@ import java.time.LocalDate;
 
 public class Main {
 
-    static int uniFacultyCount;
-    static int chosenFaculty;
-    static int chosenDepartment;
-    static String name, surname, lastname;
     static University university = Repository.createUniversity();
     static InputHandler input = new InputHandler();
 
     public static void main(String[] args) {
-        Faculty fi = university.getFaculties()[0];
-        Department se = fi.getDepartments()[0];
 
         while (true) {
             System.out.println("\n--- UNIVERSITY SYSTEM MENU ---");
@@ -51,11 +45,57 @@ public class Main {
                     studentRemoval();
                     break;
 
+                case 6:
+                    studentUpdate();
+                    break;
+
                 case 0:
                     System.out.println("Goodbye!");
                     return;
             }
         }
+    }
+
+    private static void studentUpdate() {
+        System.out.println("=== Student info updater ===");
+        String lastnameToUpd = input.readString("Lastname: ");
+        Student foundStudent = null;
+        for (Faculty f : university.getFaculties()) {
+            for (Department d : f.getDepartments()) {
+                for (Student s : d.getStudents()) {
+                    if (s.getLastname().equalsIgnoreCase(lastnameToUpd)) {
+                        System.out.println("FOUND: " + s);
+                        foundStudent = s;
+                        break;
+                    }
+                    if (foundStudent!=null) break;
+                }
+                if (foundStudent!=null) break;
+            }
+            if (foundStudent!=null) break;
+        }
+        if (foundStudent==null) {
+            System.out.println("Student not found.");
+            return;
+        }
+
+        System.out.println("What do you wanna update?");
+        System.out.println("1. Course");
+        System.out.println("2. Group");
+        System.out.println("0. Cancel");
+        int choiceToUpd = input.readInt("Select option", 0, 2);
+        switch (choiceToUpd) {
+            case 1:
+                foundStudent.setCourse(input.readInt("Course: ", 1, 6));
+                break;
+            case 2:
+                foundStudent.setGroup(input.readString("Group: "));
+                break;
+            case 0:
+                System.out.println("Update cancelled");
+                break;
+        }
+
     }
 
     private static void printUniStructure() {
@@ -72,22 +112,22 @@ public class Main {
 
     private static void addStudent() {
         System.out.println("Select faculty you want add Student to:");
-        uniFacultyCount = university.getFacultyCount();
+        int uniFacultyCount = university.getFacultyCount();
         for (int i = 0; i < uniFacultyCount; i++) {
             System.out.print(i +". " + university.getFaculties()[i] + " | ");
         }
-        chosenFaculty = input.readInt("Your choice:" );
+        int chosenFaculty = input.readInt("Your choice:" );
 
         System.out.println("Now select department you want add Student to:");
         for (int i = 0; i < university.getFaculties()[chosenFaculty].getDepartmentCount(); i++) {
             System.out.println(i +". " + university.getFaculties()[chosenFaculty].getDepartments()[i]);
         }
-        chosenDepartment =  input.readInt("Your choice:" );
+        int chosenDepartment =  input.readInt("Your choice:" );
 
         System.out.println("--- Adding New Student ---");
-        name = input.readString("Name");
-        surname = input.readString("Surname");
-        lastname = input.readString("Lastname");
+        String nameToAdd = input.readString("Name");
+        String surnameToAdd = input.readString("Surname");
+        String lastnameToAdd = input.readString("Lastname");
         LocalDate birthDate = input.readDate("Birthday");
         String email = input.readString("Email");
         String phone = input.readString("Phone");
@@ -97,7 +137,7 @@ public class Main {
         int year = input.readInt("Entry Year", 1990, 2025);
         String studId = input.readString("Student Ticket ID");
 
-        Student newStudent = new Student(name, surname, lastname, birthDate, email, phone, id,
+        Student newStudent = new Student(nameToAdd, surnameToAdd, lastnameToAdd, birthDate, email, phone, id,
                 course, group, year, Student.FormEducation.BUDGET, Student.StudentState.STUDYING, studId);
 
         university.getFaculties()[chosenFaculty].getDepartments()[chosenDepartment].addStudent(newStudent);
@@ -106,11 +146,11 @@ public class Main {
 
     private static void findStudentByLastname() {
         boolean found = false;
-        name = input.readString("Enter lastname to search");
+        String lastnameToFind = input.readString("Enter lastname to search");
         for (Faculty f : university.getFaculties()) {
             for (Department d : f.getDepartments()) {
                 for (Student s : d.getStudents()) {
-                    if (s.getLastname().equalsIgnoreCase(name)) {
+                    if (s.getLastname().equalsIgnoreCase(lastnameToFind)) {
                         System.out.println("FOUND: " + s);
                         found = true;
                     }
@@ -136,12 +176,12 @@ public class Main {
     private static void studentRemoval() {
         boolean found = false;
         System.out.println("--- Student removal ---");
-        name = input.readString("Student name to remove: ");
+        String nameToRemove = input.readString("Student name to remove: ");
         for (Faculty f : university.getFaculties()) {
             if(found) break;
 
             for (Department d : f.getDepartments()) {
-                found = d.removeStudentByLastName(name);
+                found = d.removeStudentByLastName(nameToRemove);
                 if (found) System.out.println("Student removed successfully!");
             }
         }
