@@ -11,6 +11,10 @@ public class Repository {
         Faculty fi = new Faculty(1, "Faculty of Infomatics", "FI");
         university.addFaculty(fi);
 
+        Faculty eco = new Faculty(2, "FACULTY OF ECONOMICS", "FOE");
+        university.addFaculty(eco);
+
+
         Teacher Hlybovets = new Teacher("Andrii",
                 "Mykolayovych",
                 "Hlybovets",
@@ -33,6 +37,27 @@ public class Repository {
                 "konodioda", "+380978620341", 1488228, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "148228");
         System.out.println("Sanya: " + Sanya);
         se.addStudent(Sanya);
+
+        Student Artem = new Student("Artem", "Oleksiyovich", "Voloshchenko", LocalDate.of(2008, 1, 9),
+                "aVoloshka666", "+380972417071", 105105105, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "105105105");
+        System.out.println("Artem: " + Artem);
+        se.addStudent(Artem);
+
+        Department marketing = new Department(2, "Marketing", "6-406");
+        eco.addDepartment(marketing);
+
+        Student Oleg = new Student("Oleg", "Kyrylovych", "Kyrolov", LocalDate.of(2007, 7, 29),
+                "OlegRagul", "+3809783493", 1232343565, 1, "MARK", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "1232343565");
+        System.out.println("Oleg: " + Oleg);
+        marketing.addStudent(Oleg);
+
+        Department management = new Department(2, "management", "6-406");
+        eco.addDepartment(management);
+
+        Student Vlad = new Student("Vlad", "Sergiyovich", "Hryn", LocalDate.of(2007, 9, 25),
+                "LuxonGames", "+380973274136", 235346456, 1, "MANEG", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "235346456");
+        System.out.println("Vlad: " + Vlad);
+        management.addStudent(Vlad);
 
         return university;
     }
