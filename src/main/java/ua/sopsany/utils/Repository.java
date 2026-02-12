@@ -34,12 +34,12 @@ public class Repository {
         fi.addDepartment(se);
 
         Student Sanya = new Student("Sanya", "Valeriyovych", "Obrazhei", LocalDate.of(2007, 10, 11),
-                "konodioda", "+380978620341", 1488228, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "148228");
+                "konodioda@gmail", "+380978620341", 1488228, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "148228");
         System.out.println("Sanya: " + Sanya);
         se.addStudent(Sanya);
 
         Student Artem = new Student("Artem", "Oleksiyovich", "Voloshchenko", LocalDate.of(2008, 1, 9),
-                "aVoloshka666", "+380972417071", 105105105, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "105105105");
+                "aVoloshka666@gmail", "+380972417071", 105105105, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "105105105");
         System.out.println("Artem: " + Artem);
         se.addStudent(Artem);
 
@@ -47,7 +47,7 @@ public class Repository {
         eco.addDepartment(marketing);
 
         Student Oleg = new Student("Oleg", "Kyrylovych", "Kyrolov", LocalDate.of(2007, 7, 29),
-                "OlegRagul", "+3809783493", 1232343565, 1, "MARK", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "1232343565");
+                "OlegRagul@gmail", "+3809783493", 1232343565, 2, "MARK", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "1232343565");
         System.out.println("Oleg: " + Oleg);
         marketing.addStudent(Oleg);
 
