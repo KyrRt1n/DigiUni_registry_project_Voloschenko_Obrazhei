@@ -1,4 +1,5 @@
 package ua.sopsany;
+import java.util.List;
 
 import ua.sopsany.models.*;
 import ua.sopsany.utils.InputHandler;
@@ -22,7 +23,7 @@ public class Main {
             System.out.println("5. Remove Student");
             System.out.println("0. Exit");
 
-            int choice = input.readInt("Select option", 0, 5);
+            int choice = input.readInt("Select option", 0, 6);
 
             switch (choice) {
                 case 1:
@@ -112,15 +113,16 @@ public class Main {
 
     private static void addStudent() {
         System.out.println("Select faculty you want add Student to:");
-        int uniFacultyCount = university.getFacultyCount();
-        for (int i = 0; i < uniFacultyCount; i++) {
-            System.out.print(i +". " + university.getFaculties()[i] + " | ");
+        List<Faculty> faculties = university.getFaculties();
+        for (int i = 0; i < faculties.size(); i++) {
+            System.out.print(i + ". " + faculties.get(i) + " | ");
         }
         int chosenFaculty = input.readInt("Your choice:" );
 
         System.out.println("Now select department you want add Student to:");
-        for (int i = 0; i < university.getFaculties()[chosenFaculty].getDepartmentCount(); i++) {
-            System.out.println(i +". " + university.getFaculties()[chosenFaculty].getDepartments()[i]);
+        Faculty chosen = university.getFaculties().get(chosenFaculty);
+        for (int i = 0; i < chosen.getDepartments().size(); i++) {
+            System.out.println(i + ". " + chosen.getDepartments().get(i));
         }
         int chosenDepartment =  input.readInt("Your choice:" );
 
@@ -140,7 +142,7 @@ public class Main {
         Student newStudent = new Student(nameToAdd, surnameToAdd, lastnameToAdd, birthDate, email, phone, id,
                 course, group, year, Student.FormEducation.BUDGET, Student.StudentState.STUDYING, studId);
 
-        university.getFaculties()[chosenFaculty].getDepartments()[chosenDepartment].addStudent(newStudent);
+        university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment).addStudent(newStudent);
         System.out.println("Student added successfully!");
     }
 
