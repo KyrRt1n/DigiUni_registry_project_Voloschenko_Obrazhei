@@ -23,9 +23,9 @@ public class Repository {
         facultyRepo.add(fi);
 
         Faculty eco = new Faculty(2, "Faculty of Economics", "FOE");
+        eco.setContacts("+380973274136");
         university.addFaculty(eco);
         facultyRepo.add(eco);
-
 
         Teacher Hlybovets = new Teacher("Andrii",
                 "Mykolayovych",
