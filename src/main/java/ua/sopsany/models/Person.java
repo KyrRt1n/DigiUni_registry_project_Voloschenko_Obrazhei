@@ -1,6 +1,7 @@
 package ua.sopsany.models;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public abstract class Person {
 
@@ -73,7 +74,7 @@ public abstract class Person {
     }
 
     public int getAge() {
-        return LocalDate.now().getYear() - this.birthday.getYear();
+        return Period.between(birthday, LocalDate.now()).getYears();
     }
 
     @Override
