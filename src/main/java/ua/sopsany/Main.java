@@ -1,10 +1,14 @@
 package ua.sopsany;
-import java.util.List;
 
+import java.util.List;
 import ua.sopsany.models.*;
 import ua.sopsany.utils.InputHandler;
 import ua.sopsany.utils.Repository;
 import ua.sopsany.utils.StudentFinder;
+import ua.sopsany.auth.AuthService;
+import ua.sopsany.auth.User;
+import ua.sopsany.auth.Role;
+import ua.sopsany.exceptions.UnauthorizedExcpetion;
 
 import java.time.LocalDate;
 
@@ -13,16 +17,36 @@ public class Main {
     public static University university = Repository.createUniversity();
     static InputHandler input = new InputHandler();
     static StudentFinder findStudent = new StudentFinder();
+    static AuthService authService = Repository.createAuthService();
+    static User currentUser = null;
 
     public static void main(String[] args) {
 
+        while (currentUser == null) {
+            System.out.println("\n=== LOGIN ===");
+            String login = input.readString("Login");
+            String password = input.readString("Password");
+            try {
+                currentUser = authService.login(login, password).get();
+                System.out.println("Welcome, " + currentUser.getLogin() + " [" + currentUser.getRole() + "]");
+            } catch (UnauthorizedExcpetion e) {
+                System.out.println("Error: " + e.getMessage());
+            }
+        }
+
         while (true) {
             System.out.println("\n--- UNIVERSITY SYSTEM MENU ---");
+
             System.out.println("1. Print University Structure");
-            System.out.println("2. Add Student");
             System.out.println("3. Find Student");
             System.out.println("4. Show all students");
-            System.out.println("5. Remove Student");
+
+            if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                System.out.println("2. Add Student");
+                System.out.println("5. Remove Student");
+                System.out.println("6. Update Student");
+            }
+
             System.out.println("0. Exit");
 
             int choice = input.readInt("Select option", 0, 6);
@@ -33,7 +57,11 @@ public class Main {
                     break;
 
                 case 2:
-                    addStudent();
+                    if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                        addStudent();
+                    } else {
+                        System.out.println("Access denied.");
+                    }
                     break;
 
                 case 3:
@@ -45,11 +73,19 @@ public class Main {
                     break;
 
                 case 5:
-                    studentRemoval();
+                    if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                        studentRemoval();
+                    } else {
+                        System.out.println("Access denied.");
+                    }
                     break;
 
                 case 6:
-                    studentUpdate();
+                    if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                        studentUpdate();
+                    } else {
+                        System.out.println("Access denied.");
+                    }
                     break;
 
                 case 0:
@@ -71,13 +107,13 @@ public class Main {
                         foundStudent = s;
                         break;
                     }
-                    if (foundStudent!=null) break;
+                    if (foundStudent != null) break;
                 }
-                if (foundStudent!=null) break;
+                if (foundStudent != null) break;
             }
-            if (foundStudent!=null) break;
+            if (foundStudent != null) break;
         }
-        if (foundStudent==null) {
+        if (foundStudent == null) {
             System.out.println("Student not found.");
             return;
         }
@@ -98,7 +134,6 @@ public class Main {
                 System.out.println("Update cancelled");
                 break;
         }
-
     }
 
     private static void printUniStructure() {
@@ -119,14 +154,14 @@ public class Main {
         for (int i = 0; i < faculties.size(); i++) {
             System.out.print(i + ". " + faculties.get(i) + " | ");
         }
-        int chosenFaculty = input.readInt("Your choice:" );
+        int chosenFaculty = input.readInt("Your choice:");
 
         System.out.println("Now select department you want add Student to:");
         Faculty chosen = university.getFaculties().get(chosenFaculty);
         for (int i = 0; i < chosen.getDepartments().size(); i++) {
             System.out.println(i + ". " + chosen.getDepartments().get(i));
         }
-        int chosenDepartment =  input.readInt("Your choice:" );
+        int chosenDepartment = input.readInt("Your choice:");
 
         System.out.println("--- Adding New Student ---");
         String nameToAdd = input.readString("Name");
@@ -149,13 +184,11 @@ public class Main {
     }
 
     private static void findStudent() {
-        boolean found = false;
-
-        System.out.println("1. Find students in course of your choice");
-        System.out.println("2. Find students in group of your choice");
-        System.out.println("3. Find students by Name, Lastname and Surname");
+        System.out.println("1. Find students by course");
+        System.out.println("2. Find students by group");
+        System.out.println("3. Find students by full name");
         System.out.println("0. Go back");
-        int findingOption = input.readInt("How to you wanna find student?", 0, 3);
+        int findingOption = input.readInt("Your choice:", 0, 3);
 
         switch (findingOption) {
             case 1:
@@ -167,14 +200,14 @@ public class Main {
                 findStudent.ByGroup(groupToFind);
                 break;
             case 3:
-                String lastnameToFind = input.readString("Enter lastname to search");
-                String nameToFind = input.readString("Enter student name to search");
-                String surnameToFind = input.readString("Enter surname to search");
-                findStudent.ByFullName(nameToFind, lastnameToFind,  surnameToFind);
+                String lastnameToFind = input.readString("Enter lastname");
+                String nameToFind = input.readString("Enter name");
+                String surnameToFind = input.readString("Enter surname");
+                findStudent.ByFullName(nameToFind, lastnameToFind, surnameToFind);
                 break;
-            case 0: return;
+            case 0:
+                return;
         }
-
     }
 
     private static void printStudentList() {
@@ -193,10 +226,9 @@ public class Main {
     private static void studentRemoval() {
         boolean found = false;
         System.out.println("--- Student removal ---");
-        String nameToRemove = input.readString("Student name to remove: ");
+        String nameToRemove = input.readString("Student lastname to remove:");
         for (Faculty f : university.getFaculties()) {
-            if(found) break;
-
+            if (found) break;
             for (Department d : f.getDepartments()) {
                 found = d.removeStudentByLastName(nameToRemove);
                 if (found) System.out.println("Student removed successfully!");
