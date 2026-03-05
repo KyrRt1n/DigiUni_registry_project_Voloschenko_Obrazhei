@@ -44,7 +44,7 @@ public class Repository {
         Department se = new Department(1, "Software Engineering", "1-225");
         fi.addDepartment(se);
 
-        Student Sanya = new Student("Sanya", "Valeriyovych", "Obrazhei", LocalDate.of(2007, 10, 11),
+        Student Sanya = new Student("Sanya", "Valeriyovych", "Obrazhei", LocalDate.of(2007, 11, 10),
                 "konodioda@gmail", "+380978620341", 1488228, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "148228");
         System.out.println("Sanya: " + Sanya);
         se.addStudent(Sanya);
