@@ -2,6 +2,10 @@ package ua.sopsany.utils;
 
 import ua.sopsany.models.*;
 import java.time.LocalDate;
+import ua.sopsany.auth.AuthService;
+import ua.sopsany.auth.User;
+import ua.sopsany.auth.Role;
+
 
 public class Repository {
 
@@ -14,11 +18,11 @@ public class Repository {
 
         University university = new University("НаУКМА", "НаУКМА", "Київ", "Сковороди 2");
 
-        Faculty fi = new Faculty(1, "Faculty of Infomatics", "FI");
+        Faculty fi = new Faculty(1, "Faculty of Informatics", "FI");
         university.addFaculty(fi);
         facultyRepo.add(fi);
 
-        Faculty eco = new Faculty(2, "FACULTY OF ECONOMICS", "FOE");
+        Faculty eco = new Faculty(2, "Faculty of Economics", "FOE");
         university.addFaculty(eco);
         facultyRepo.add(eco);
 
@@ -36,11 +40,9 @@ public class Repository {
                 LocalDate.of(2012, 9, 1),
                 24);
         fi.setDecan(Hlybovets);
-        teacherRepo.add(Hlybovets);
 
         Department se = new Department(1, "Software Engineering", "1-225");
         fi.addDepartment(se);
-        departmentRepo.add(se);
 
         Student Sanya = new Student("Sanya", "Valeriyovych", "Obrazhei", LocalDate.of(2007, 10, 11),
                 "konodioda@gmail", "+380978620341", 1488228, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "148228");
@@ -64,8 +66,11 @@ public class Repository {
         System.out.println("Oleg: " + Oleg);
         marketing.addStudent(Oleg);
         studentRepo.add(Oleg);
+        marketing.addStudent(new Student("Oleg", "Kyrylovych", "Kyrolov",
+                LocalDate.of(2007, 7, 29), "OlegRagul@gmail", "+3809783493",
+                1232343565, 2, "MARK", 2025, Student.FormEducation.BUDGET, Student.StudentState.STUDYING, "1232343565"));
 
-        Department management = new Department(2, "management", "6-406");
+        Department management = new Department(3, "Management", "6-407");
         eco.addDepartment(management);
         departmentRepo.add(management);
 
@@ -76,5 +81,13 @@ public class Repository {
         studentRepo.add(Vlad);
 
         return university;
+    }
+
+    public static AuthService createAuthService() {
+        AuthService auth = new AuthService();
+        auth.addUser(new User("user", "user123", Role.USER));
+        auth.addUser(new User("manager", "mgr123", Role.MANAGER));
+        auth.addUser(new User("admin", "admin123", Role.ADMIN));
+        return auth;
     }
 }
