@@ -74,6 +74,9 @@ public abstract class Person {
     }
 
     public int getAge() {
+        if (birthday == null){
+            return 0;
+        }
         return Period.between(birthday, LocalDate.now()).getYears();
     }
 
