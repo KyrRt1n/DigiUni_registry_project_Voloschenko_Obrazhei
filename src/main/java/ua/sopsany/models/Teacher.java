@@ -1,6 +1,7 @@
 package ua.sopsany.models;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Teacher extends Person {
 
@@ -62,6 +63,10 @@ public class Teacher extends Person {
 
     public String getPosition() {
         return position;
+    }
+
+    public int getYearsOfWork() {
+        return Period.between(this.dateOfEmployment, LocalDate.now()).getYears();
     }
 
     @Override

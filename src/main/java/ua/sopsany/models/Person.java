@@ -72,6 +72,10 @@ public abstract class Person {
         return id;
     }
 
+    public int getAge() {
+        return LocalDate.now().getYear() - this.birthday.getYear();
+    }
+
     @Override
     public String toString() {
         return "№" +id + ": " + name + ", " + surname + " (" + phone + ")";

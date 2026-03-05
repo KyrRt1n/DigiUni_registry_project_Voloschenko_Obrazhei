@@ -7,7 +7,6 @@ import ua.sopsany.models.Student;
 
 public class StudentFinder {
 
-    static InputHandler input = new InputHandler();
 
     public void ByFullName(String nameToFind, String lastnameToFind, String surnameToFind){
         Student foundStudent = null;
