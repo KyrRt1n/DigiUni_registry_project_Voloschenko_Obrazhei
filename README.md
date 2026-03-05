@@ -3,20 +3,35 @@
 ```
 .
 └── DigiUni Registry
-    └── main
+    ├── main
+    │   └── java
+    │       └── ua.sopsany
+    │           ├── Main.java
+    │           ├── auth
+    │           │   ├── AuthService.java
+    │           │   ├── Role.java
+    │           │   └── User.java
+    │           ├── exceptions
+    │           │   ├── DuplicateIdException.java
+    │           │   ├── EntityNotFoundException.java
+    │           │   └── UnauthorizedExcpetion.java
+    │           ├── models
+    │           │   ├── Department.java
+    │           │   ├── Faculty.java
+    │           │   ├── Person.java
+    │           │   ├── Student.java
+    │           │   ├── Teacher.java
+    │           │   └── University.java
+    │           └── utils
+    │               ├── GenericRepository.java
+    │               ├── InputHandler.java
+    │               ├── Repository.java
+    │               ├── SearchService.java
+    │               └── StudentFinder.java
+    └── test
         └── java
             └── ua.sopsany
-                ├── Main.java
-                ├── utils
-                │   ├── InputHandler.java
-                │   └── Repository.java
-                └── Models
-                    ├── Department.java
-                    ├── Faculty.java
-                    ├── Person.java
-                    ├── Student.java
-                    ├── Teacher.java
-                    └── University.java
+                └── UniversityTest.java
 ```
 
 
