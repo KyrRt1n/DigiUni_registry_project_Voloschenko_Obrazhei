@@ -1,6 +1,7 @@
 package ua.sopsany.models;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class University {
     private String fullName;
@@ -8,16 +9,14 @@ public class University {
     private String city;
     private String address;
 
-    private Faculty[] faculties;
-    private int facultyCount;
+    private List<Faculty> faculties = new ArrayList<>();
 
     public University(String fullName, String shortName, String city, String address) {
         this.fullName = fullName;
         this.shortName = shortName;
         this.city = city;
         this.address = address;
-        this.faculties = new Faculty[3];
-        this.facultyCount = 0;
+
     }
 
     public University(String fullName, String shortName) {
@@ -26,12 +25,7 @@ public class University {
     }
 
     public void addFaculty(Faculty faculty) {
-        if(facultyCount == faculties.length) {
-            faculties = Arrays.copyOf(faculties, faculties.length + 5);
-        }
-
-        faculties[facultyCount] = faculty;
-        facultyCount++;
+        faculties.add(faculty);
     }
 
     public void setCity(String city) {
@@ -42,20 +36,8 @@ public class University {
         this.address = address;
     }
 
-    public void setFaculties(Faculty[] faculties) {
-        this.faculties = faculties;
-    }
-
-    public void setFacultyCount(int facultyCount) {
-        this.facultyCount = facultyCount;
-    }
-
-    public Faculty[] getFaculties() {
-        return Arrays.copyOf(faculties, facultyCount);
-    }
-
-    public int getFacultyCount() {
-        return facultyCount;
+    public List<Faculty> getFaculties() {
+        return faculties;
     }
 
     public String getFullName() {
