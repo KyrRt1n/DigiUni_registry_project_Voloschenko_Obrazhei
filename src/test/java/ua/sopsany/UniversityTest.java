@@ -84,10 +84,9 @@ public class UniversityTest {
         repo.add(Sanya);
         Student Oleg = new Student("Oleg", "Kyrylovych", "Kyrolov", LocalDate.of(2007, 7, 29),
                 "OlegRagul@gmail", "+3809783493", 1232343565, 2, "MARK", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "1232343565");
-        System.out.println("Oleg: " + Oleg);
         repo.add(Oleg);
 
-        List<Student> result = searchService.findByCourse(repo.getAll(), 1);
+        List<Student> result = searchService.findByLastName(repo.getAll(), "Obrazhei");
 
         assertEquals("Sanya", result.get(0).getName());
     }
