@@ -1,6 +1,5 @@
 package ua.sopsany.auth;
 
- public enum Role {
-        USER, ADMIN, MANAGER
-    }
-
+public enum Role {
+    USER, ADMIN, MANAGER
+}
