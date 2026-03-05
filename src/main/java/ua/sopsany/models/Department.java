@@ -1,4 +1,6 @@
 package ua.sopsany.models;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Department {
 
@@ -6,78 +8,41 @@ public class Department {
     private String name;
     private String office;
 
-    private Student[] students;
-    private int studentsCount;
+    private List<Student> students = new ArrayList<>();
+    private List<Teacher> teachers = new ArrayList<>();
 
-    private Teacher[] teachers;
-    private int teachersCount;
 
     public Department(int ID, String Name, String office) {
         this.ID = ID;
         this.name = Name;
         this.office = office;
-        this.students = new Student[10];
-        this.studentsCount = 0;
-        this.teachers = new Teacher[10];
-        this.teachersCount = 0;
+
     }
 
     public Department(int ID, String name) {
         this.ID = ID;
         this.name = name;
-        this.students = new Student[10];
-        this.studentsCount = 0;
-        this.teachers = new Teacher[10];
-        this.teachersCount = 0;
     }
 
     public void addStudent(Student student) {
-        if (studentsCount == students.length) {
-            students = java.util.Arrays.copyOf(students, students.length + 5);
-        }
-        students[studentsCount] = student;
-        studentsCount++;
+        students.add(student);
     }
 
     public boolean removeStudentByLastName(String lastname) {
-        int indexToRemove = -1;
-
-        for (int i = 0; i < studentsCount; i++) {
-            if (students[i].getLastname().equals(lastname)) {
-                indexToRemove = i;
-                break;
-            }
-        }
-
-        if (indexToRemove == -1) return false;
-
-        for (int i = indexToRemove; i < studentsCount - 1; i++)
-            students[i] = students[i + 1];
-
-        students[studentsCount - 1] = null;
-        studentsCount--;
-
-        return true;
+        return students.removeIf(s -> s.getLastname().equals(lastname));
     }
 
     public void setOffice(String office) {
         this.office = office;
     }
 
-    public void setStudents(Student[] students) {
+
+    public void setStudents(List<Student> students) {
         this.students = students;
     }
 
-    public void setStudentsCount(int studentsCount) {
-        this.studentsCount = studentsCount;
-    }
-
-    public void setTeachers(Teacher[] teachers) {
+    public void setTeachers(List<Teacher> teachers) {
         this.teachers = teachers;
-    }
-
-    public void setTeachersCount(int teachersCount) {
-        this.teachersCount = teachersCount;
     }
 
     public int getID() {
@@ -92,8 +57,8 @@ public class Department {
         return office;
     }
 
-    public Student[] getStudents() {
-        return java.util.Arrays.copyOf(students, studentsCount);
+    public List<Student> getStudents() {
+        return students;
     }
 
     @Override
