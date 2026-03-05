@@ -38,11 +38,11 @@ public class Main {
             System.out.println("\n--- UNIVERSITY SYSTEM MENU ---");
 
             System.out.println("1. Print University Structure");
-            System.out.println("3. Find Student");
-            System.out.println("4. Show all students");
+            System.out.println("2. Find Student");
+            System.out.println("3. Show all students");
 
             if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
-                System.out.println("2. Add Student");
+                System.out.println("4. Add Student");
                 System.out.println("5. Remove Student");
                 System.out.println("6. Update Student");
             }
@@ -57,19 +57,19 @@ public class Main {
                     break;
 
                 case 2:
+                    findStudent();
+                    break;
+
+                case 3:
+                    printStudentList();
+                    break;
+
+                case 4:
                     if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
                         addStudent();
                     } else {
                         System.out.println("Access denied.");
                     }
-                    break;
-
-                case 3:
-                    findStudent();
-                    break;
-
-                case 4:
-                    printStudentList();
                     break;
 
                 case 5:
