@@ -46,14 +46,12 @@ public class Repository {
 
         Student Sanya = new Student("Sanya", "Valeriyovych", "Obrazhei", LocalDate.of(2007, 11, 10),
                 "konodioda@gmail", "+380978620341", 1488228, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "148228");
-        System.out.println("Sanya: " + Sanya);
         se.addStudent(Sanya);
         studentRepo.add(Sanya);
 
 
         Student Artem = new Student("Artem", "Oleksiyovich", "Voloshchenko", LocalDate.of(2008, 1, 9),
                 "aVoloshka666@gmail", "+380972417071", 105105105, 1, "IPZ", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "105105105");
-        System.out.println("Artem: " + Artem);
         se.addStudent(Artem);
         studentRepo.add(Artem);
 
@@ -63,7 +61,6 @@ public class Repository {
 
         Student Oleg = new Student("Oleg", "Kyrylovych", "Kyrolov", LocalDate.of(2007, 7, 29),
                 "OlegRagul@gmail", "+3809783493", 1232343565, 2, "MARK", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "1232343565");
-        System.out.println("Oleg: " + Oleg);
         marketing.addStudent(Oleg);
         studentRepo.add(Oleg);
         marketing.addStudent(new Student("Oleg", "Kyrylovych", "Kyrolov",
@@ -76,7 +73,6 @@ public class Repository {
 
         Student Vlad = new Student("Vlad", "Sergiyovich", "Hryn", LocalDate.of(2007, 9, 25),
                 "LuxonGames", "+380973274136", 235346456, 1, "MANEG", 2025, Student.FormEducation.BUDGET , Student.StudentState.STUDYING, "235346456");
-        System.out.println("Vlad: " + Vlad);
         management.addStudent(Vlad);
         studentRepo.add(Vlad);
 

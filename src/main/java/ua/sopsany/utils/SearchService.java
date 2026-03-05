@@ -23,4 +23,11 @@ public class SearchService {
         return students.stream().sorted(Comparator.comparing(Person::getLastname)).toList();
     }
 
+    public List<Student> findByFullName(List<Student> students, String lastname, String name, String surname) {
+        return students.stream().filter(s -> s.getSurname().equalsIgnoreCase(surname)
+                && s.getLastname().equalsIgnoreCase(lastname)
+                && s.getName().equalsIgnoreCase(name)).toList();
+    }
+
+
 }
