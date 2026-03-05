@@ -4,7 +4,7 @@ import java.util.List;
 import ua.sopsany.models.*;
 import ua.sopsany.utils.InputHandler;
 import ua.sopsany.utils.Repository;
-import ua.sopsany.utils.StudentFinder;
+import ua.sopsany.utils.SearchService;
 import ua.sopsany.auth.AuthService;
 import ua.sopsany.auth.User;
 import ua.sopsany.auth.Role;
@@ -16,7 +16,7 @@ public class Main {
 
     public static University university = Repository.createUniversity();
     static InputHandler input = new InputHandler();
-    static StudentFinder findStudent = new StudentFinder();
+    static SearchService findStudent = new SearchService();
     static AuthService authService = Repository.createAuthService();
     static User currentUser = null;
 
@@ -157,9 +157,9 @@ public class Main {
         int chosenFaculty = input.readInt("Your choice:");
 
         System.out.println("Now select department you want add Student to:");
-        Faculty chosen = university.getFaculties().get(chosenFaculty);
-        for (int i = 0; i < chosen.getDepartments().size(); i++) {
-            System.out.println(i + ". " + chosen.getDepartments().get(i));
+        Faculty chosenFac = university.getFaculties().get(chosenFaculty);
+        for (int i = 0; i < chosenFac.getDepartments().size(); i++) {
+            System.out.println(i + ". " + chosenFac.getDepartments().get(i));
         }
         int chosenDepartment = input.readInt("Your choice:");
 
@@ -187,27 +187,40 @@ public class Main {
         System.out.println("1. Find students by course");
         System.out.println("2. Find students by group");
         System.out.println("3. Find students by full name");
+        System.out.println("4. Sort students by lastname");
         System.out.println("0. Go back");
-        int findingOption = input.readInt("Your choice:", 0, 3);
+        List<Student> allStudents = Repository.studentRepo.getAll();
+        List<Student> result = List.of();
+        int findingOption = input.readInt("Your choice:", 0, 4);
 
         switch (findingOption) {
             case 1:
                 int courseToFind = input.readInt("Select course:");
-                findStudent.ByCourse(courseToFind);
+                result = findStudent.findByCourse(allStudents, courseToFind);
                 break;
             case 2:
                 String groupToFind = input.readString("Select group:");
-                findStudent.ByGroup(groupToFind);
+                result = findStudent.findByGroup(allStudents, groupToFind);
                 break;
             case 3:
                 String lastnameToFind = input.readString("Enter lastname");
                 String nameToFind = input.readString("Enter name");
                 String surnameToFind = input.readString("Enter surname");
-                findStudent.ByFullName(nameToFind, lastnameToFind, surnameToFind);
+                result = findStudent.findByFullName(allStudents, lastnameToFind, nameToFind, surnameToFind);
+                break;
+            case 4:
+                result = findStudent.sortByLastname(allStudents);
                 break;
             case 0:
                 return;
         }
+
+        if (!result.isEmpty())
+            result.forEach(s -> System.out.println("FOUND: " + s));
+        else
+            System.out.println("Student not found.");
+
+
     }
 
     private static void printStudentList() {
@@ -215,9 +228,9 @@ public class Main {
         for (Faculty f : university.getFaculties()) {
             System.out.println("Faculty: " + f.getShortName());
             for (Department d : f.getDepartments()) {
-                System.out.println("  └-Department: " + d.getName());
+                System.out.println("    └-Department: " + d.getName());
                 for (Student s : d.getStudents()) {
-                    System.out.println("    └- " + s);
+                    System.out.println("        └- " + s);
                 }
             }
         }
