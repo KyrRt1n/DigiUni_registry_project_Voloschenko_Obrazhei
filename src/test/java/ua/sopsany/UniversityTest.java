@@ -1,6 +1,7 @@
 package ua.sopsany;
 
 import org.junit.jupiter.api.Test;
+import ua.sopsany.exceptions.DuplicateIdException;
 import ua.sopsany.models.Faculty;
 import ua.sopsany.models.Student;
 import ua.sopsany.models.University;
@@ -37,7 +38,7 @@ public class UniversityTest {
     }
 
     @Test
-    void testGenericRepository(){
+    void testGenericRepository() throws DuplicateIdException {
         GenericRepository<Student> repo = new GenericRepository<>();
 
         Student student = new Student("Sanya", "Valeriyovych", "Obrazhei",
@@ -50,7 +51,7 @@ public class UniversityTest {
     }
 
     @Test
-    void testFindByCourse(){
+    void testFindByCourse() throws DuplicateIdException {
 
         GenericRepository<Student> repo = new GenericRepository<>();
         SearchService searchService = new SearchService();
@@ -73,7 +74,7 @@ public class UniversityTest {
 
 
     @Test
-    void testFindByLastname(){
+    void testFindByLastname() throws DuplicateIdException {
         GenericRepository<Student> repo = new GenericRepository<>();
         SearchService searchService = new SearchService();
 
