@@ -8,7 +8,7 @@ import ua.sopsany.utils.SearchService;
 import ua.sopsany.auth.AuthService;
 import ua.sopsany.auth.User;
 import ua.sopsany.auth.Role;
-import ua.sopsany.exceptions.UnauthorizedExcpetion;
+import ua.sopsany.exceptions.UnauthorizedException;
 
 import java.time.LocalDate;
 
@@ -29,7 +29,7 @@ public class Main {
             try {
                 currentUser = authService.login(login, password).get();
                 System.out.println("Welcome, " + currentUser.getLogin() + " [" + currentUser.getRole() + "]");
-            } catch (UnauthorizedExcpetion e) {
+            } catch (UnauthorizedException e) {
                 System.out.println("Error: " + e.getMessage());
             }
         }
@@ -176,10 +176,14 @@ public class Main {
         int year = input.readInt("Entry Year", 1990, 2025);
         String studId = input.readString("Student Ticket ID");
 
+        Department targetDept = university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment);
         Student newStudent = new Student(nameToAdd, surnameToAdd, lastnameToAdd, birthDate, email, phone, id,
                 course, group, year, Student.FormEducation.BUDGET, Student.StudentState.STUDYING, studId);
 
+        Repository.addStudent(targetDept, newStudent);
+
         university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment).addStudent(newStudent);
+
         System.out.println("Student added successfully!");
     }
 
