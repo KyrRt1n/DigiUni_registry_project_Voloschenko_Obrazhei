@@ -29,8 +29,7 @@ public class SearchService {
                 && s.getName().equalsIgnoreCase(name)).toList();
     }
 
-
-    public Student findByStudentTicketId(List<Student> students, String StudenID) {
-        return students.stream().filter(s -> s.getStudentID().equalsIgnoreCase(StudenID)).toList().get(0);
+    public Student findByStudentId(List<Student> students, String StudentID) {
+        return students.stream().filter(s -> s.getStudentID().equalsIgnoreCase(StudentID)).toList().get(0);
     }
 }

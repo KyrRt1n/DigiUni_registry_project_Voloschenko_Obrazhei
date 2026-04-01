@@ -98,7 +98,7 @@ public class Main {
         }
 
         String studentID = input.readString("Please enter the precise Student ID to confirm");
-        Student exactStudent = searchService.findByStudentTicketId(matches, studentID);
+        Student exactStudent = searchService.findByStudentId(matches, studentID);
 
         if (exactStudent == null) {
             System.out.println("Student with such Ticket ID not found among the matches.");
