@@ -1,5 +1,6 @@
 package ua.sopsany.utils;
 
+import ua.sopsany.auth.User;
 import ua.sopsany.models.*;
 
 import java.util.Comparator;

@@ -32,7 +32,7 @@ public class User {
         return isBlocked;
     }
 
-    public void setBlocked(boolean blocked) {
+    public void setBlockedStatus(boolean blocked) {
         isBlocked = blocked;
     }
 

@@ -41,7 +41,13 @@ public class Main {
             System.out.println("2. Find Student");
             System.out.println("3. Show all students");
 
-            if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+            if (currentUser.getRole() == Role.ADMIN) {
+                System.out.println("4. Add Student");
+                System.out.println("5. Remove Student");
+                System.out.println("6. Update Student");
+                System.out.println("7. Admin Menu");
+            }
+            else if (currentUser.getRole() == Role.MANAGER ) {
                 System.out.println("4. Add Student");
                 System.out.println("5. Remove Student");
                 System.out.println("6. Update Student");
@@ -49,7 +55,7 @@ public class Main {
 
             System.out.println("0. Exit");
 
-            int choice = input.readInt("Select option", 0, 6);
+            int choice = input.readInt("Select option", 0, 7);
 
             switch (choice) {
                 case 1:
@@ -73,11 +79,60 @@ public class Main {
                     if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) studentUpdate();
                     else System.out.println("Access denied.");
                     break;
+                case 7:
+                    if(currentUser.getRole() == Role.ADMIN)
+                        adminMenu();
+                    else
+                        System.out.println("Access denied.");
+                    break;
                 case 0:
                     System.out.println("Goodbye!");
                     return;
             }
         }
+    }
+
+    private static void adminMenu() {
+        System.out.println("--- ADMIN MENU ---");
+        System.out.println("1. Block/Unblock user");
+        System.out.println("2. Remove user");
+        System.out.println("3. Edit user");
+        System.out.println("4. Show all users");
+
+        int choice = input.readInt("Select option", 0, 4);
+        switch (choice) {
+            case 1:
+                System.out.println("Edit users");
+                adminBlockUnblock();
+                break;
+            case 2:
+                System.out.println("Edit departments");
+                break;
+        }
+
+    }
+
+    private static void adminBlockUnblock() {
+        System.out.println("--- User block/unblock ---");
+        boolean block;
+        if(input.readInt("Do you want block user(1) or unblock(0)?", 0, 1) == 1) {
+            block = true;
+        } else {
+            block = false;
+        }
+
+        String login = input.readString("Enter user's login");
+        if(login == null) {
+            System.out.println("User not found");
+        }
+        else if(login == "admin") {
+            System.out.println("You can't block admin");
+        }
+        else{
+            authService.findByLogin(login).setBlockedStatus(block);
+        }
+
+
     }
 
     private static Student findStudentInteractively(String actionName) {
