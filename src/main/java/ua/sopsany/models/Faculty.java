@@ -2,6 +2,7 @@
 
     import java.util.ArrayList;
     import java.util.List;
+    import java.util.Objects;
 
     public class Faculty {
         private int id;
@@ -73,5 +74,18 @@
             if (contacts == null)
                 contacts = "not assigned";
             return shortName + " - " + fullName + " (Contacts: " + contacts + ")";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Faculty faculty = (Faculty) o;
+            return id == faculty.id;
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(id);
         }
     }
