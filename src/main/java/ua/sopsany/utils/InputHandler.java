@@ -16,7 +16,7 @@ public class InputHandler {
 
     public String readString(String prompt) {
         while (true) {
-            System.out.print(prompt + ":");
+            System.out.print(prompt + ": ");
             String input = scanner.nextLine().trim();
             if (!input.isEmpty()) {
                 return input;
@@ -45,7 +45,7 @@ public class InputHandler {
 
     public int readInt(String prompt, int min, int max) {
         while (true) {
-            System.out.print(prompt + ":");
+            System.out.print(prompt + ": ");
             String input = scanner.nextLine().trim();
 
             if (!input.isEmpty()) {

@@ -30,4 +30,7 @@ public class SearchService {
     }
 
 
+    public Student findByStudentTicketId(List<Student> students, String StudenID) {
+        return students.stream().filter(s -> s.getStudentID().equalsIgnoreCase(StudenID)).toList().get(0);
+    }
 }

@@ -17,7 +17,7 @@ public class Student extends Person {
 
     public Student(String name, String surname, String lastname, LocalDate birthday, String email, String phone, int id,
                    int course, String group, int entryYear, FormEducation eduForm, StudentState state, String studentID) {
-        super(name, surname, lastname, birthday, email, phone, id);
+        super(surname, name, lastname, birthday, email, phone, id);
         this.course = course;
         this.group = group;
         this.entryYear = entryYear;
@@ -64,6 +64,6 @@ public class Student extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + "Student: "+getName() + getSurname() +", Group " + group + ", course " + course;
+        return super.toString() + " | Group: " + group + ", Course: " + course;
     }
 }
