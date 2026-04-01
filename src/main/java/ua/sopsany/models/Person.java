@@ -14,9 +14,9 @@ public abstract class Person {
     private String phone;
     private int id;
 
-    public Person(String name, String surname, String lastname, LocalDate birthday, String email, String phone, int id) {
-        this.name = name;
+    public Person(String surname, String name, String lastname, LocalDate birthday, String email, String phone, int id) {
         this.surname = surname;
+        this.name = name;
         this.lastname = lastname;
         this.birthday = birthday;
         this.email = email;
