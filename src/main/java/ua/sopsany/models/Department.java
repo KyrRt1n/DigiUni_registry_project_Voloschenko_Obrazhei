@@ -3,6 +3,7 @@ import ua.sopsany.utils.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Department {
 
@@ -97,6 +98,19 @@ public class Department {
     public String toString() {
         String headName = (head != null) ? head.getLastname() : "not assigned";
         return "Department " + name + ", Head: " + headName;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Department department = (Department) o;
+        return ID == department.ID;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(ID);
     }
 
 }
