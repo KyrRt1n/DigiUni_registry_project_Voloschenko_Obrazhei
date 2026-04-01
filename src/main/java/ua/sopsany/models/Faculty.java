@@ -70,6 +70,8 @@
 
         @Override
         public String toString() {
+            if (contacts == null)
+                contacts = "not assigned";
             return shortName + " - " + fullName + " (Contacts: " + contacts + ")";
         }
     }

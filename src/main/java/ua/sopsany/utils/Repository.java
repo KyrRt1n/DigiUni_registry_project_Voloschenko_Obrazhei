@@ -22,6 +22,15 @@ public class Repository {
         }
     }
 
+    public static void removeStudent(Department dept, Student student) {
+        dept.getStudents().remove(student);
+        try {
+            studentRepo.remove(student);
+        } catch (EntityNotFoundException e) {
+            System.out.println("[WARN] Student not found in repo: " + e.getMessage());
+        }
+    }
+
     public static University createUniversity() {
 
         University university = new University("НаУКМА", "НаУКМА", "Київ", "Сковороди 2");

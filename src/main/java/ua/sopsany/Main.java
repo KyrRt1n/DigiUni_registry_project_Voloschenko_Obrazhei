@@ -152,16 +152,16 @@ public class Main {
         System.out.println("Select faculty you want add Student to:");
         List<Faculty> faculties = university.getFaculties();
         for (int i = 0; i < faculties.size(); i++) {
-            System.out.print(i + ". " + faculties.get(i) + " | ");
+            System.out.print(i + ". " + faculties.get(i) + "\n");
         }
-        int chosenFaculty = input.readInt("Your choice:");
+        int chosenFaculty = input.readInt("Your choice", 0 , faculties.size() - 1);
 
         System.out.println("Now select department you want add Student to:");
         Faculty chosenFac = university.getFaculties().get(chosenFaculty);
         for (int i = 0; i < chosenFac.getDepartments().size(); i++) {
             System.out.println(i + ". " + chosenFac.getDepartments().get(i));
         }
-        int chosenDepartment = input.readInt("Your choice:");
+        int chosenDepartment = input.readInt("Your choice", 0, chosenFac.getDepartments().size() - 1);
 
         System.out.println("--- Adding New Student ---");
         String nameToAdd = input.readString("Name");
@@ -182,7 +182,7 @@ public class Main {
 
         Repository.addStudent(targetDept, newStudent);
 
-        university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment).addStudent(newStudent);
+//        university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment).addStudent(newStudent);
 
         System.out.println("Student added successfully!");
     }
@@ -241,16 +241,31 @@ public class Main {
     }
 
     private static void studentRemoval() {
-        boolean found = false;
         System.out.println("--- Student removal ---");
-        String nameToRemove = input.readString("Student lastname to remove:");
+        String nameToRemove = input.readString("Student lastname to remove");
+
+        Student foundStudent = null;
+        Department foundDept = null;
+
         for (Faculty f : university.getFaculties()) {
-            if (found) break;
             for (Department d : f.getDepartments()) {
-                found = d.removeStudentByLastName(nameToRemove);
-                if (found) System.out.println("Student removed successfully!");
+                for (Student s : d.getStudents()) {
+                    if (s.getLastname().equalsIgnoreCase(nameToRemove)) {
+                        foundStudent = s;
+                        foundDept = d;
+                        break;
+                    }
+                }
+                if (foundStudent != null) break;
             }
+            if (foundStudent != null) break;
         }
-        if (!found) System.out.println("Student not found!");
+
+        if (foundStudent != null) {
+            Repository.removeStudent(foundDept, foundStudent);
+            System.out.println("Student " + foundStudent.getLastname() + " removed successfully!");
+        } else {
+            System.out.println("Student not found!");
+        }
     }
 }
