@@ -12,6 +12,7 @@ public class Repository {
     public static GenericRepository<Department> departmentRepo = new GenericRepository<>();
     public static GenericRepository<Teacher> teacherRepo = new GenericRepository<>();
     public static GenericRepository<Student> studentRepo = new GenericRepository<>();
+    public static GenericRepository<User> userRepo = new GenericRepository<>();
 
     public static void addStudent(Department dept, Student student) {
         dept.addStudent(student);
@@ -33,7 +34,7 @@ public class Repository {
 
     public static University createUniversity() {
 
-        University university = new University("НаУКМА", "НаУКМА", "Київ", "Сковороди 2");
+        University university = new University("Національний Університет Києво-Могилянська Академія", "НаУКМА", "Київ", "Сковороди 2");
 
         Faculty fi = new Faculty(1, "Faculty of Informatics", "FI");
         university.addFaculty(fi);

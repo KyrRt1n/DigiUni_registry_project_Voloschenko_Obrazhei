@@ -19,4 +19,9 @@ import ua.sopsany.exceptions.UnauthorizedException;
             }
             throw new UnauthorizedException("Invalid login or password");
         }
+
+        public User findByLogin(String login) {
+            return users.get(login);
+        }
+
     }
