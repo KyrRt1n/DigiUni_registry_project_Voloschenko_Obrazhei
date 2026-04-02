@@ -36,4 +36,11 @@ public class User {
         isBlocked = blocked;
     }
 
+    @Override
+    public String toString() {
+        if(isBlocked)
+            return login + " | " + role + " | (blocked)";
+        return login + " | " + role;
+    }
+
 }

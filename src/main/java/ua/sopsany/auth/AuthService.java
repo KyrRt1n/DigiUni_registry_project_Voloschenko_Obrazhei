@@ -24,4 +24,10 @@ import ua.sopsany.exceptions.UnauthorizedException;
             return users.get(login);
         }
 
+        public List<User> getAllUsers() {
+            return new ArrayList<>(users.values());
+        }
+
+
+
     }
