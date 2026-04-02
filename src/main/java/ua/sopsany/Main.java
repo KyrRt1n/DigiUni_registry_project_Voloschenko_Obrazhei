@@ -93,6 +93,7 @@ public class Main {
     }
 
     private static void adminMenu() {
+        System.out.println();
         System.out.println("--- ADMIN MENU ---");
         System.out.println("1. Block/Unblock user");
         System.out.println("2. Remove user");
@@ -113,8 +114,13 @@ public class Main {
     }
 
     private static void adminBlockUnblock() {
+        System.out.println();
         System.out.println("--- User block/unblock ---");
+        for (User u : authService.getAllUsers()) {
+            System.out.println(u);
+        }
         boolean block;
+        System.out.println();
         if(input.readInt("Do you want block user(1) or unblock(0)?", 0, 1) == 1) {
             block = true;
         } else {
@@ -122,17 +128,28 @@ public class Main {
         }
 
         String login = input.readString("Enter user's login");
-        if(login == null) {
-            System.out.println("User not found");
+        while(login.isEmpty()) {
+            login = input.readString("Enter user's login(not empty)");
         }
-        else if(login == "admin") {
+        User user = authService.findByLogin(login);
+        if(user == null) {
+            System.out.println("User not found");
+            return;
+        }
+        else if(login.equals("admin") || login.equals(currentUser.getLogin())) {
             System.out.println("You can't block admin");
         }
-        else{
-            authService.findByLogin(login).setBlockedStatus(block);
+        else {
+            if (user.isBlocked() && block) {
+                System.out.println("User is already blocked");
+                return;
+            }
+            if (!user.isBlocked() && !block) {
+                System.out.println("User is already unblocked");
+                return;
+            }
+            user.setBlockedStatus(block);
         }
-
-
     }
 
     private static Student findStudentInteractively(String actionName) {
