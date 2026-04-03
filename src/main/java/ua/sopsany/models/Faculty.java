@@ -29,6 +29,8 @@
 
         }
 
+        public Faculty() {}
+
         public void addDepartment(Department department) {
             departments.add(department);
         }

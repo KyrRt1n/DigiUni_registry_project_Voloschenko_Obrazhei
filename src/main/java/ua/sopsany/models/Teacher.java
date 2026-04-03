@@ -1,5 +1,7 @@
 package ua.sopsany.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -24,6 +26,8 @@ public class Teacher extends Person {
     public Teacher(String surname, String name, String lastname) {
         super(surname, name, lastname);
     }
+
+    public Teacher() {}
 
     public void setPosition(String position) {
         this.position = position;
@@ -65,6 +69,7 @@ public class Teacher extends Person {
         return position;
     }
 
+    @JsonIgnore
     public int getYearsOfWork() {
         return Period.between(this.dateOfEmployment, LocalDate.now()).getYears();
     }
