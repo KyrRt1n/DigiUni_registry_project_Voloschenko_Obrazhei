@@ -21,73 +21,93 @@ public class Main {
     static User currentUser = null;
 
     public static void main(String[] args) {
+        while (true) {
 
-        while (currentUser == null) {
-            System.out.println("\n=== LOGIN ===");
-            String login = input.readString("Login");
-            String password = input.readString("Password");
-            try {
-                currentUser = authService.login(login, password).get();
-                System.out.println("Welcome, " + currentUser.getLogin() + " [" + currentUser.getRole() + "]");
-            } catch (UnauthorizedException e) {
-                System.out.println("Error: " + e.getMessage());
+            while (currentUser == null) {
+                System.out.println("\n=== LOGIN ===");
+                String login = input.readString("Login");
+                String password = input.readString("Password");
+                try {
+                    currentUser = authService.login(login, password).get();
+                    System.out.println("Welcome, " + currentUser.getLogin() + " [" + currentUser.getRole() + "]");
+                } catch (UnauthorizedException e) {
+                    System.out.println("Error: " + e.getMessage());
+                }
+            }
+
+            while (currentUser != null) {
+                System.out.println("\n--- UNIVERSITY SYSTEM MENU ---");
+                System.out.println("1. Search & Reports");
+
+                if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                    System.out.println("2. Manage Students");
+                    System.out.println("3. Manage Teachers");
+                    System.out.println("4. Manage Departments");
+                    System.out.println("5. Manage Faculties");
+                }
+
+                if (currentUser.getRole() == Role.ADMIN) {
+                    System.out.println("6. Manage Users & Roles");
+                }
+
+                System.out.println("9. Logout");
+                System.out.println("0. Exit Application");
+
+                int choice = input.readInt("Select option", 0, 9);
+
+                switch (choice) {
+                    case 1:
+                        searchAndReportsMenu();
+                        break;
+                    case 2:
+                        if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) manageStudentsMenu();
+                        else System.out.println("Access denied.");
+                        break;
+                    case 3:
+                        if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) manageTeachersMenu();
+                        else System.out.println("Access denied.");
+                        break;
+                    case 4:
+                        if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) manageDepartmentsMenu();
+                        else System.out.println("Access denied.");
+                        break;
+                    case 5:
+                        if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) manageFacultiesMenu();
+                        else System.out.println("Access denied.");
+                        break;
+                    case 6:
+                        if (currentUser.getRole() == Role.ADMIN) adminMenu();
+                        else System.out.println("Access denied.");
+                        break;
+                    case 9:
+                        System.out.println("Logging out...");
+                        currentUser = null;
+                        break;
+                    case 0:
+                        System.out.println("Goodbye!");
+                        return;
+                    default:
+                        System.out.println("Invalid option.");
+                }
             }
         }
+    }
 
+
+    private static void searchAndReportsMenu() {
         while (true) {
-            System.out.println("\n--- UNIVERSITY SYSTEM MENU ---");
-
+            System.out.println("\n--- Search & Reports ---");
             System.out.println("1. Print University Structure");
             System.out.println("2. Find Student");
             System.out.println("3. Show all students");
+            System.out.println("0. Go back");
 
-            if (currentUser.getRole() == Role.ADMIN) {
-                System.out.println("4. Add Student");
-                System.out.println("5. Remove Student");
-                System.out.println("6. Update Student");
-                System.out.println("7. Admin Menu");
-            }
-            else if (currentUser.getRole() == Role.MANAGER ) {
-                System.out.println("4. Add Student");
-                System.out.println("5. Remove Student");
-                System.out.println("6. Update Student");
-            }
-
-            System.out.println("0. Exit");
-
-            int choice = input.readInt("Select option", 0, 7);
-
+            int choice = input.readInt("Select option", 0, 3);
             switch (choice) {
-                case 1:
-                    printUniStructure();
-                    break;
-                case 2:
-                    findStudent();
-                    break;
-                case 3:
-                    printStudentList();
-                    break;
-                case 4:
-                    if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) addStudent();
-                    else System.out.println("Access denied.");
-                    break;
-                case 5:
-                    if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) studentRemoval();
-                    else System.out.println("Access denied.");
-                    break;
-                case 6:
-                    if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) studentUpdate();
-                    else System.out.println("Access denied.");
-                    break;
-                case 7:
-                    if(currentUser.getRole() == Role.ADMIN)
-                        adminMenu();
-                    else
-                        System.out.println("Access denied.");
-                    break;
-                case 0:
-                    System.out.println("Goodbye!");
-                    return;
+                case 1: printUniStructure(); break;
+                case 2: findStudent(); break;
+                case 3: printStudentList(); break;
+                case 0: return;
             }
         }
     }
