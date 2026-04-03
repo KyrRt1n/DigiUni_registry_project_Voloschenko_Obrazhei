@@ -1,8 +1,10 @@
 package ua.sopsany.utils;
 
 import ua.sopsany.auth.User;
+import ua.sopsany.dto.FacultyStatsRecord;
 import ua.sopsany.models.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -32,5 +34,40 @@ public class SearchService {
 
     public Student findByStudentId(List<Student> students, String StudentID) {
         return students.stream().filter(s -> s.getStudentID().equalsIgnoreCase(StudentID)).toList().get(0);
+    }
+
+    public List<FacultyStatsRecord> generateFacultyStatistics(University university) {
+        List<FacultyStatsRecord> statsList = new ArrayList<>();
+
+        for (Faculty faculty : university.getFaculties()) {
+
+            List<Student> facultyStudents = faculty.getDepartments().stream()
+                    .flatMap(dept -> dept.getStudents().stream())
+                    .toList();
+
+            long totalStudents = facultyStudents.size();
+
+            long budgetStudents = facultyStudents.stream()
+                    .filter(s -> s.getEducationForm() == Student.FormEducation.BUDGET)
+                    .count();
+
+            long contractStudents = facultyStudents.stream()
+                    .filter(s -> s.getEducationForm() == Student.FormEducation.CONTRACT)
+                    .count();
+
+            statsList.add(new FacultyStatsRecord(
+                    faculty.getShortName(),
+                    totalStudents,
+                    budgetStudents,
+                    contractStudents));
+        }
+        return statsList;
+    }
+
+    public List<Student> getStudentsByCourseSorted(List<Student> allStudents, int course) {
+        return allStudents.stream()
+                .filter(s -> s.getCourse() == course)
+                .sorted(Comparator.comparing(Person::getLastname))
+                .toList();
     }
 }

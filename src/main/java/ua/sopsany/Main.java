@@ -1,6 +1,8 @@
 package ua.sopsany;
 
 import java.util.List;
+
+import ua.sopsany.dto.FacultyStatsRecord;
 import ua.sopsany.models.*;
 import ua.sopsany.utils.InputHandler;
 import ua.sopsany.utils.Repository;
@@ -100,13 +102,38 @@ public class Main {
             System.out.println("1. Print University Structure");
             System.out.println("2. Find Student");
             System.out.println("3. Show all students");
+            System.out.println("4. Faculty Statistics Report");
+            System.out.println("5. Sorted Students by Course");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 3);
+            int choice = input.readInt("Select option", 0, 5);
             switch (choice) {
                 case 1: printUniStructure(); break;
                 case 2: findStudent(); break;
                 case 3: printStudentList(); break;
+                case 4:
+                    System.out.println("\n--- Faculty Statistics ---");
+                    List<FacultyStatsRecord> stats = searchService.generateFacultyStatistics(university);
+                    if (stats.isEmpty())
+                        System.out.println("No data available.");
+                    else
+                        for (FacultyStatsRecord record : stats)
+                            System.out.println(record.toReportLine());
+                    break;
+
+                case 5:
+                    System.out.println("\n--- Students by course ---");
+                    int c = input.readInt("Enter course", 1, 6);
+                    List<Student> sortedStudents = searchService.getStudentsByCourseSorted(Repository.studentRepo.getAll(), c);
+                    if (sortedStudents.isEmpty()) {
+                        System.out.println("No students found on course " + c);
+                    } else {
+                        for (Student s : sortedStudents) {
+                            System.out.println(s);
+                        }
+                    }
+                    break;
+
                 case 0: return;
             }
         }
@@ -598,6 +625,8 @@ public class Main {
         String surnameToAdd = input.readString("Surname");
         String lastnameToAdd = input.readString("Lastname");
         LocalDate birthDate = input.readDate("Birthday");
+        int formEd = input.readInt("Form of education (1. Budget | 2. Contract)", 1, 2);
+        int studState = input.readInt("Student state (1. STUDYING, 2. ACADEMIC_LEAVE, 3. DEDUCTED)", 1, 3);
         String email = input.readString("Email");
         String phone = input.readString("Phone");
         int id = input.readInt("Personal ID");
@@ -627,7 +656,7 @@ public class Main {
 
         Department targetDept = university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment);
         Student newStudent = new Student(nameToAdd, surnameToAdd, lastnameToAdd, birthDate, email, phone, id,
-                course, group, year, Student.FormEducation.BUDGET, Student.StudentState.STUDYING, studId);
+                course, group, year, formEducationEnum, studStateEnum, studId);
 
         Repository.addStudent(targetDept, newStudent);
 
