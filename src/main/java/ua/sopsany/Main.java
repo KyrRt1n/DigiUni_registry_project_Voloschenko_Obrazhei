@@ -606,6 +606,25 @@ public class Main {
         int year = input.readInt("Entry Year", 1990, 2025);
         String studId = input.readString("Student Ticket ID");
 
+        Student.FormEducation formEducationEnum;
+        if(formEd == 1) {
+            formEducationEnum = Student.FormEducation.BUDGET;
+        }
+        else {
+            formEducationEnum = Student.FormEducation.CONTRACT;
+        }
+
+        Student.StudentState studStateEnum;
+        if(studState == 1) {
+            studStateEnum = Student.StudentState.STUDYING;
+        }
+        else if(studState == 2) {
+            studStateEnum = Student.StudentState.ACADEMIC_LEAVE;
+        }
+        else {
+            studStateEnum = Student.StudentState.DEDUCTED;
+        }
+
         Department targetDept = university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment);
         Student newStudent = new Student(nameToAdd, surnameToAdd, lastnameToAdd, birthDate, email, phone, id,
                 course, group, year, Student.FormEducation.BUDGET, Student.StudentState.STUDYING, studId);
