@@ -24,6 +24,8 @@ public class University {
         this.shortName = shortName;
     }
 
+    public University() {}
+
     public void addFaculty(Faculty faculty) {
         faculties.add(faculty);
     }

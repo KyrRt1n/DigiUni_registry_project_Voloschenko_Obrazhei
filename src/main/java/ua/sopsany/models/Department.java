@@ -1,4 +1,5 @@
 package ua.sopsany.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import ua.sopsany.utils.Repository;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ public class Department {
     private String name;
     private String office;
     private Teacher head;
+
+    @JsonIgnore
     private Faculty faculty;
 
     private List<Student> students = new ArrayList<>();
@@ -41,6 +44,16 @@ public class Department {
         this.ID = ID;
         this.name = name;
     }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Department() {}
 
     public void addStudent(Student student) {
         students.add(student);

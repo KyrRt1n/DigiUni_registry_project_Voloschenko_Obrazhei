@@ -1,5 +1,7 @@
 package ua.sopsany.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
@@ -29,6 +31,8 @@ public abstract class Person {
         this.name = name;
         this.lastname = lastname;
     }
+
+    public Person() {}
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
@@ -74,6 +78,7 @@ public abstract class Person {
         return id;
     }
 
+    @JsonIgnore
     public int getAge() {
         if (birthday == null){
             return 0;
