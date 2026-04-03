@@ -93,8 +93,7 @@ public class Main {
     }
 
     private static void adminMenu() {
-        System.out.println();
-        System.out.println("--- ADMIN MENU ---");
+        System.out.println("\n--- ADMIN MENU ---");
         System.out.println("1. Block/Unblock user");
         System.out.println("2. Remove user");
         System.out.println("3. Edit user");
@@ -103,22 +102,95 @@ public class Main {
         int choice = input.readInt("Select option", 0, 4);
         switch (choice) {
             case 1:
-                System.out.println("Edit users");
                 adminBlockUnblock();
                 break;
             case 2:
-                System.out.println("Edit departments");
+                adminRemoveUser();
+                break;
+            case 3:
+                adminEditUser();
+                break;
+            case 4:
+                for (User u : authService.getAllUsers())
+                    System.out.println(u);
                 break;
         }
 
     }
 
-    private static void adminBlockUnblock() {
-        System.out.println();
-        System.out.println("--- User block/unblock ---");
-        for (User u : authService.getAllUsers()) {
+    private static void adminEditUser() {
+        System.out.println("\n--- Edit user ---");
+        for (User u : authService.getAllUsers())
             System.out.println(u);
+
+        System.out.println("\nWhat do you want to change? \n 1. Password \n 2. Role \n 0. Cancel");
+        int choice = input.readInt("Select option", 0, 2);
+
+        if(choice == 0) {
+            return;
         }
+        else if(choice == 1) {
+            String login = input.readString("Enter user's login");
+            User user = authService.findByLogin(login);
+            if(user == null) {
+                System.out.println("User not found");
+                return;
+            }
+            String newPassword = input.readString("Enter new password");
+            authService.changePassword(user, newPassword);
+            System.out.println("Password changed successfully");
+        }
+        else if(choice == 2) {
+            String login = input.readString("Enter user's login");
+            User user = authService.findByLogin(login);
+            if(user == null) {
+                System.out.println("User not found");
+                return;
+            }
+            if(login.equals("admin") || login.equals(currentUser.getLogin())) {
+                System.out.println("You can't change role of admin");
+                return;
+            }
+
+            System.out.println("Current role: " + user.getRole());
+            int newRole = input.readInt("Roles: 1. USER \n2. MANAGER \n3. ADMIN \n0. Cancel", 0, 3);
+
+            if (newRole == 1)
+                user.setRole(Role.USER);
+            else if (newRole == 2)
+                user.setRole(Role.MANAGER);
+            else if (newRole == 3)
+                user.setRole(Role.ADMIN);
+            else {
+                System.out.println("Role not found");
+                return;
+            }
+        }
+    }
+
+    private static void adminRemoveUser() {
+        System.out.println("\n--- Remove user ---");
+        for (User u : authService.getAllUsers())
+            System.out.println(u);
+        String login = input.readString("Enter user's login");
+        User user = authService.findByLogin(login);
+        if(user == null) {
+            System.out.println("User not found");
+            return;
+        }
+        else if(login.equals("admin") || login.equals(currentUser.getLogin())) {
+            System.out.println("You can't remove admin");
+        }
+        else {
+            authService.removeUser(login);
+            System.out.println("User " + user + " removed");
+        }
+    }
+
+    private static void adminBlockUnblock() {
+        System.out.println("\n--- User block/unblock ---");
+        for (User u : authService.getAllUsers())
+            System.out.println(u);
         boolean block;
         System.out.println();
         if(input.readInt("Do you want block user(1) or unblock(0)?", 0, 1) == 1) {
@@ -128,9 +200,6 @@ public class Main {
         }
 
         String login = input.readString("Enter user's login");
-        while(login.isEmpty()) {
-            login = input.readString("Enter user's login(not empty)");
-        }
         User user = authService.findByLogin(login);
         if(user == null) {
             System.out.println("User not found");
