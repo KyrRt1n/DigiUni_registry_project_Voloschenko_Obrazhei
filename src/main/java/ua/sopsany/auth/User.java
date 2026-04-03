@@ -47,8 +47,8 @@ public class User {
     @Override
     public String toString() {
         return isBlocked ?
-                login + " | " + role + " | (blocked)" :
-                login + " | " + role;
+                "User: " + login + " | [" + role + "] | (blocked)" :
+                "User: " + login + " | [" + role + "]";
     }
 
 }
