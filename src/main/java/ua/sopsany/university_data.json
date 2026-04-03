@@ -1,0 +1,134 @@
+{
+  "fullName" : "Національний Університет Києво-Могилянська Академія",
+  "shortName" : "НаУКМА",
+  "city" : "Київ",
+  "address" : "Сковороди 2",
+  "faculties" : [ {
+    "id" : 1,
+    "fullName" : "Faculty of Informatics",
+    "shortName" : "FI",
+    "decan" : {
+      "name" : "Andrii",
+      "surname" : "Mykolayovych",
+      "lastname" : "Hlybovets",
+      "birthday" : "1970-10-01",
+      "email" : "hlybaphp@gm",
+      "phone" : "0730737373",
+      "id" : 91238761,
+      "position" : "FI faculty decan",
+      "academicDegree" : "Tech science doctor",
+      "academicTitle" : "Professor",
+      "dateOfEmployment" : "2012-09-01",
+      "workLoad" : 24
+    },
+    "contacts" : null,
+    "departments" : [ {
+      "name" : "Software Engineering",
+      "office" : "1-225",
+      "head" : {
+        "name" : "Andrii",
+        "surname" : "Mykolayovych",
+        "lastname" : "Hlybovets",
+        "birthday" : "1970-10-01",
+        "email" : "hlybaphp@gm",
+        "phone" : "0730737373",
+        "id" : 91238761,
+        "position" : "FI faculty decan",
+        "academicDegree" : "Tech science doctor",
+        "academicTitle" : "Professor",
+        "dateOfEmployment" : "2012-09-01",
+        "workLoad" : 24
+      },
+      "students" : [ {
+        "name" : "Sanya",
+        "surname" : "Valeriyovych",
+        "lastname" : "Obrazhei",
+        "birthday" : "2007-11-10",
+        "email" : "konodioda@gmail",
+        "phone" : "+380978620341",
+        "id" : 1488228,
+        "course" : 1,
+        "group" : "IPZ",
+        "entryYear" : 2025,
+        "studentID" : "148228",
+        "educationForm" : "BUDGET",
+        "studentState" : "STUDYING"
+      }, {
+        "name" : "Artem",
+        "surname" : "Oleksiyovich",
+        "lastname" : "Voloshchenko",
+        "birthday" : "2008-01-09",
+        "email" : "aVoloshka666@gmail",
+        "phone" : "+380972417071",
+        "id" : 105105105,
+        "course" : 1,
+        "group" : "IPZ",
+        "entryYear" : 2025,
+        "studentID" : "105105105",
+        "educationForm" : "BUDGET",
+        "studentState" : "STUDYING"
+      } ],
+      "id" : 1
+    } ]
+  }, {
+    "id" : 2,
+    "fullName" : "Faculty of Economics",
+    "shortName" : "FOE",
+    "decan" : null,
+    "contacts" : "+380973274136",
+    "departments" : [ {
+      "name" : "Marketing",
+      "office" : "6-406",
+      "head" : {
+        "name" : "Iryna",
+        "surname" : "Petrivna",
+        "lastname" : "Kovalchuk",
+        "birthday" : "1975-03-15",
+        "email" : "ikovalchuk@ukma.edu.ua",
+        "phone" : "+380671234567",
+        "id" : 55567890,
+        "position" : "Marketing Department head",
+        "academicDegree" : "Candidate of Sciences",
+        "academicTitle" : "Associate Professor",
+        "dateOfEmployment" : "2005-09-01",
+        "workLoad" : 20
+      },
+      "students" : [ {
+        "name" : "Oleg",
+        "surname" : "Kyrylovych",
+        "lastname" : "Kyrolov",
+        "birthday" : "2007-07-29",
+        "email" : "OlegRagul@gmail",
+        "phone" : "+3809783493",
+        "id" : 1232343565,
+        "course" : 2,
+        "group" : "MARK",
+        "entryYear" : 2025,
+        "studentID" : "1232343565",
+        "educationForm" : "BUDGET",
+        "studentState" : "STUDYING"
+      } ],
+      "id" : 2
+    }, {
+      "name" : "Management",
+      "office" : "6-407",
+      "head" : null,
+      "students" : [ {
+        "name" : "Vlad",
+        "surname" : "Sergiyovich",
+        "lastname" : "Hryn",
+        "birthday" : "2007-09-25",
+        "email" : "LuxonGames@gmail",
+        "phone" : "+380973274136",
+        "id" : 235346456,
+        "course" : 1,
+        "group" : "MANEG",
+        "entryYear" : 2025,
+        "studentID" : "235346456",
+        "educationForm" : "BUDGET",
+        "studentState" : "STUDYING"
+      } ],
+      "id" : 3
+    } ]
+  } ]
+}

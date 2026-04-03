@@ -26,6 +26,8 @@ public class Student extends Person {
         this.studentID = studentID;
     }
 
+    public Student() {}
+
     public void setCourse(int course) {
         this.course = course;
     }

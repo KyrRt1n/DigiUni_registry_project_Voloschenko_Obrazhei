@@ -1,9 +1,11 @@
 package ua.sopsany;
 
+import java.io.File;
 import java.util.List;
 
 import ua.sopsany.dto.FacultyStatsRecord;
 import ua.sopsany.models.*;
+import ua.sopsany.utils.FileStorageService;
 import ua.sopsany.utils.InputHandler;
 import ua.sopsany.utils.Repository;
 import ua.sopsany.utils.SearchService;
@@ -16,13 +18,21 @@ import java.time.LocalDate;
 
 public class Main {
 
-    public static University university = Repository.createUniversity();
+    public static University university;
     static InputHandler input = new InputHandler();
     static SearchService searchService = new SearchService();
     static AuthService authService = Repository.createAuthService();
     static User currentUser = null;
+    static FileStorageService storage = new FileStorageService();
 
     public static void main(String[] args) {
+
+        university = storage.loadUniversity();
+        if (university == null) {
+            university = Repository.createUniversity();
+        } else {
+            System.out.println("University data loaded from file!");
+        }
         while (true) {
 
             while (currentUser == null) {
@@ -52,10 +62,11 @@ public class Main {
                     System.out.println("6. Manage Users & Roles");
                 }
 
+                System.out.println("8. Save University Structure to file");
                 System.out.println("9. Logout");
                 System.out.println("0. Exit Application");
 
-                int choice = input.readInt("Select option", 0, 9);
+                int choice = input.readInt("Select option", 0, 10);
 
                 switch (choice) {
                     case 1:
@@ -81,6 +92,10 @@ public class Main {
                         if (currentUser.getRole() == Role.ADMIN) adminMenu();
                         else System.out.println("Access denied.");
                         break;
+                    case 8:
+                        System.out.println("saving");
+                        storage.saveUni(university);
+                        break;
                     case 9:
                         System.out.println("Logging out...");
                         currentUser = null;
@@ -88,6 +103,7 @@ public class Main {
                     case 0:
                         System.out.println("Goodbye!");
                         return;
+
                     default:
                         System.out.println("Invalid option.");
                 }
