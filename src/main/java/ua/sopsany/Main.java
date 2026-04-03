@@ -112,30 +112,286 @@ public class Main {
         }
     }
 
-    private static void adminMenu() {
-        System.out.println("\n--- ADMIN MENU ---");
-        System.out.println("1. Block/Unblock user");
-        System.out.println("2. Remove user");
-        System.out.println("3. Edit user");
-        System.out.println("4. Show all users");
+    private static void manageStudentsMenu() {
+        while (true) {
+            System.out.println("\n--- Manage Students ---");
+            System.out.println("1. Add Student");
+            System.out.println("2. Remove Student");
+            System.out.println("3. Update Student Info");
+            System.out.println("0. Go back");
 
-        int choice = input.readInt("Select option", 0, 4);
-        switch (choice) {
-            case 1:
-                adminBlockUnblock();
-                break;
-            case 2:
-                adminRemoveUser();
-                break;
-            case 3:
-                adminEditUser();
-                break;
-            case 4:
-                for (User u : authService.getAllUsers())
-                    System.out.println(u);
-                break;
+            int choice = input.readInt("Select option", 0, 3);
+            switch (choice) {
+                case 1: addStudent(); break;
+                case 2: studentRemoval(); break;
+                case 3: studentUpdate(); break;
+                case 0: return;
+            }
         }
+    }
 
+    private static void manageTeachersMenu() {
+        while (true) {
+            System.out.println("\n--- Manage Teachers ---");
+            System.out.println("1. Add Teacher");
+            System.out.println("2. Remove Teacher");
+            System.out.println("3. Show all Teachers");
+            System.out.println("0. Go back");
+
+            int choice = input.readInt("Select option", 0, 3);
+            switch (choice) {
+                case 1:
+                    System.out.println("--- Adding New Teacher ---");
+                    String name = input.readString("Name");
+                    String surname = input.readString("Surname");
+                    String lastname = input.readString("Lastname");
+                    LocalDate birthDate = input.readDate("Birthday");
+                    String email = input.readString("Email");
+                    String phone = input.readString("Phone");
+                    int id = input.readInt("Personal ID");
+                    String position = input.readString("Position (e.g. Professor, Assistant)");
+                    String academicDegree = input.readString("Academic Degree (e.g. PhD, Doctor)");
+                    String academicTitle = input.readString("Academic Title");
+                    LocalDate empDate = input.readDate("Date of Employment");
+                    int workLoad = input.readInt("Workload (hours)");
+
+                    Teacher newTeacher = new Teacher(name, surname, lastname, birthDate, email, phone, id,
+                            position, academicDegree, academicTitle, empDate, workLoad);
+
+                    try {
+                        Repository.teacherRepo.add(newTeacher);
+                        System.out.println("Teacher added successfully!");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("--- Removing Teacher ---");
+                    String lastNameToRemove = input.readString("Enter teacher's lastname to remove");
+                    Teacher teacherToRemove = null;
+
+                    for (Teacher t : Repository.teacherRepo.getAll()) {
+                        if (t.getLastname().equalsIgnoreCase(lastNameToRemove)) {
+                            teacherToRemove = t;
+                            break;
+                        }
+                    }
+
+                    if (teacherToRemove != null) {
+                        try {
+                            Repository.teacherRepo.remove(teacherToRemove);
+                            System.out.println("Teacher " + teacherToRemove.getLastname() + " removed successfully!");
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("Teacher not found.");
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("--- All Teachers ---");
+                    List<Teacher> teachers = Repository.teacherRepo.getAll();
+                    if (teachers.isEmpty()) {
+                        System.out.println("No teachers found.");
+                    } else {
+                        for (Teacher t : teachers) {
+                            System.out.println(t);
+                        }
+                    }
+                    break;
+
+                case 0:
+                    return;
+            }
+        }
+    }
+
+    private static void manageDepartmentsMenu() {
+        while (true) {
+            System.out.println("\n--- Manage Departments ---");
+            System.out.println("1. Add Department");
+            System.out.println("2. Remove Department");
+            System.out.println("3. Show all Departments");
+            System.out.println("0. Go back");
+
+            int choice = input.readInt("Select option", 0, 3);
+            switch (choice) {
+                case 1:
+                    List<Faculty> faculties = university.getFaculties();
+                    if (faculties.isEmpty()) {
+                        System.out.println("Error: No faculties exist. Please add a faculty first.");
+                        break;
+                    }
+
+                    System.out.println("Select faculty to add department to:");
+                    for (int i = 0; i < faculties.size(); i++) {
+                        System.out.println(i + ". " + faculties.get(i).getShortName() + " (" + faculties.get(i).getFullName() + ")");
+                    }
+                    int facIndex = input.readInt("Your choice", 0, faculties.size() - 1);
+                    Faculty selectedFac = faculties.get(facIndex);
+
+                    System.out.println("--- Adding New Department ---");
+                    int deptId = input.readInt("Department ID");
+                    String deptName = input.readString("Name (e.g. Software Engineering)");
+                    String office = input.readString("Office (e.g. 1-225)");
+
+                    Department newDept = new Department(deptId, deptName, office);
+                    newDept.setFaculty(selectedFac);
+                    selectedFac.addDepartment(newDept);
+
+                    try {
+                        Repository.departmentRepo.add(newDept);
+                        System.out.println("Department added successfully to " + selectedFac.getShortName() + "!");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("--- Removing Department ---");
+                    faculties = university.getFaculties();
+                    if (faculties.isEmpty()) {
+                        System.out.println("No faculties found.");
+                        break;
+                    }
+                    System.out.println("Select faculty:");
+                    for (int i = 0; i < faculties.size(); i++) {
+                        System.out.println(i + ". " + faculties.get(i).getShortName());
+                    }
+                    int fIndex = input.readInt("Your choice", 0, faculties.size() - 1);
+                    Faculty f = faculties.get(fIndex);
+
+                    if (f.getDepartments().isEmpty()) {
+                        System.out.println("No departments in this faculty.");
+                        break;
+                    }
+
+                    System.out.println("Select department to remove:");
+                    for (int i = 0; i < f.getDepartments().size(); i++) {
+                        System.out.println(i + ". " + f.getDepartments().get(i).getName());
+                    }
+                    int dIndex = input.readInt("Your choice", 0, f.getDepartments().size() - 1);
+
+                    Department deptToRemove = f.getDepartments().get(dIndex);
+                    f.getDepartments().remove(deptToRemove);
+
+                    try {
+                        Repository.departmentRepo.remove(deptToRemove);
+                        System.out.println("Department removed successfully!");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("--- All Departments ---");
+                    for (Faculty fac : university.getFaculties()) {
+                        System.out.println("Faculty: " + fac.getShortName());
+                        for (Department d : fac.getDepartments()) {
+                            System.out.println("  └- " + d);
+                        }
+                    }
+                    break;
+
+                case 0:
+                    return;
+            }
+        }
+    }
+
+    private static void manageFacultiesMenu() {
+        while (true) {
+            System.out.println("\n--- Manage Faculties ---");
+            System.out.println("1. Add Faculty");
+            System.out.println("2. Remove Faculty");
+            System.out.println("3. Show all Faculties");
+            System.out.println("0. Go back");
+
+            int choice = input.readInt("Select option", 0, 3);
+            switch (choice) {
+                case 1:
+                    System.out.println("--- Adding New Faculty ---");
+                    int id = input.readInt("Faculty ID");
+                    String fullName = input.readString("Full Name (e.g. Faculty of Informatics)");
+                    String shortName = input.readString("Short Name (e.g. FI)");
+                    String contacts = input.readString("Contacts (Phone/Email)");
+
+                    Faculty newFac = new Faculty(id, fullName, shortName, null, contacts);
+                    university.addFaculty(newFac);
+
+                    try {
+                        Repository.facultyRepo.add(newFac);
+                        System.out.println("Faculty added successfully!");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("--- Removing Faculty ---");
+                    List<Faculty> faculties = university.getFaculties();
+                    if (faculties.isEmpty()) {
+                        System.out.println("No faculties found.");
+                        break;
+                    }
+
+                    System.out.println("Select faculty to remove:");
+                    for (int i = 0; i < faculties.size(); i++) {
+                        System.out.println(i + ". " + faculties.get(i).getFullName());
+                    }
+                    int facIndex = input.readInt("Your choice", 0, faculties.size() - 1);
+
+                    Faculty facToRemove = faculties.get(facIndex);
+                    university.getFaculties().remove(facToRemove);
+
+                    try {
+                        Repository.facultyRepo.remove(facToRemove);
+                        System.out.println("Faculty " + facToRemove.getShortName() + " removed successfully!");
+                    } catch (Exception e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
+                    break;
+
+                case 3:
+                    System.out.println("--- All Faculties ---");
+                    if (university.getFaculties().isEmpty()) {
+                        System.out.println("No faculties found.");
+                    } else {
+                        for (Faculty f : university.getFaculties()) {
+                            System.out.println(f);
+                        }
+                    }
+                    break;
+
+                case 0:
+                    return;
+            }
+        }
+    }
+
+
+    private static void adminMenu() {
+        while (true) {
+            System.out.println("\n--- ADMIN MENU (User Management) ---");
+            System.out.println("1. Block/Unblock user");
+            System.out.println("2. Remove user");
+            System.out.println("3. Edit user");
+            System.out.println("4. Show all users");
+            System.out.println("0. Go back");
+
+            int choice = input.readInt("Select option", 0, 4);
+            switch (choice) {
+                case 1: adminBlockUnblock(); break;
+                case 2: adminRemoveUser(); break;
+                case 3: adminEditUser(); break;
+                case 4:
+                    for (User u : authService.getAllUsers()) System.out.println(u);
+                    break;
+                case 0: return;
+            }
+        }
     }
 
     private static void adminEditUser() {
@@ -143,48 +399,40 @@ public class Main {
         for (User u : authService.getAllUsers())
             System.out.println(u);
 
-        System.out.println("\nWhat do you want to change? \n 1. Password \n 2. Role \n 0. Cancel");
-        int choice = input.readInt("Select option", 0, 2);
-
-        if(choice == 0) {
+        String login = input.readString("Enter user's login");
+        User user = authService.findByLogin(login);
+        if(user == null) {
+            System.out.println("User not found");
             return;
         }
-        else if(choice == 1) {
-            String login = input.readString("Enter user's login");
-            User user = authService.findByLogin(login);
-            if(user == null) {
-                System.out.println("User not found");
-                return;
-            }
+
+        System.out.println("\nWhat do you want to change for user '" + login + "'? \n 1. Password \n 2. Role \n 0. Cancel");
+        int choice = input.readInt("Select option", 0, 2);
+
+        if (choice == 1) {
             String newPassword = input.readString("Enter new password");
             authService.changePassword(user, newPassword);
             System.out.println("Password changed successfully");
         }
-        else if(choice == 2) {
-            String login = input.readString("Enter user's login");
-            User user = authService.findByLogin(login);
-            if(user == null) {
-                System.out.println("User not found");
-                return;
-            }
+        else if (choice == 2) {
             if(login.equals("admin") || login.equals(currentUser.getLogin())) {
-                System.out.println("You can't change role of admin");
+                System.out.println("You can't change role of admin/yourself");
                 return;
             }
-
             System.out.println("Current role: " + user.getRole());
             int newRole = input.readInt("Roles: 1. USER \n2. MANAGER \n3. ADMIN \n0. Cancel", 0, 3);
 
-            if (newRole == 1)
-                user.setRole(Role.USER);
-            else if (newRole == 2)
-                user.setRole(Role.MANAGER);
-            else if (newRole == 3)
-                user.setRole(Role.ADMIN);
+            if (newRole == 1) user.setRole(Role.USER);
+            else if (newRole == 2) user.setRole(Role.MANAGER);
+            else if (newRole == 3) user.setRole(Role.ADMIN);
             else {
-                System.out.println("Role not found");
-                return;
+                System.out.println("Cancelled");
+                adminEditUser();
             }
+        }
+        else {
+            System.out.println("Cancelled");
+            adminMenu();
         }
     }
 
@@ -192,32 +440,31 @@ public class Main {
         System.out.println("\n--- Remove user ---");
         for (User u : authService.getAllUsers())
             System.out.println(u);
-        String login = input.readString("Enter user's login");
+
+        String login = input.readString("Enter user's login to remove or \"_\" to go back");
+        if(login.equals("_")) {
+            System.out.println("Cancelled");
+            adminMenu();
+            return;
+        }
         User user = authService.findByLogin(login);
         if(user == null) {
             System.out.println("User not found");
-            return;
         }
         else if(login.equals("admin") || login.equals(currentUser.getLogin())) {
-            System.out.println("You can't remove admin");
+            System.out.println("You can't remove admin or yourself");
         }
         else {
             authService.removeUser(login);
-            System.out.println("User " + user + " removed");
+            System.out.println("User " + login + " removed");
         }
+        adminMenu();
     }
 
     private static void adminBlockUnblock() {
         System.out.println("\n--- User block/unblock ---");
         for (User u : authService.getAllUsers())
             System.out.println(u);
-        boolean block;
-        System.out.println();
-        if(input.readInt("Do you want block user(1) or unblock(0)?", 0, 1) == 1) {
-            block = true;
-        } else {
-            block = false;
-        }
 
         String login = input.readString("Enter user's login");
         User user = authService.findByLogin(login);
@@ -226,20 +473,24 @@ public class Main {
             return;
         }
         else if(login.equals("admin") || login.equals(currentUser.getLogin())) {
-            System.out.println("You can't block admin");
+            System.out.println("You can't block admin or yourself");
+            return;
         }
-        else {
-            if (user.isBlocked() && block) {
-                System.out.println("User is already blocked");
-                return;
-            }
-            if (!user.isBlocked() && !block) {
-                System.out.println("User is already unblocked");
-                return;
-            }
-            user.setBlockedStatus(block);
+
+        boolean block = input.readInt("Do you want block user(1) or unblock(0)?", 0, 1) == 1;
+
+        if (user.isBlocked() && block) {
+            System.out.println("User is already blocked");
+            return;
         }
+        if (!user.isBlocked() && !block) {
+            System.out.println("User is already unblocked");
+            return;
+        }
+        user.setBlockedStatus(block);
+        System.out.println("User status updated.");
     }
+
 
     private static Student findStudentInteractively(String actionName) {
         String lastname = input.readString("Enter student's lastname to " + actionName);
@@ -323,18 +574,6 @@ public class Main {
         }
     }
 
-    private static void printUniStructure() {
-        System.out.println("============");
-        System.out.println("University: " + university.getFullName());
-        for (Faculty f : university.getFaculties()) {
-            System.out.println("  └Faculty: " + f);
-            for (Department d : f.getDepartments()) {
-                System.out.println("   └-Department: " + d.getName());
-            }
-        }
-        System.out.println("============");
-    }
-
     private static void addStudent() {
         System.out.println("Select faculty you want add Student to:");
         List<Faculty> faculties = university.getFaculties();
@@ -374,6 +613,19 @@ public class Main {
         Repository.addStudent(targetDept, newStudent);
 
         System.out.println("Student added successfully!");
+    }
+
+
+    private static void printUniStructure() {
+        System.out.println("============");
+        System.out.println("University: " + university.getFullName());
+        for (Faculty f : university.getFaculties()) {
+            System.out.println("  └Faculty: " + f);
+            for (Department d : f.getDepartments()) {
+                System.out.println("   └-Department: " + d.getName());
+            }
+        }
+        System.out.println("============");
     }
 
     private static void findStudent() {
