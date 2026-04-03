@@ -9,6 +9,14 @@ public class User {
     private boolean isBlocked;
 
 
+    public void setRole(Role newRole) {
+        this.role = newRole;
+    }
+
+    public void setPassword(String password) {
+        this.password = password.hashCode();
+    }
+
     public User(String login, String password, Role role) {
         this.login = login;
         this.password = password.hashCode();
@@ -38,9 +46,9 @@ public class User {
 
     @Override
     public String toString() {
-        if(isBlocked)
-            return login + " | " + role + " | (blocked)";
-        return login + " | " + role;
+        return isBlocked ?
+                login + " | " + role + " | (blocked)" :
+                login + " | " + role;
     }
 
 }
