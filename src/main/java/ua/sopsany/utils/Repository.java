@@ -67,7 +67,7 @@ public class Repository {
         // --- Faculty of Economics ---
         Teacher economicsHead = new Teacher("Iryna", "Petrivna", "Kovalchuk",
                 LocalDate.of(1975, 3, 15), "ikovalchuk@ukma.edu.ua", "+380671234567", 55567890,
-                "FOE Department head", "Candidate of Sciences", "Associate Professor",
+                "Marketing Department head", "Candidate of Sciences", "Associate Professor",
                 LocalDate.of(2005, 9, 1), 20);
         try { teacherRepo.add(economicsHead); } catch (DuplicateIdException e) { System.out.println(e.getMessage()); }
 
