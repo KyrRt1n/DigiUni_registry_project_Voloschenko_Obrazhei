@@ -24,6 +24,13 @@ public class User {
         this.isBlocked = false;
     }
 
+    public User(String login, int passwordHash, Role role, boolean isBlocked) {
+        this.login = login;
+        this.password = passwordHash;
+        this.role = role;
+        this.isBlocked = isBlocked;
+    }
+
     public String getLogin() {
         return login;
     }
