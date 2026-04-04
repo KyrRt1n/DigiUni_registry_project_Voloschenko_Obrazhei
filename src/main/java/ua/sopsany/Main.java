@@ -145,17 +145,19 @@ public class Main {
             System.out.println("\n--- Search & Reports ---");
             System.out.println("1. Print University Structure");
             System.out.println("2. Find Student/Teacher");
-            System.out.println("3. Show all students");
-            System.out.println("4. Faculty Statistics Report");
-            System.out.println("5. Sorted Students by Course");
+            System.out.println("3. Sort Students/Teachers");
+            System.out.println("4. Show all students");
+            System.out.println("5. Faculty Statistics Report");
+            System.out.println("6. Sorted Students by Course");
             System.out.println("0. Go back");
 
             int choice = input.readInt("Select option", 0, 5);
             switch (choice) {
                 case 1: printUniStructure(); break;
                 case 2: findStudent(); break;
-                case 3: printStudentList(); break;
-                case 4:
+                case 3: sortStudents(); break;
+                case 4: printStudentList(); break;
+                case 5:
                     System.out.println("\n--- Faculty Statistics ---");
                     List<FacultyStatsRecord> stats = searchService.generateFacultyStatistics(university);
                     if (stats.isEmpty())
@@ -165,7 +167,7 @@ public class Main {
                             System.out.println(record.toReportLine());
                     break;
 
-                case 5:
+                case 6:
                     System.out.println("\n--- Students by course ---");
                     int c = input.readInt("Enter course", 1, 6);
                     List<Student> sortedStudents = searchService.getStudentsByCourseSorted(Repository.studentRepo.getAll(), c);
@@ -442,7 +444,6 @@ public class Main {
         }
     }
 
-
     private static void adminMenu() {
         while (true) {
             System.out.println("\n--- ADMIN MENU (User Management) ---");
@@ -561,7 +562,6 @@ public class Main {
         user.setBlockedStatus(block);
         System.out.println("User status updated.");
     }
-
 
     private static Student findStudentInteractively(String actionName) {
         String lastname = input.readString("Enter student's lastname to " + actionName);
@@ -707,7 +707,6 @@ public class Main {
         System.out.println("Student added successfully!");
     }
 
-
     private static void printUniStructure() {
         System.out.println("============");
         System.out.println("University: " + university.getFullName());
@@ -720,21 +719,39 @@ public class Main {
         System.out.println("============");
     }
 
-    private static void findStudent() {
-        System.out.println("\n1. Find students by course");
-        System.out.println("2. Find students by group");
-        System.out.println("3. Find students by full name");
-        System.out.println("4. Sort students by lastname");
-        System.out.println("5. Find student by ticket ID");
-        System.out.println("6. Find teacher by lastname");
-        System.out.println("7. Sort teachers by lastname");
-
+    private static void sortStudents() {
+        System.out.println("1. Sort students by lastname");
+        System.out.println("2. Sort teachers by lastname");
+        System.out.println("3. Sort students by course");
+        System.out.println("4. Sort by faculty");
+        System.out.println("5. Sort by department");
+        System.out.println("6. Sort by group");
         System.out.println("0. Go back");
+
         List<Student> allStudents = Repository.studentRepo.getAll();
         List<Student> resultStud = List.of();
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
-        int findingOption = input.readInt("Your choice", 0, 7);
+        int sortOption = input.readInt("Your choice", 0, 6);
+
+        switch (sortOption) {
+
+        }
+    }
+
+    private static void findStudent() {
+        System.out.println("\n1. Find students by course");
+        System.out.println("2. Find students by group");
+        System.out.println("3. Find students by full name");
+        System.out.println("4. Find student by ticket ID");
+        System.out.println("5. Find teacher by lastname");
+        System.out.println("0. Go back");
+
+        List<Student> allStudents = Repository.studentRepo.getAll();
+        List<Student> resultStud = List.of();
+        List<Teacher> allTeachers = Repository.teacherRepo.getAll();
+        List<Teacher> resultTeach = List.of();
+        int findingOption = input.readInt("Your choice", 0, 5);
 
         switch (findingOption) {
             case 1:
@@ -752,21 +769,15 @@ public class Main {
                 resultStud = searchService.findByFullName(allStudents, lastnameToFind, nameToFind, surnameToFind);
                 break;
             case 4:
-                resultStud = searchService.sortByLastname(allStudents);
-                break;
-            case 5:
                 String studIdToFind = input.readString("Enter Student ID");
                 Student found = searchService.findByStudentId(allStudents, studIdToFind);
                 if (found != null) {
                     resultStud = List.of(found);
                 }
                 break;
-            case 6:
+            case 5:
                 String teachLastnameToFind = input.readString("Enter teacher's lastname");
                 resultTeach = searchService.findTeacherByLastName(allTeachers, teachLastnameToFind);
-                break;
-            case 7:
-                resultTeach = searchService.sortTeachersByLastname(allTeachers);
                 break;
             case 0:
                 return;
