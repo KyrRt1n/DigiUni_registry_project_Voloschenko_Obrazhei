@@ -32,6 +32,7 @@ public class Main {
             university = Repository.createUniversity();
         } else {
             System.out.println("University data loaded from file!");
+            Repository.syncRepos(university);
         }
         while (true) {
 
@@ -93,8 +94,9 @@ public class Main {
                         else System.out.println("Access denied.");
                         break;
                     case 8:
-                        System.out.println("saving");
+                        System.out.println("Saving...");
                         storage.saveUni(university);
+                        System.out.println("University structure saved successfully!");
                         break;
                     case 9:
                         System.out.println("Logging out...");

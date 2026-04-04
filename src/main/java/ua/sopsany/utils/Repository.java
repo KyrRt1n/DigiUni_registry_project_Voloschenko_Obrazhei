@@ -100,4 +100,29 @@ public class Repository {
         auth.addUser(new User("admin", "admin123", Role.ADMIN));
         return auth;
     }
+
+    public static void syncRepos(University uni) {
+        facultyRepo = new GenericRepository<>();
+        departmentRepo = new GenericRepository<>();
+        teacherRepo = new GenericRepository<>();
+        studentRepo = new GenericRepository<>();
+
+        for (Faculty f : uni.getFaculties()) {
+            try { facultyRepo.add(f); } catch (DuplicateIdException ignored) {}
+
+            if (f.getDecan() != null)
+                try { teacherRepo.add(f.getDecan()); } catch (DuplicateIdException ignored) {}
+
+            for (Department d : f.getDepartments()) {
+                try { departmentRepo.add(d); } catch (DuplicateIdException ignored) {}
+
+                if (d.getHead() != null)
+                    try { teacherRepo.add(d.getHead()); } catch (DuplicateIdException ignored) {}
+
+                for (Student s : d.getStudents()) {
+                    try { studentRepo.add(s); } catch (DuplicateIdException ignored) {}
+                }
+            }
+        }
+    }
 }
