@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
 
-public abstract class Person {
+public sealed abstract class Person permits Teacher, Student {
 
     private String name;
     private String surname;
