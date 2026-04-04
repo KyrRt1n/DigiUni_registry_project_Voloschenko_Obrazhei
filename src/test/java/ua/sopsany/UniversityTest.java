@@ -2,9 +2,7 @@ package ua.sopsany;
 
 import org.junit.jupiter.api.Test;
 import ua.sopsany.exceptions.DuplicateIdException;
-import ua.sopsany.models.Faculty;
 import ua.sopsany.models.Student;
-import ua.sopsany.models.University;
 import ua.sopsany.utils.GenericRepository;
 import ua.sopsany.utils.SearchService;
 
