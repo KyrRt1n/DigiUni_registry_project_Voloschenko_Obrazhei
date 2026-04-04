@@ -56,12 +56,12 @@ public class Main {
                     System.out.println("3. Manage Teachers");
                     System.out.println("4. Manage Departments");
                     System.out.println("5. Manage Faculties");
+                    if (currentUser.getRole() == Role.ADMIN)
+                        System.out.println("6. Manage Users & Roles");
                     System.out.println("8. Save University Structure to file");
                 }
 
-                if (currentUser.getRole() == Role.ADMIN) {
-                    System.out.println("6. Manage Users & Roles");
-                }
+
 
 
                 System.out.println("9. Logout");
