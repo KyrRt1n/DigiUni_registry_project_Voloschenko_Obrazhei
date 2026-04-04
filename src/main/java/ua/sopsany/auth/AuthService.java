@@ -11,7 +11,9 @@ public class AuthService {
     }
     public Optional<User> login(String login, String password) throws UnauthorizedException {
         User u = users.get(login);
-        if (u != null && u.getPassword() == password.hashCode() && !u.isBlocked()) {
+        if(u.isBlocked())
+            throw new UnauthorizedException("User is blocked");
+        else if (u != null && u.getPassword() == password.hashCode()) {
             return Optional.of(u);
         }
         throw new UnauthorizedException("Invalid login or password");

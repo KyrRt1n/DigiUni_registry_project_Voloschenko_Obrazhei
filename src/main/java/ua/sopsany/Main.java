@@ -68,9 +68,6 @@ public class Main {
                     System.out.println("8. Save University Structure to file");
                 }
 
-
-
-
                 System.out.println("9. Logout");
                 System.out.println("0. Exit Application");
 
