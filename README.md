@@ -1,38 +1,114 @@
 ### Voloschenko Artem and Oleksandr Obrazhei Digital University project
 
 ```
-.
-└── DigiUni Registry
-    ├── main
-    │   └── java
-    │       └── ua.sopsany
-    │           ├── Main.java
-    │           ├── auth
-    │           │   ├── AuthService.java
-    │           │   ├── Role.java
-    │           │   └── User.java
-    │           ├── exceptions
-    │           │   ├── DuplicateIdException.java
-    │           │   ├── EntityNotFoundException.java
-    │           │   └── UnauthorizedExcpetion.java
-    │           ├── models
-    │           │   ├── Department.java
-    │           │   ├── Faculty.java
-    │           │   ├── Person.java
-    │           │   ├── Student.java
-    │           │   ├── Teacher.java
-    │           │   └── University.java
-    │           └── utils
-    │               ├── GenericRepository.java
-    │               ├── InputHandler.java
-    │               ├── Repository.java
-    │               ├── SearchService.java
-    │               └── StudentFinder.java
-    └── test
-        └── java
-            └── ua.sopsany
-                └── UniversityTest.java
+DigiUni Registry
+├── main
+│   └── java
+│       └── ua.sopsany
+│           ├── Main.java
+│           ├── university_data.json
+│           ├── user_data.json
+│           │
+│           ├── auth
+│           │   ├── AuthService.java
+│           │   ├── Role.java
+│           │   └── User.java
+│           │
+│           ├── dto
+│           │   └── FacultyStatsRecord.java
+│           │   └── StudentDTO.java
+│           │
+│           ├── exceptions
+│           │   ├── DuplicateIdException.java
+│           │   ├── EntityNotFoundException.java
+│           │   └── UnauthorizedExcpetion.java
+│           │
+│           ├── models
+│           │   ├── Department.java
+│           │   ├── Faculty.java
+│           │   ├── Person.java
+│           │   ├── Student.java
+│           │   ├── Teacher.java
+│           │   └── University.java
+│           │
+│           └── utils
+│               ├── FileStorageService.java
+│               ├── GenericRepository.java
+│               ├── InputHandler.java
+│               ├── Repository.java
+│               └── SearchService.java
+└── test
+    └── java
+        └── ua.sopsany
+              └── UniversityTest.java
 ```
+
+4. Мінімальний функціонал (обов'язковий)
+   4.1 Мінімальні дані сутностей
+
+   - [ ] Університет: повна назва, скорочена назва, місто, адреса.
+   - [ ] Факультет: унікальний код, назва, скорочена назва, декан (посилання на викладача), контакти.
+   - [ ] Кафедра: унікальний код, назва, факультет (посилання), завідувач (посилання на викладача), кабінет/локація.
+   - [ ] Персона (базовий тип): унікальний ідентифікатор, ПІБ (3 частини), дата народження, email, телефон.
+   - [ ] Студент: ідентифікатор студента/залікова, курс (1-6), група, рік вступу, форма навчання (бюджет/контракт), статус (навчається/академвідпустка/відрахований).
+   - [ ] Викладач: посада, науковий ступінь, вчене звання, дата прийняття на роботу, ставка/навантаження.
+
+4.2 Операції керування даними
+
+   - [ ] Створити/видалити/редагувати факультет.
+   - [ ] Створити/видалити/редагувати кафедру факультету.
+   - [ ] Додати/видалити/редагувати студента/викладача в кафедрі.
+   - [ ] Переводити студента між групами/кафедрами та змінювати курс.
+
+4.3 Пошук і звіти
+
+   - [ ] Знайти студента/викладача за ПІБ, курсом або групою.
+   - [ ] Вивести всіх студентів, впорядкованих за курсами.
+   - [ ] Вивести всіх студентів/викладачів факультету, впорядкованих за алфавітом.
+   - [ ] Вивести всіх студентів кафедри, впорядкованих за курсами.
+   - [ ] Вивести всіх студентів/викладачів кафедри, впорядкованих за алфавітом.
+   - [ ] Вивести всіх студентів кафедри вказаного курсу (звичайний список та впорядкований за алфавітом).
+
+4.4 Доступ і ролі
+
+   - [ ] Потрібна авторизація (логін/пароль) і розмежування прав доступу.
+   - [ ] Користувач: лише перегляд (пошук і звіти).
+   - [ ] Менеджер: повний доступ до CRUD, без керування користувачами.
+   - [ ] Адміністратор: повний доступ + створення/редагування/блокування користувачів і ролей.
+
+5. Розширені вимоги (покриття тем курсу)
+
+   - [ ] ООП та дизайн: Ієрархія Person -> Student/Teacher, використання інтерфейсів, принципів SOLID, композиції.
+   - [ ] Інкапсуляція та валідація: Приватні поля, валідатори, використання Optional.
+   - [ ] Колекції та дженеріки: Репозиторії Repository<T, ID>, обґрунтований вибір List/Set/Map, коректні equals()/hashCode().
+   - [ ] Stream API: Фільтрація, сортування, групування через стріми та лямбди.
+   - [ ] Дата та час: Використання LocalDate, LocalDateTime, розрахунок стажу/віку через Period/Duration.
+   - [ ] Сучасна Java: Використання record (для Read-only даних), sealed класів, Lombok.
+   - [ ] Винятки та логування: Власні винятки (Exceptions), логування через SLF4J + Log4j2 (у файл).
+   - [ ] Тестування: Не менше 20 unit-тестів (JUnit), включаючи параметризовані.
+   - [ ] I/O: Збереження даних на диск (NIO.2, Path/Files), серіалізація (JSON або бінарна).
+   - [ ] Багатопоточність: Фонові операції або автозбереження.
+   - [ ] Мережевий режим: TCP клієнт-сервер.
+   - [ ] Reflection: Анотації для меню або валідації.
+
+6. Технічні вимоги
+
+   Мова: Java 17+.
+   Збірка: Maven.
+   Інтерфейс: консольне меню.
+   Захист від некоректного введення.
+
+
+8. Звіт
+
+Word-документ, що містить: постановку задачі, розподіл ролей, опис можливостей, UML-діаграму, опис рішень та проблем, висновки, код.
+9. Результат здачі
+
+   Git-репозиторій з комітами і PR.
+   Три теги: checkpoint-1, checkpoint-2, checkpoint-3.
+   README.md з інструкцією.
+   Word-звіт.
+
 
 
 <a href="https://tree.nathanfriend.com/?s=(%27options!(%27fancy!true~fullPat3trailingSlas3rootDot!true)~5(%275%27DigiUni%20Registry0main478ua.sopsany*Main2utils6InputHandler-Repository2Models6Departm9Faculty-Person-Stud9Teacher-University-6%27)~version!%271%27)*8%20-2%200%5Cn%202.7*3h!false~40%205source!6*%207java84%209ent-%01987654320-*">
