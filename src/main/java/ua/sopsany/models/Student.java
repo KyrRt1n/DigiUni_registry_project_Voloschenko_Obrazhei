@@ -2,7 +2,7 @@ package ua.sopsany.models;
 
 import java.time.LocalDate;
 
-public class Student extends Person {
+public final class Student extends Person {
 
     public enum FormEducation {BUDGET, CONTRACT}
     public enum StudentState {STUDYING, ACADEMIC_LEAVE, DEDUCTED}

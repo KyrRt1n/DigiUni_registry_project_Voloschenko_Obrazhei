@@ -105,7 +105,7 @@
         "group" : "MARK",
         "entryYear" : 2025,
         "studentID" : "1232343565",
-        "educationForm" : "BUDGET",
+        "educationForm" : "CONTRACT",
         "studentState" : "STUDYING"
       } ],
       "id" : 2
@@ -126,7 +126,7 @@
         "entryYear" : 2025,
         "studentID" : "235346456",
         "educationForm" : "BUDGET",
-        "studentState" : "STUDYING"
+        "studentState" : "ACADEMIC_LEAVE"
       } ],
       "id" : 3
     } ]

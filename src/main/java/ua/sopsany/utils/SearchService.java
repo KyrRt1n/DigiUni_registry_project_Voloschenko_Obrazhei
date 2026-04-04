@@ -1,6 +1,5 @@
 package ua.sopsany.utils;
 
-import ua.sopsany.auth.User;
 import ua.sopsany.dto.FacultyStatsRecord;
 import ua.sopsany.models.*;
 
@@ -32,8 +31,15 @@ public class SearchService {
                 && s.getName().equalsIgnoreCase(name)).toList();
     }
 
-    public Student findByStudentId(List<Student> students, String StudentID) {
-        return students.stream().filter(s -> s.getStudentID().equalsIgnoreCase(StudentID)).toList().get(0);
+    public Student findByStudentId(List<Student> students, String studentID) {
+        return students.stream()
+                .filter(s -> s.getStudentID().equalsIgnoreCase(studentID))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public List<Teacher> findTeacherByLastName(List<Teacher> teachers, String lastname) {
+        return teachers.stream().filter(t -> t.getLastname().equalsIgnoreCase(lastname)).toList();
     }
 
     public List<FacultyStatsRecord> generateFacultyStatistics(University university) {
@@ -69,5 +75,9 @@ public class SearchService {
                 .filter(s -> s.getCourse() == course)
                 .sorted(Comparator.comparing(Person::getLastname))
                 .toList();
+    }
+
+    public List<Teacher> sortTeachersByLastname(List<Teacher> allTeachers) {
+        return allTeachers.stream().sorted(Comparator.comparing(Person::getLastname)).toList();
     }
 }

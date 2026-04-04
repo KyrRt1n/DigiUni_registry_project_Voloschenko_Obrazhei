@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.time.LocalDate;
 import java.time.Period;
 
-public class Teacher extends Person {
+public final class Teacher extends Person {
 
     private String position;
     private String academicDegree;

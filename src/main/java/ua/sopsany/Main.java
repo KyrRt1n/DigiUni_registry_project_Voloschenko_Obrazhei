@@ -1,6 +1,5 @@
 package ua.sopsany;
 
-import java.io.File;
 import java.util.List;
 
 import ua.sopsany.dto.FacultyStatsRecord;
@@ -32,6 +31,7 @@ public class Main {
             university = Repository.createUniversity();
         } else {
             System.out.println("University data loaded from file!");
+            Repository.syncRepos(university);
         }
         while (true) {
 
@@ -56,13 +56,14 @@ public class Main {
                     System.out.println("3. Manage Teachers");
                     System.out.println("4. Manage Departments");
                     System.out.println("5. Manage Faculties");
+                    System.out.println("8. Save University Structure to file");
                 }
 
                 if (currentUser.getRole() == Role.ADMIN) {
                     System.out.println("6. Manage Users & Roles");
                 }
 
-                System.out.println("8. Save University Structure to file");
+
                 System.out.println("9. Logout");
                 System.out.println("0. Exit Application");
 
@@ -93,8 +94,12 @@ public class Main {
                         else System.out.println("Access denied.");
                         break;
                     case 8:
-                        System.out.println("saving");
-                        storage.saveUni(university);
+                        if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                            System.out.println("Saving...");
+                            storage.saveUni(university);
+                            System.out.println("University structure saved successfully!");
+                        }
+                        else System.out.println("Access denied.");
                         break;
                     case 9:
                         System.out.println("Logging out...");
@@ -116,7 +121,7 @@ public class Main {
         while (true) {
             System.out.println("\n--- Search & Reports ---");
             System.out.println("1. Print University Structure");
-            System.out.println("2. Find Student");
+            System.out.println("2. Find Student/Teacher");
             System.out.println("3. Show all students");
             System.out.println("4. Faculty Statistics Report");
             System.out.println("5. Sorted Students by Course");
@@ -693,41 +698,63 @@ public class Main {
     }
 
     private static void findStudent() {
-        System.out.println("1. Find students by course");
+        System.out.println("\n1. Find students by course");
         System.out.println("2. Find students by group");
         System.out.println("3. Find students by full name");
         System.out.println("4. Sort students by lastname");
+        System.out.println("5. Find student by ticket ID");
+        System.out.println("6. Find teacher by lastname");
+        System.out.println("7. Sort teachers by lastname");
+
         System.out.println("0. Go back");
         List<Student> allStudents = Repository.studentRepo.getAll();
-        List<Student> result = List.of();
-        int findingOption = input.readInt("Your choice:", 0, 4);
+        List<Student> resultStud = List.of();
+        List<Teacher> allTeachers = Repository.teacherRepo.getAll();
+        List<Teacher> resultTeach = List.of();
+        int findingOption = input.readInt("Your choice", 0, 7);
 
         switch (findingOption) {
             case 1:
-                int courseToFind = input.readInt("Select course:");
-                result = searchService.findByCourse(allStudents, courseToFind);
+                int courseToFind = input.readInt("Select course");
+                resultStud = searchService.findByCourse(allStudents, courseToFind);
                 break;
             case 2:
-                String groupToFind = input.readString("Select group:");
-                result = searchService.findByGroup(allStudents, groupToFind);
+                String groupToFind = input.readString("Select group");
+                resultStud = searchService.findByGroup(allStudents, groupToFind);
                 break;
             case 3:
                 String lastnameToFind = input.readString("Enter lastname");
                 String nameToFind = input.readString("Enter name");
                 String surnameToFind = input.readString("Enter surname");
-                result = searchService.findByFullName(allStudents, lastnameToFind, nameToFind, surnameToFind);
+                resultStud = searchService.findByFullName(allStudents, lastnameToFind, nameToFind, surnameToFind);
                 break;
             case 4:
-                result = searchService.sortByLastname(allStudents);
+                resultStud = searchService.sortByLastname(allStudents);
+                break;
+            case 5:
+                String studIdToFind = input.readString("Enter Student ID");
+                Student found = searchService.findByStudentId(allStudents, studIdToFind);
+                if (found != null) {
+                    resultStud = List.of(found);
+                }
+                break;
+            case 6:
+                String teachLastnameToFind = input.readString("Enter teacher's lastname");
+                resultTeach = searchService.findTeacherByLastName(allTeachers, teachLastnameToFind);
+                break;
+            case 7:
+                resultTeach = searchService.sortTeachersByLastname(allTeachers);
                 break;
             case 0:
                 return;
         }
 
-        if (!result.isEmpty())
-            result.forEach(s -> System.out.println("FOUND: " + s));
+        if (!resultStud.isEmpty() && resultStud.size() >= 1)
+            resultStud.forEach(s -> System.out.println("FOUND: " + s));
+        else if(!resultTeach.isEmpty() && resultTeach.size() >= 1)
+            resultTeach.forEach(t -> System.out.println("FOUND: " + t));
         else
-            System.out.println("Student not found.");
+            System.out.println("Person not found.");
     }
 
     private static void printStudentList() {
