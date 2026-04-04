@@ -31,6 +31,12 @@ public class SearchService {
                 && s.getName().equalsIgnoreCase(name)).toList();
     }
 
+    public List<Teacher> findTeacherByFullName(List<Teacher> teachers, String lastname, String name, String surname) {
+        return teachers.stream().filter(t -> t.getSurname().equalsIgnoreCase(surname)
+                && t.getLastname().equalsIgnoreCase(lastname)
+                && t.getName().equalsIgnoreCase(name)).toList();
+    }
+
     public Student findByStudentId(List<Student> students, String studentID) {
         return students.stream()
                 .filter(s -> s.getStudentID().equalsIgnoreCase(studentID))
@@ -79,5 +85,13 @@ public class SearchService {
 
     public List<Teacher> sortTeachersByLastname(List<Teacher> allTeachers) {
         return allTeachers.stream().sorted(Comparator.comparing(Person::getLastname)).toList();
+    }
+
+    public List<Student> sortStudentsByCourse(List<Student> allStudents) {
+        return allStudents.stream().sorted(Comparator.comparing(Student::getCourse)).toList();
+    }
+
+    public List<Student> sortStudentsByGroup(List<Student> allStudents) {
+        return allStudents.stream().sorted(Comparator.comparing(Student::getGroup)).toList();
     }
 }

@@ -125,10 +125,10 @@ public class Main {
             while (true) {
                 try {
                     Thread.sleep(60_000); // 60 секунд
-                    System.out.println("\n[AutoSave] Saving university data...");
+//                    System.out.println("\n[AutoSave] Saving university data...");
                     storage.saveUni(university);
                     storage.saveUsers(authService);
-                    System.out.println("[AutoSave] Done.");
+                    System.out.println("\n[AutoSave] Done.");
                 } catch (InterruptedException e) {
                     System.out.println("[AutoSave] Thread interrupted.");
                     break;
@@ -151,10 +151,10 @@ public class Main {
             System.out.println("6. Sorted Students by Course");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 5);
+            int choice = input.readInt("Select option", 0, 6);
             switch (choice) {
                 case 1: printUniStructure(); break;
-                case 2: findStudent(); break;
+                case 2: findPerson(); break;
                 case 3: sortStudents(); break;
                 case 4: printStudentList(); break;
                 case 5:
@@ -720,38 +720,93 @@ public class Main {
     }
 
     private static void sortStudents() {
+        System.out.println("\n--- Sorting Menu ---");
         System.out.println("1. Sort students by lastname");
         System.out.println("2. Sort teachers by lastname");
         System.out.println("3. Sort students by course");
-        System.out.println("4. Sort by faculty");
-        System.out.println("5. Sort by department");
-        System.out.println("6. Sort by group");
+        System.out.println("4. Sort students by faculty");
+        System.out.println("5. Sort students by department");
+        System.out.println("6. Sort students by group");
         System.out.println("0. Go back");
 
         List<Student> allStudents = Repository.studentRepo.getAll();
         List<Student> resultStud = List.of();
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
+
         int sortOption = input.readInt("Your choice", 0, 6);
 
         switch (sortOption) {
+            case 1:
+                resultStud = searchService.sortByLastname(allStudents);
+                break;
+            case 2:
+                resultTeach = searchService.sortTeachersByLastname(allTeachers);
+                break;
+            case 3:
+                resultStud = searchService.sortStudentsByCourse(allStudents);
+                break;
+            case 4:
+                System.out.println("\n--- Students grouped by Faculty (A-Z) ---");
+                for (Faculty f : university.getFaculties()) {
+                    System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
+                    List<Student> facStudents = f.getDepartments().stream()
+                            .flatMap(d -> d.getStudents().stream())
+                            .sorted(java.util.Comparator.comparing(Person::getLastname))
+                            .toList();
 
+                    if (facStudents.isEmpty()) System.out.println("  No students found.");
+                    else facStudents.forEach(s -> System.out.println("  " + s));
+                }
+                return;
+
+            case 5:
+                System.out.println("\n--- Students grouped by Department (A-Z) ---");
+                for (Faculty f : university.getFaculties()) {
+                    for (Department d : f.getDepartments()) {
+                        System.out.println("\n[Dept: " + d.getName() + " | Fac: " + f.getShortName() + "]");
+                        List<Student> depStudents = d.getStudents().stream()
+                                .sorted(java.util.Comparator.comparing(Person::getLastname))
+                                .toList();
+
+                        if (depStudents.isEmpty()) System.out.println("  No students found.");
+                        else depStudents.forEach(s -> System.out.println("  " + s));
+                    }
+                }
+                return;
+
+            case 6:
+                resultStud = searchService.sortStudentsByGroup(allStudents);
+                break;
+            case 0:
+                return;
+        }
+
+        if (!resultStud.isEmpty()) {
+            System.out.println("\n--- Sorted students ---");
+            resultStud.forEach(System.out::println);
+        } else if (!resultTeach.isEmpty()) {
+            System.out.println("\n--- Sorted teachers ---");
+            resultTeach.forEach(System.out::println);
+        } else {
+            System.out.println("The list is empty. Nobody to sort.");
         }
     }
 
-    private static void findStudent() {
+    private static void findPerson() {
         System.out.println("\n1. Find students by course");
         System.out.println("2. Find students by group");
         System.out.println("3. Find students by full name");
         System.out.println("4. Find student by ticket ID");
         System.out.println("5. Find teacher by lastname");
+        System.out.println("6. Find teacher by full name");
         System.out.println("0. Go back");
 
         List<Student> allStudents = Repository.studentRepo.getAll();
         List<Student> resultStud = List.of();
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
-        int findingOption = input.readInt("Your choice", 0, 5);
+        int findingOption = input.readInt("Your choice", 0, 6);
 
         switch (findingOption) {
             case 1:
@@ -778,6 +833,12 @@ public class Main {
             case 5:
                 String teachLastnameToFind = input.readString("Enter teacher's lastname");
                 resultTeach = searchService.findTeacherByLastName(allTeachers, teachLastnameToFind);
+                break;
+            case 6:
+                String teacherLastnameToFind = input.readString("Enter lastname");
+                String teacherNameToFind = input.readString("Enter name");
+                String teacherSurnameToFind = input.readString("Enter surname");
+                resultTeach = searchService.findTeacherByFullName(allTeachers, teacherLastnameToFind, teacherNameToFind, teacherSurnameToFind);
                 break;
             case 0:
                 return;

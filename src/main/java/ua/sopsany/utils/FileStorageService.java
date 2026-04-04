@@ -30,7 +30,7 @@ public class FileStorageService {
         try {
             String json = mapper.writeValueAsString(university);
             Files.writeString(uniFilePath, json);
-            System.out.println("Data saved successfully to " + uniFilePath.toAbsolutePath());
+//            System.out.println("Data saved successfully to " + uniFilePath.toAbsolutePath());
         } catch (Exception e) {
             System.out.println("Error saving data: " + e.getMessage());
         }
@@ -61,7 +61,7 @@ public class FileStorageService {
             }
             String json = mapper.writeValueAsString(data);
             Files.writeString(usersFilePath, json);
-            System.out.println("Users saved successfully to " + usersFilePath.toAbsolutePath());
+//            System.out.println("Users saved successfully to " + usersFilePath.toAbsolutePath());
         } catch (Exception e) {
             System.out.println("Error saving users: " + e.getMessage());
         }
