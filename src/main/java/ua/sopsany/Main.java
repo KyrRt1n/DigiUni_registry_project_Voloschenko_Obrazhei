@@ -33,6 +33,13 @@ public class Main {
             System.out.println("University data loaded from file!");
             Repository.syncRepos(university);
         }
+
+        AuthService loadedAuth = new AuthService();
+        storage.loadUsers(loadedAuth);
+        if (!loadedAuth.getAllUsers().isEmpty()) {
+            authService = loadedAuth;
+        }
+        startAutoSaveThread();
         while (true) {
 
             while (currentUser == null) {
@@ -97,7 +104,8 @@ public class Main {
                         if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
                             System.out.println("Saving...");
                             storage.saveUni(university);
-                            System.out.println("University structure saved successfully!");
+                            storage.saveUsers(authService);
+                            System.out.println("University + Users saved successfully!");
                         }
                         else System.out.println("Access denied.");
                         break;
@@ -115,8 +123,26 @@ public class Main {
             }
         }
     }
-
-
+    private static void startAutoSaveThread() {
+        Thread autoSave = new Thread(() -> {
+            while (true) {
+                try {
+                    Thread.sleep(60_000); // 60 секунд
+                    System.out.println("\n[AutoSave] Saving university data...");
+                    storage.saveUni(university);
+                    storage.saveUsers(authService);
+                    System.out.println("[AutoSave] Done.");
+                } catch (InterruptedException e) {
+                    System.out.println("[AutoSave] Thread interrupted.");
+                    break;
+                }
+            }
+        });
+        autoSave.setDaemon(true);
+        autoSave.setName("AutoSaveThread");
+        autoSave.start();
+        System.out.println("[AutoSave] Background thread started (saves every 60 sec)");
+    }
     private static void searchAndReportsMenu() {
         while (true) {
             System.out.println("\n--- Search & Reports ---");
