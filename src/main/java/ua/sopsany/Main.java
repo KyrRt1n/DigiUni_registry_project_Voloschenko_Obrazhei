@@ -12,6 +12,8 @@ import ua.sopsany.auth.AuthService;
 import ua.sopsany.auth.User;
 import ua.sopsany.auth.Role;
 import ua.sopsany.exceptions.UnauthorizedException;
+import ua.sopsany.dto.FacultyStatsRecord;
+import ua.sopsany.dto.StudentDTO;
 
 import java.time.LocalDate;
 
@@ -149,9 +151,10 @@ public class Main {
             System.out.println("4. Show all students");
             System.out.println("5. Faculty Statistics Report");
             System.out.println("6. Sorted Students by Course");
+            System.out.println("7. Full Student Report (DTO)");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 6);
+            int choice = input.readInt("Select option", 0, 7);
             switch (choice) {
                 case 1: printUniStructure(); break;
                 case 2: findPerson(); break;
@@ -178,6 +181,14 @@ public class Main {
                             System.out.println(s);
                         }
                     }
+                    break;
+                case 7:
+                    System.out.println("\n--- Full Student Report (DTO) ---");
+                    List<StudentDTO> dtoReport = searchService.generateFullStudentReport(university);
+                    if (dtoReport.isEmpty())
+                        System.out.println("No students found.");
+                    else
+                        dtoReport.forEach(dto -> System.out.println(dto.toReportLine()));
                     break;
 
                 case 0: return;
