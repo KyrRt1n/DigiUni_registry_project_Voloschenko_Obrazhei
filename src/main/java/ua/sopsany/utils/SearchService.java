@@ -1,6 +1,7 @@
 package ua.sopsany.utils;
 
 import ua.sopsany.dto.FacultyStatsRecord;
+import ua.sopsany.dto.StudentDTO;
 import ua.sopsany.models.*;
 
 import java.util.ArrayList;
@@ -93,5 +94,15 @@ public class SearchService {
 
     public List<Student> sortStudentsByGroup(List<Student> allStudents) {
         return allStudents.stream().sorted(Comparator.comparing(Student::getGroup)).toList();
+    }
+
+    public List<StudentDTO> generateFullStudentReport(University university) {
+        return university.getFaculties().stream()
+                .flatMap(f -> f.getDepartments().stream()
+                        .flatMap(d -> d.getStudents().stream()
+                                .map(s -> StudentDTO.from(s, f.getShortName(), d.getName()))
+                        ))
+                .sorted(Comparator.comparing(StudentDTO::fullName))
+                .toList();
     }
 }
