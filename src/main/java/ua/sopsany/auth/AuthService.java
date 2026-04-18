@@ -11,9 +11,11 @@ public class AuthService {
     }
     public Optional<User> login(String login, String password) throws UnauthorizedException {
         User u = users.get(login);
-        if(u.isBlocked())
+        if(u == null)
+            throw new UnauthorizedException("User not found");
+        else if(u.isBlocked())
             throw new UnauthorizedException("User is blocked");
-        else if (u != null && u.getPassword() == password.hashCode()) {
+        else if (u.getPassword() == password.hashCode()) {
             return Optional.of(u);
         }
         throw new UnauthorizedException("Invalid login or password");
