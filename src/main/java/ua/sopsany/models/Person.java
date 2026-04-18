@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Objects;
 
-public sealed abstract class Person permits Teacher, Student {
+public sealed abstract class Person implements Identifiable<Integer> permits Teacher, Student {
 
     private String name;
     private String surname;
@@ -74,7 +74,8 @@ public sealed abstract class Person permits Teacher, Student {
         return phone;
     }
 
-    public int getId() {
+    @Override
+    public Integer getId() {
         return id;
     }
 

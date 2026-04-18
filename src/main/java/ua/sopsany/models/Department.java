@@ -1,14 +1,13 @@
 package ua.sopsany.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ua.sopsany.utils.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Department {
+public class Department implements Identifiable<Integer>{
 
-    private int ID;
+    private int id;
     private String name;
     private String office;
     private Teacher head;
@@ -19,34 +18,34 @@ public class Department {
     private List<Student> students = new ArrayList<>();
     private List<Teacher> teachers = new ArrayList<>();
 
-    public Department(int ID, String Name, String office, Teacher head, Faculty faculty) {
-        this.ID = ID;
+    public Department(int id, String Name, String office, Teacher head, Faculty faculty) {
+        this.id = id;
         this.name = Name;
         this.office = office;
         this.head = head;
         this.faculty = faculty;
     }
 
-    public Department(int ID, String Name, String office, Teacher head) {
-        this.ID = ID;
+    public Department(int id, String Name, String office, Teacher head) {
+        this.id = id;
         this.name = Name;
         this.office = office;
         this.head = head;
     }
 
-    public Department(int ID, String Name, String office) {
-        this.ID = ID;
+    public Department(int id, String Name, String office) {
+        this.id = id;
         this.name = Name;
         this.office = office;
     }
 
-    public Department(int ID, String name) {
-        this.ID = ID;
+    public Department(int id, String name) {
+        this.id = id;
         this.name = name;
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
@@ -91,8 +90,9 @@ public class Department {
         this.teachers = teachers;
     }
 
-    public int getID() {
-        return ID;
+    @Override
+    public Integer getId() {
+        return id;
     }
 
     public String getName() {
@@ -118,12 +118,12 @@ public class Department {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Department department = (Department) o;
-        return ID == department.ID;
+        return id == department.id;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ID);
+        return Objects.hash(id);
     }
 
 }

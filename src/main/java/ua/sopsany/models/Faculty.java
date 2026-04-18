@@ -4,7 +4,7 @@
     import java.util.List;
     import java.util.Objects;
 
-    public class Faculty {
+    public class Faculty implements Identifiable<Integer>{
         private int id;
         private String fullName;
         private String shortName;
@@ -51,7 +51,8 @@
             return departments;
         }
 
-        public int getId() {
+        @Override
+        public Integer getId() {
             return id;
         }
 
