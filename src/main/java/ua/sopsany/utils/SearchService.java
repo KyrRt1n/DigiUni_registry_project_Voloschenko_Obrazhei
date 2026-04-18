@@ -105,4 +105,10 @@ public class SearchService {
                 .sorted(Comparator.comparing(StudentDTO::fullName))
                 .toList();
     }
+
+    public java.util.Set<String> getAllUniqueGroups(List<Student> students) {
+        return students.stream()
+                .map(Student::getGroup)
+                .collect(java.util.stream.Collectors.toSet());
+    }
 }
