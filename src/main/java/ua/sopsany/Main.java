@@ -2,19 +2,12 @@ package ua.sopsany;
 
 import java.util.List;
 
-import ua.sopsany.dto.FacultyStatsRecord;
+import ua.sopsany.dto.*;
 import ua.sopsany.models.*;
-import ua.sopsany.utils.FileStorageService;
-import ua.sopsany.utils.InputHandler;
-import ua.sopsany.utils.Repository;
-import ua.sopsany.utils.SearchService;
-import ua.sopsany.auth.AuthService;
-import ua.sopsany.auth.User;
-import ua.sopsany.auth.Role;
-import ua.sopsany.exceptions.UnauthorizedException;
-import ua.sopsany.dto.FacultyStatsRecord;
-import ua.sopsany.dto.StudentDTO;
-
+import ua.sopsany.utils.*;
+import ua.sopsany.auth.*;
+import ua.sopsany.exceptions.*;
+import org.slf4j.*;
 import java.time.LocalDate;
 
 public class Main {
@@ -25,6 +18,7 @@ public class Main {
     static AuthService authService = Repository.createAuthService();
     static User currentUser = null;
     static FileStorageService storage = new FileStorageService();
+    private static final Logger log = LoggerFactory.getLogger(Main.class);
 
     public static void main(String[] args) {
 
@@ -51,8 +45,10 @@ public class Main {
                 try {
                     currentUser = authService.login(login, password).get();
                     System.out.println("Welcome, " + currentUser.getLogin() + " [" + currentUser.getRole() + "]");
+                    log.info("User {} successfully logged in with role {}", currentUser.getLogin(), currentUser.getRole());
                 } catch (UnauthorizedException e) {
                     System.out.println("Error: " + e.getMessage());
+                    log.warn("Failed login attempt for user '{}', with '{}'. Reason: {}", login, password, e.getMessage());
                 }
             }
 
