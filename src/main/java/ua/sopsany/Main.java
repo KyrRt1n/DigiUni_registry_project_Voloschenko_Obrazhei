@@ -209,13 +209,15 @@ public class Main {
             System.out.println("1. Add Student");
             System.out.println("2. Remove Student");
             System.out.println("3. Update Student Info");
+            System.out.println("4. Transfer Student to another department");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 3);
+            int choice = input.readInt("Select option", 0, 4);
             switch (choice) {
                 case 1: addStudent(); break;
                 case 2: studentRemoval(); break;
                 case 3: studentUpdate(); break;
+                case 4: studentTransfer(); break;
                 case 0: return;
             }
         }
@@ -644,6 +646,64 @@ public class Main {
             case 0:
                 System.out.println("Update cancelled");
                 break;
+        }
+    }
+    private static void studentTransfer() {
+        System.out.println("=== Student transfer ===");
+        Student student = findStudentInteractively("transfer");
+        if (student == null) return;
+
+        Department currentDept = null;
+        for (Faculty f : university.getFaculties()) {
+            for (Department d : f.getDepartments()) {
+                if (d.getStudents().contains(student)) {
+                    currentDept = d;
+                    break;
+                }
+            }
+            if (currentDept != null) break;
+        }
+
+        if (currentDept == null) {
+            System.out.println("Error: Student is not attached to any department.");
+            return;
+        }
+        String facName = currentDept.getFaculty() != null
+                ? currentDept.getFaculty().getShortName()
+                : "unknown faculty";
+        System.out.println("Student currently at: " + currentDept.getName() + " (" + facName + ")");
+
+        List<Department> available = new ArrayList<>();
+        for (Faculty f : university.getFaculties()) {
+            for (Department d : f.getDepartments()) {
+                if (!d.equals(currentDept)) available.add(d);
+            }
+        }
+
+        if (available.isEmpty()) {
+            System.out.println("No other departments to transfer to.");
+            return;
+        }
+
+        System.out.println("Select target department:");
+        for (int i = 0; i < available.size(); i++) {
+            Department d = available.get(i);
+            String facShort = d.getFaculty() != null ? d.getFaculty().getShortName() : "?";
+            System.out.println(i + ". [" + facShort + "] " + d.getName());
+        }
+        int idx = input.readInt("Your choice", 0, available.size() - 1);
+        Department target = available.get(idx);
+
+        try {
+            Repository.transferStudent(student, currentDept, target);
+            System.out.println("Student " + student.getLastname()
+                    + " transferred from '" + currentDept.getName()
+                    + "' to '" + target.getName() + "'");
+            log.info("Student {} transferred: {} -> {}",
+                    student.getStudentID(), currentDept.getName(), target.getName());
+        } catch (Exception e) {
+            System.out.println("Transfer failed: " + e.getMessage());
+            log.error("Transfer failed for student {}: {}", student.getStudentID(), e.getMessage());
         }
     }
     private static void teacherUpdate() {

@@ -32,6 +32,28 @@ public class Repository {
         }
     }
 
+    public static void transferStudent(Student student, Department fromDept, Department toDept)
+            throws EntityNotFoundException, DuplicateIdException {
+
+        if (student == null || fromDept == null || toDept == null) {
+            throw new IllegalArgumentException("Student, source and target departments must not be null");
+        }
+        if (fromDept.equals(toDept)) {
+            throw new IllegalArgumentException("Source and target departments are the same");
+        }
+        if (!fromDept.getStudents().contains(student)) {
+            throw new EntityNotFoundException(
+                    "Student " + student.getLastname() + " is not in department '" + fromDept.getName() + "'");
+        }
+        if (toDept.getStudents().contains(student)) {
+            throw new DuplicateIdException(
+                    "Student " + student.getLastname() + " is already in department '" + toDept.getName() + "'");
+        }
+
+        fromDept.getStudents().remove(student);
+        toDept.addStudent(student);
+    }
+
     public static University createUniversity() {
 
         University university = new University("Національний Університет Києво-Могилянська Академія", "НаУКМА", "Київ", "Сковороди 2");
@@ -114,6 +136,7 @@ public class Repository {
                 try { teacherRepo.add(f.getDecan()); } catch (DuplicateIdException ignored) {}
 
             for (Department d : f.getDepartments()) {
+                d.setFaculty(f);
                 try { departmentRepo.add(d); } catch (DuplicateIdException ignored) {}
 
                 if (d.getHead() != null)
