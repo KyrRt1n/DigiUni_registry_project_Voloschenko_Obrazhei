@@ -1,15 +1,24 @@
 package ua.sopsany.models;
 
 import java.time.LocalDate;
+import ua.sopsany.reflection.Validate;
 
 public final class Student extends Person {
 
     public enum FormEducation {BUDGET, CONTRACT}
     public enum StudentState {STUDYING, ACADEMIC_LEAVE, DEDUCTED}
 
+
+    @Validate(min = 1, max = 6)
     private int course;
+
+    @Validate(notNull = true, minLength = 1, maxLength = 20)
     private String group;
+
+    @Validate(min = 1990, max = 2025)
     private int entryYear;
+
+    @Validate(notNull = true, minLength = 3, maxLength = 20)
     private String studentID;
 
     private FormEducation educationForm;
