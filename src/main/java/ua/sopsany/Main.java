@@ -9,6 +9,7 @@ import ua.sopsany.auth.*;
 import ua.sopsany.exceptions.*;
 import org.slf4j.*;
 import java.time.LocalDate;
+import ua.sopsany.network.UniversityServer;
 
 public class Main {
 
@@ -35,7 +36,9 @@ public class Main {
         if (!loadedAuth.getAllUsers().isEmpty()) {
             authService = loadedAuth;
         }
+        startTcpServer();
         startAutoSaveThread();
+        try { Thread.sleep(100); } catch (InterruptedException ignored) {}
         while (true) {
 
             while (currentUser == null) {
@@ -123,12 +126,10 @@ public class Main {
             while (true) {
                 try {
                     Thread.sleep(60_000); // 60 секунд
-//                    System.out.println("\n[AutoSave] Saving university data...");
                     storage.saveUni(university);
                     storage.saveUsers(authService);
-                    System.out.println("\n[AutoSave] Done.");
                 } catch (InterruptedException e) {
-                    System.out.println("[AutoSave] Thread interrupted.");
+                    log.warn("AutoSave thread interrupted");
                     break;
                 }
             }
@@ -136,7 +137,11 @@ public class Main {
         autoSave.setDaemon(true);
         autoSave.setName("AutoSaveThread");
         autoSave.start();
-        System.out.println("[AutoSave] Background thread started (saves every 60 sec)");
+        log.info("AutoSave background thread started (saves every 60 sec)");
+    }
+    private static void startTcpServer() {
+        UniversityServer tcpServer = new UniversityServer(9090);
+        tcpServer.start();
     }
     private static void searchAndReportsMenu() {
         while (true) {
