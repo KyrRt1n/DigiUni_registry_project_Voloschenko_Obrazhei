@@ -76,6 +76,6 @@ public final class Teacher extends Person {
 
     @Override
     public String toString() {
-        return super.toString() + " [Teacher: " + position + ", Work since: " + dateOfEmployment + "]";
+        return super.toString() + " [Teacher: " + position + ", Workload: " + workLoad + "h" + ", Work since: " + dateOfEmployment + "]";
     }
     }

@@ -1,6 +1,7 @@
 package ua.sopsany;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import ua.sopsany.dto.*;
 import ua.sopsany.models.*;
@@ -226,9 +227,10 @@ public class Main {
             System.out.println("1. Add Teacher");
             System.out.println("2. Remove Teacher");
             System.out.println("3. Show all Teachers");
+            System.out.println("4. Update Teacher Info");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 3);
+            int choice = input.readInt("Select option", 0, 4);
             switch (choice) {
                 case 1:
                     System.out.println("--- Adding New Teacher ---");
@@ -291,6 +293,9 @@ public class Main {
                         }
                     }
                     break;
+                case 4:
+                    teacherUpdate();
+                    break;
 
                 case 0:
                     return;
@@ -304,9 +309,10 @@ public class Main {
             System.out.println("1. Add Department");
             System.out.println("2. Remove Department");
             System.out.println("3. Show all Departments");
+            System.out.println("4. Update Department Info");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 3);
+            int choice = input.readInt("Select option", 0, 4);
             switch (choice) {
                 case 1:
                     List<Faculty> faculties = university.getFaculties();
@@ -384,6 +390,9 @@ public class Main {
                         }
                     }
                     break;
+                case 4:
+                    departmentUpdate();
+                    break;
 
                 case 0:
                     return;
@@ -397,9 +406,10 @@ public class Main {
             System.out.println("1. Add Faculty");
             System.out.println("2. Remove Faculty");
             System.out.println("3. Show all Faculties");
+            System.out.println("4. Update Faculty Info");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 3);
+            int choice = input.readInt("Select option", 0, 4);
             switch (choice) {
                 case 1:
                     System.out.println("--- Adding New Faculty ---");
@@ -453,6 +463,9 @@ public class Main {
                             System.out.println(f);
                         }
                     }
+                    break;
+                case 4:
+                    facultyUpdate();
                     break;
 
                 case 0:
@@ -632,6 +645,190 @@ public class Main {
                 System.out.println("Update cancelled");
                 break;
         }
+    }
+    private static void teacherUpdate() {
+        System.out.println("=== Teacher info updater ===");
+        List<Teacher> teachers = Repository.teacherRepo.getAll();
+        if (teachers.isEmpty()) {
+            System.out.println("No teachers in the system.");
+            return;
+        }
+
+        String lastname = input.readString("Enter teacher's lastname");
+        List<Teacher> matches = new ArrayList<>();
+        for (Teacher t : teachers) {
+            if (t.getLastname().equalsIgnoreCase(lastname)) matches.add(t);
+        }
+
+        if (matches.isEmpty()) {
+            System.out.println("Teacher not found.");
+            return;
+        }
+
+        Teacher target;
+        if (matches.size() == 1) {
+            target = matches.get(0);
+        } else {
+            System.out.println("Found multiple teachers with that lastname:");
+            for (int i = 0; i < matches.size(); i++) {
+                System.out.println(i + ". " + matches.get(i));
+            }
+            int idx = input.readInt("Select which one", 0, matches.size() - 1);
+            target = matches.get(idx);
+        }
+
+        System.out.println("Editing: " + target);
+        System.out.println("What do you want to update?");
+        System.out.println("1. Position");
+        System.out.println("2. Academic Degree");
+        System.out.println("3. Academic Title");
+        System.out.println("4. Workload (hours)");
+        System.out.println("5. Email");
+        System.out.println("6. Phone");
+        System.out.println("0. Cancel");
+        int opt = input.readInt("Select option", 0, 6);
+
+        switch (opt) {
+            case 1:
+                target.setPosition(input.readString("New position"));
+                System.out.println("Position updated.");
+                break;
+            case 2:
+                target.setAcademicDegree(input.readString("New academic degree"));
+                System.out.println("Academic degree updated.");
+                break;
+            case 3:
+                target.setAcademicTitle(input.readString("New academic title"));
+                System.out.println("Academic title updated.");
+                break;
+            case 4:
+                target.setWorkLoad(input.readInt("New workload", 0, 40));
+                System.out.println("Workload updated.");
+                break;
+            case 5:
+                target.setEmail(input.readString("New email"));
+                System.out.println("Email updated.");
+                break;
+            case 6:
+                target.setPhone(input.readString("New phone"));
+                System.out.println("Phone updated.");
+                break;
+            case 0:
+                System.out.println("Update cancelled.");
+                break;
+        }
+        log.info("Teacher '{}' updated (option {})", target.getLastname(), opt);
+    }
+
+    private static void departmentUpdate() {
+        System.out.println("=== Department info updater ===");
+        List<Faculty> faculties = university.getFaculties();
+        if (faculties.isEmpty()) {
+            System.out.println("No faculties found.");
+            return;
+        }
+
+        System.out.println("Select faculty:");
+        for (int i = 0; i < faculties.size(); i++) {
+            System.out.println(i + ". " + faculties.get(i).getShortName());
+        }
+        int fIdx = input.readInt("Your choice", 0, faculties.size() - 1);
+        Faculty fac = faculties.get(fIdx);
+
+        if (fac.getDepartments().isEmpty()) {
+            System.out.println("No departments in this faculty.");
+            return;
+        }
+
+        System.out.println("Select department to edit:");
+        for (int i = 0; i < fac.getDepartments().size(); i++) {
+            System.out.println(i + ". " + fac.getDepartments().get(i).getName());
+        }
+        int dIdx = input.readInt("Your choice", 0, fac.getDepartments().size() - 1);
+        Department target = fac.getDepartments().get(dIdx);
+
+        System.out.println("Editing: " + target);
+        System.out.println("1. Name");
+        System.out.println("2. Office");
+        System.out.println("3. Head (assign from existing teachers)");
+        System.out.println("0. Cancel");
+        int opt = input.readInt("Select option", 0, 3);
+
+        switch (opt) {
+            case 1:
+                target.setName(input.readString("New name"));
+                System.out.println("Name updated.");
+                break;
+            case 2:
+                target.setOffice(input.readString("New office"));
+                System.out.println("Office updated.");
+                break;
+            case 3:
+                List<Teacher> allT = Repository.teacherRepo.getAll();
+                if (allT.isEmpty()) {
+                    System.out.println("No teachers available. Add a teacher first.");
+                    return;
+                }
+                System.out.println("Select new head:");
+                for (int i = 0; i < allT.size(); i++) {
+                    System.out.println(i + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
+                }
+                int tIdx = input.readInt("Your choice", 0, allT.size() - 1);
+                target.setHead(allT.get(tIdx));
+                System.out.println("Head updated.");
+                break;
+            case 0:
+                System.out.println("Update cancelled.");
+                break;
+        }
+        log.info("Department '{}' updated (option {})", target.getName(), opt);
+    }
+
+    private static void facultyUpdate() {
+        System.out.println("=== Faculty info updater ===");
+        List<Faculty> faculties = university.getFaculties();
+        if (faculties.isEmpty()) {
+            System.out.println("No faculties found.");
+            return;
+        }
+
+        System.out.println("Select faculty to edit:");
+        for (int i = 0; i < faculties.size(); i++) {
+            System.out.println(i + ". " + faculties.get(i));
+        }
+        int fIdx = input.readInt("Your choice", 0, faculties.size() - 1);
+        Faculty target = faculties.get(fIdx);
+
+        System.out.println("Editing: " + target);
+        System.out.println("1. Contacts");
+        System.out.println("2. Dean (assign from existing teachers)");
+        System.out.println("0. Cancel");
+        int opt = input.readInt("Select option", 0, 2);
+
+        switch (opt) {
+            case 1:
+                target.setContacts(input.readString("New contacts"));
+                System.out.println("Contacts updated.");
+                break;
+            case 2:
+                List<Teacher> allT = Repository.teacherRepo.getAll();
+                if (allT.isEmpty()) {
+                    System.out.println("No teachers available. Add a teacher first.");
+                    return;
+                }
+                System.out.println("Select new dean:");
+                for (int i = 0; i < allT.size(); i++) {
+                    System.out.println(i + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
+                }
+                int tIdx = input.readInt("Your choice", 0, allT.size() - 1);
+                target.setDecan(allT.get(tIdx));
+                System.out.println("Dean updated.");
+                break;
+            case 0:
+                System.out.println("Update cancelled.");
+                break;
+        }
+        log.info("Faculty '{}' updated (option {})", target.getShortName(), opt);
     }
 
     private static void studentRemoval() {
