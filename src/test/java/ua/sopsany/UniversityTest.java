@@ -216,4 +216,34 @@ public class UniversityTest {
         assertEquals(f1, f2);
         assertEquals(f1.hashCode(), f2.hashCode());
     }
+    //dept + course tests
+    @Test
+    void testGetDeptStudentsByCoursePlain() {
+        Department dept = new Department(11, "DeptX");
+        dept.addStudent(testStudent1);
+        dept.addStudent(testStudent2);
+
+        List<Student> onlyCourse1 = searchService.getDeptStudentsByCourse(dept, 1);
+        assertEquals(1, onlyCourse1.size());
+        assertEquals("Ivanov", onlyCourse1.get(0).getLastname());
+
+        List<Student> onlyCourse5 = searchService.getDeptStudentsByCourse(dept, 5);
+        assertTrue(onlyCourse5.isEmpty());
+    }
+
+    @Test
+    void testGetDeptStudentsByCourseAlpha() {
+        Department dept = new Department(12, "DeptY");
+        Student sameCourseO = new Student("Olena", "O", "Ooo", LocalDate.of(2005, 1, 1),
+                "e", "p", 9, 1, "IPZ", 2023,
+                Student.FormEducation.BUDGET, Student.StudentState.STUDYING, "T999");
+        dept.addStudent(sameCourseO);
+        dept.addStudent(testStudent1);
+        dept.addStudent(testStudent2);
+
+        List<Student> alpha = searchService.getDeptStudentsByCourseAlpha(dept, 1);
+        assertEquals(2, alpha.size());
+        assertEquals("Ivanov", alpha.get(0).getLastname());
+        assertEquals("Ooo",    alpha.get(1).getLastname());
+    }
 }

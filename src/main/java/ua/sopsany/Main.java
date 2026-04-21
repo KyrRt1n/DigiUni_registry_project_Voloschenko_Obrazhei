@@ -8,8 +8,7 @@ import ua.sopsany.models.*;
 import ua.sopsany.utils.*;
 import ua.sopsany.auth.*;
 import ua.sopsany.exceptions.*;
-import ua.sopsany.reflection.MenuDispatcher;
-import ua.sopsany.reflection.ReflectionDemo;
+import ua.sopsany.reflection.*;
 import org.slf4j.*;
 import java.time.LocalDate;
 import ua.sopsany.network.UniversityServer;
@@ -69,9 +68,9 @@ public class Main {
                     System.out.println("5. Manage Faculties");
                     if (currentUser.getRole() == Role.ADMIN)
                         System.out.println("6. Manage Users & Roles");
-                    System.out.println("8. Save University Structure to file");
+                    System.out.println("7. Save University Structure to file");
                 }
-                System.out.println("7. Reflection Demo (auto-built menu)");
+                System.out.println("8. Reflection Demo (auto-built menu)");
                 System.out.println("9. Logout");
                 System.out.println("0. Exit Application");
 
@@ -102,9 +101,6 @@ public class Main {
                         else System.out.println("Access denied.");
                         break;
                     case 7:
-                        new MenuDispatcher(input).runMenu(ReflectionDemo.class, currentUser, "Reflection Demo");
-                        break;
-                    case 8:
                         if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
                             System.out.println("Saving...");
                             storage.saveUni(university);
@@ -113,11 +109,15 @@ public class Main {
                         }
                         else System.out.println("Access denied.");
                         break;
+                    case 8:
+                        new MenuDispatcher(input).runMenu(ReflectionDemo.class, currentUser, "Reflection Demo");
+                        break;
                     case 9:
                         System.out.println("Logging out...");
                         currentUser = null;
                         break;
                     case 0:
+
                         System.out.println("Goodbye!");
                         return;
 
@@ -159,9 +159,10 @@ public class Main {
             System.out.println("5. Faculty Statistics Report");
             System.out.println("6. Sorted Students by Course");
             System.out.println("7. Full Student Report (DTO)");
+            System.out.println("8. Students of a Department by given Course (plain + A-Z)");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 7);
+            int choice = input.readInt("Select option", 0, 8);
             switch (choice) {
                 case 1: printUniStructure(); break;
                 case 2: findPerson(); break;
@@ -197,6 +198,8 @@ public class Main {
                     else
                         dtoReport.forEach(dto -> System.out.println(dto.toReportLine()));
                     break;
+
+                case 8: deptStudentsOfCourse(); break;
 
                 case 0: return;
             }
@@ -1137,5 +1140,54 @@ public class Main {
                 }
             }
         }
+    }
+
+    private static Department pickDepartment() {
+        List<Faculty> faculties = university.getFaculties();
+        if (faculties.isEmpty()) {
+            System.out.println("No faculties in the system.");
+            return null;
+        }
+        System.out.println("Select faculty:");
+        for (int i = 0; i < faculties.size(); i++) {
+            System.out.println(i + ". " + faculties.get(i).getShortName()
+                    + " (" + faculties.get(i).getFullName() + ")");
+        }
+        int fIdx = input.readInt("Your choice", 0, faculties.size() - 1);
+        Faculty fac = faculties.get(fIdx);
+
+        if (fac.getDepartments().isEmpty()) {
+            System.out.println("No departments in this faculty.");
+            return null;
+        }
+        System.out.println("Select department:");
+        for (int i = 0; i < fac.getDepartments().size(); i++) {
+            System.out.println(i + ". " + fac.getDepartments().get(i).getName());
+        }
+        int dIdx = input.readInt("Your choice", 0, fac.getDepartments().size() - 1);
+        return fac.getDepartments().get(dIdx);
+    }
+
+    private static void deptStudentsOfCourse() {
+        System.out.println("\n--- Students of a Department by given Course ---");
+        Department dept = pickDepartment();
+        if (dept == null) return;
+
+        int course = input.readInt("Enter course", 1, 6);
+
+        List<Student> plain = searchService.getDeptStudentsByCourse(dept, course);
+        if (plain.isEmpty()) {
+            System.out.println("No students on course " + course
+                    + " in department '" + dept.getName() + "'.");
+            return;
+        }
+
+        System.out.println("\n[Plain list] Department: " + dept.getName()
+                + ", course: " + course + " (count: " + plain.size() + ")");
+        plain.forEach(s -> System.out.println("  " + s));
+
+        List<Student> alpha = searchService.getDeptStudentsByCourseAlpha(dept, course);
+        System.out.println("\n[Alphabetical, A-Z by lastname]");
+        alpha.forEach(s -> System.out.println("  " + s));
     }
 }

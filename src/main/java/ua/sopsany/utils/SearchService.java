@@ -111,4 +111,17 @@ public class SearchService {
                 .map(Student::getGroup)
                 .collect(java.util.stream.Collectors.toSet());
     }
+
+    public List<Student> getDeptStudentsByCourse(Department dept, int course) {
+        return dept.getStudents().stream()
+                .filter(s -> s.getCourse() == course)
+                .toList();
+    }
+
+    public List<Student> getDeptStudentsByCourseAlpha(Department dept, int course) {
+        return dept.getStudents().stream()
+                .filter(s -> s.getCourse() == course)
+                .sorted(Comparator.comparing(Person::getLastname))
+                .toList();
+    }
 }
