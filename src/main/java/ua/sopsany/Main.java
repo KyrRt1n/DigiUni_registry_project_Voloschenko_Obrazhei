@@ -8,8 +8,7 @@ import ua.sopsany.models.*;
 import ua.sopsany.utils.*;
 import ua.sopsany.auth.*;
 import ua.sopsany.exceptions.*;
-import ua.sopsany.reflection.MenuDispatcher;
-import ua.sopsany.reflection.ReflectionDemo;
+import ua.sopsany.reflection.*;
 import org.slf4j.*;
 import java.time.LocalDate;
 import ua.sopsany.network.UniversityServer;
@@ -69,9 +68,9 @@ public class Main {
                     System.out.println("5. Manage Faculties");
                     if (currentUser.getRole() == Role.ADMIN)
                         System.out.println("6. Manage Users & Roles");
-                    System.out.println("8. Save University Structure to file");
+                    System.out.println("7. Save University Structure to file");
                 }
-                System.out.println("7. Reflection Demo (auto-built menu)");
+                System.out.println("8. Reflection Demo (auto-built menu)");
                 System.out.println("9. Logout");
                 System.out.println("0. Exit Application");
 
@@ -102,9 +101,6 @@ public class Main {
                         else System.out.println("Access denied.");
                         break;
                     case 7:
-                        new MenuDispatcher(input).runMenu(ReflectionDemo.class, currentUser, "Reflection Demo");
-                        break;
-                    case 8:
                         if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
                             System.out.println("Saving...");
                             storage.saveUni(university);
@@ -113,11 +109,15 @@ public class Main {
                         }
                         else System.out.println("Access denied.");
                         break;
+                    case 8:
+                        new MenuDispatcher(input).runMenu(ReflectionDemo.class, currentUser, "Reflection Demo");
+                        break;
                     case 9:
                         System.out.println("Logging out...");
                         currentUser = null;
                         break;
                     case 0:
+
                         System.out.println("Goodbye!");
                         return;
 
