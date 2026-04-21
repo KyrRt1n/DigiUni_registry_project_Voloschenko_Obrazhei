@@ -1,21 +1,18 @@
 package ua.sopsany.auth;
 
-import ua.sopsany.auth.Role;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
 public class User {
+
     private String login;
     private int password;
+
+    @Setter
     private Role role;
+
     private boolean isBlocked;
-
-
-    public void setRole(Role newRole) {
-        this.role = newRole;
-    }
-
-    public void setPassword(String password) {
-        this.password = password.hashCode();
-    }
 
     public User(String login, String password, Role role) {
         this.login = login;
@@ -31,31 +28,18 @@ public class User {
         this.isBlocked = isBlocked;
     }
 
-    public String getLogin() {
-        return login;
-    }
-
-    public int getPassword() {
-        return password;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public boolean isBlocked() {
-        return isBlocked;
+    public void setPassword(String password) {
+        this.password = password.hashCode();
     }
 
     public void setBlockedStatus(boolean blocked) {
-        isBlocked = blocked;
+        this.isBlocked = blocked;
     }
 
     @Override
     public String toString() {
-        return isBlocked ?
-                "User: " + login + " | [" + role + "] | (blocked)" :
-                "User: " + login + " | [" + role + "]";
+        return isBlocked
+                ? "User: " + login + " | [" + role + "] | (blocked)"
+                : "User: " + login + " | [" + role + "]";
     }
-
 }
