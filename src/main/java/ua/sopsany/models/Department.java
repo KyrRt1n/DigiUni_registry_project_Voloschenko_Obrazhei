@@ -107,6 +107,10 @@ public class Department implements Identifiable<Integer>{
         return students;
     }
 
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
     @Override
     public String toString() {
         String headName = (head != null) ? head.getLastname() : "not assigned";

@@ -142,6 +142,12 @@ public class Repository {
                 if (d.getHead() != null)
                     try { teacherRepo.add(d.getHead()); } catch (DuplicateIdException ignored) {}
 
+                if (d.getTeachers() != null) {
+                    for (Teacher t : d.getTeachers()) {
+                        try { teacherRepo.add(t); } catch (DuplicateIdException ignored) {}
+                    }
+                }
+
                 for (Student s : d.getStudents()) {
                     try { studentRepo.add(s); } catch (DuplicateIdException ignored) {}
                 }
