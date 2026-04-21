@@ -243,7 +243,7 @@ public class Main {
                     String surname = input.readString("Surname");
                     String lastname = input.readString("Lastname");
                     LocalDate birthDate = input.readDate("Birthday");
-                    String email = input.readString("Email");
+                    String email = input.readEmail("Email");
                     String phone = input.readString("Phone");
                     int id = input.readInt("Personal ID");
                     String position = input.readString("Position (e.g. Professor, Assistant)");
@@ -769,7 +769,7 @@ public class Main {
                 System.out.println("Workload updated.");
                 break;
             case 5:
-                target.setEmail(input.readString("New email"));
+                target.setEmail(input.readEmail("New email"));
                 System.out.println("Email updated.");
                 break;
             case 6:
@@ -948,7 +948,7 @@ public class Main {
         LocalDate birthDate = input.readDate("Birthday");
         int formEd = input.readInt("Form of education (1. Budget | 2. Contract)", 1, 2);
         int studState = input.readInt("Student state (1. STUDYING, 2. ACADEMIC_LEAVE, 3. DEDUCTED)", 1, 3);
-        String email = input.readString("Email");
+        String email = input.readEmail("Email");
         String phone = input.readString("Phone");
         int id = input.readInt("Personal ID");
         int course = input.readInt("Course", 1, 6);

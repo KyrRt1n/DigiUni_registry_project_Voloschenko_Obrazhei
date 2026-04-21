@@ -89,7 +89,7 @@ public sealed abstract class Person implements Identifiable<Integer> permits Tea
 
     @Override
     public String toString() {
-        return "№" +id + ": " + name + ", " + surname + " (" + phone + ")";
+        return "№" + id + ": " + lastname + " " + name + " " + surname + " (" + phone + ")";
     }
 
     @Override
