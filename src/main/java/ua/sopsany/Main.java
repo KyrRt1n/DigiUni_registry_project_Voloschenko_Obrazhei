@@ -13,6 +13,8 @@ import org.slf4j.*;
 import java.time.LocalDate;
 import ua.sopsany.network.UniversityServer;
 
+import static java.util.Comparator.comparing;
+
 public class Main {
 
     public static University university;
@@ -974,7 +976,7 @@ public class Main {
                     System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
                     List<Student> facStudents = f.getDepartments().stream()
                             .flatMap(d -> d.getStudents().stream())
-                            .sorted(java.util.Comparator.comparing(Person::getLastname))
+                            .sorted(comparing(Person::getLastname))
                             .toList();
 
                     if (facStudents.isEmpty()) System.out.println("  No students found.");
@@ -988,7 +990,7 @@ public class Main {
                     for (Department d : f.getDepartments()) {
                         System.out.println("\n[Dept: " + d.getName() + " | Fac: " + f.getShortName() + "]");
                         List<Student> depStudents = d.getStudents().stream()
-                                .sorted(java.util.Comparator.comparing(Person::getLastname))
+                                .sorted(comparing(Person::getLastname))
                                 .toList();
 
                         if (depStudents.isEmpty()) System.out.println("  No students found.");
@@ -1019,7 +1021,7 @@ public class Main {
 
                     List<Teacher> sortedTeachers = facTeachers.stream()
                             .distinct()
-                            .sorted(java.util.Comparator.comparing(Person::getLastname))
+                            .sorted(comparing(Person::getLastname))
                             .toList();
 
                     if (sortedTeachers.isEmpty()) System.out.println("  No teachers found in this faculty.");
@@ -1038,7 +1040,7 @@ public class Main {
 
                         List<Teacher> sortedDepTeachers = depTeachers.stream()
                                 .distinct() // not to see doubled pearson
-                                .sorted(java.util.Comparator.comparing(Person::getLastname))
+                                .sorted(comparing(Person::getLastname))
                                 .toList();
 
                         if (sortedDepTeachers.isEmpty()) System.out.println("  No teachers found in this department.");
