@@ -1,5 +1,6 @@
 package ua.sopsany.auth;
 
+import java.time.LocalDateTime;
 import java.util.*;
 
 import ua.sopsany.exceptions.UnauthorizedException;
@@ -27,6 +28,7 @@ public class AuthService {
             throw new UnauthorizedException("User is blocked");
         }
         if (u.getPassword() == password.hashCode()) {
+            u.setLastLogin(LocalDateTime.now());
             return Optional.of(u);
         }
         throw new UnauthorizedException("Invalid login or password");

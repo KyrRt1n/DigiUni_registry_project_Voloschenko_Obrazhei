@@ -1,7 +1,10 @@
 package ua.sopsany.auth;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class User {
@@ -13,6 +16,10 @@ public class User {
     private Role role;
 
     private boolean isBlocked;
+
+    @JsonIgnore
+    @Setter
+    private LocalDateTime lastLogin;
 
     public User(String login, String password, Role role) {
         this.login = login;

@@ -3,6 +3,7 @@ package ua.sopsany.utils;
 import ua.sopsany.exceptions.*;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class GenericRepository<T> {
     private List<T> items = new ArrayList<T>();
@@ -24,4 +25,15 @@ public class GenericRepository<T> {
         return items;
     }
 
+    public Optional<T> findBy(Predicate<T> predicate) {
+        return items.stream().filter(predicate).findFirst();
+    }
+
+    public int size() {
+        return items.size();
+    }
+
+    public boolean isEmpty() {
+        return items.isEmpty();
+    }
 }

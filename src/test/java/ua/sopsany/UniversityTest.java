@@ -246,4 +246,46 @@ public class UniversityTest {
         assertEquals("Ivanov", alpha.get(0).getLastname());
         assertEquals("Ooo",    alpha.get(1).getLastname());
     }
+
+    //Optional in GenericRepository + LocalDateTime/Duration for session
+
+    @Test
+    void testGenericRepoFindByReturnsOptional() throws DuplicateIdException {
+        studentRepo.add(testStudent1);
+        studentRepo.add(testStudent2);
+
+        Optional<Student> hit  = studentRepo.findBy(s -> "T102".equals(s.getStudentID()));
+        Optional<Student> miss = studentRepo.findBy(s -> "XXX".equals(s.getStudentID()));
+
+        assertTrue(hit.isPresent());
+        assertEquals("Petrov", hit.get().getLastname());
+        assertTrue(miss.isEmpty());
+
+        assertEquals(2, studentRepo.size());
+        assertFalse(studentRepo.isEmpty());
+    }
+
+    @Test
+    void testLoginSetsLastLoginTimestamp() throws UnauthorizedException {
+        java.time.LocalDateTime before = java.time.LocalDateTime.now();
+        Optional<User> u = authService.login("admin", "admin123");
+
+        assertTrue(u.isPresent());
+        java.time.LocalDateTime lastLogin = u.get().getLastLogin();
+        assertNotNull(lastLogin, "lastLogin should be set on successful login");
+        assertFalse(lastLogin.isBefore(before), "lastLogin must be at or after the call time");
+    }
+
+    @Test
+    void testSessionDurationViaDuration() throws UnauthorizedException, InterruptedException {
+        Optional<User> u = authService.login("admin", "admin123");
+        assertTrue(u.isPresent());
+        Thread.sleep(50);
+
+        java.time.Duration session = java.time.Duration.between(
+                u.get().getLastLogin(), java.time.LocalDateTime.now());
+
+        assertTrue(session.toMillis() >= 50,
+                "Session duration must be at least the sleep period, got " + session.toMillis() + " ms");
+    }
 }
