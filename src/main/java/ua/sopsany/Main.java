@@ -913,11 +913,12 @@ public class Main {
     private static void sortStudents() {
         System.out.println("\n--- Sorting Menu ---");
         System.out.println("1. Sort students by lastname");
-        System.out.println("2. Sort teachers by lastname");
-        System.out.println("3. Sort students by course");
-        System.out.println("4. Sort students by faculty");
-        System.out.println("5. Sort students by department");
-        System.out.println("6. Sort students by group");
+        System.out.println("2. Sort students by course");
+        System.out.println("3. Sort students by faculty");
+        System.out.println("4. Sort students by department");
+        System.out.println("5. Sort students by group");
+        System.out.println("6. Sort teachers by lastname");
+        System.out.println("7. Sort teachers by faculty (A-Z)");
         System.out.println("0. Go back");
 
         List<Student> allStudents = Repository.studentRepo.getAll();
@@ -925,19 +926,16 @@ public class Main {
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
 
-        int sortOption = input.readInt("Your choice", 0, 6);
+        int sortOption = input.readInt("Your choice", 0, 7);
 
         switch (sortOption) {
             case 1:
                 resultStud = searchService.sortByLastname(allStudents);
                 break;
             case 2:
-                resultTeach = searchService.sortTeachersByLastname(allTeachers);
-                break;
-            case 3:
                 resultStud = searchService.sortStudentsByCourse(allStudents);
                 break;
-            case 4:
+            case 3:
                 System.out.println("\n--- Students grouped by Faculty (A-Z) ---");
                 for (Faculty f : university.getFaculties()) {
                     System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
@@ -951,7 +949,7 @@ public class Main {
                 }
                 return;
 
-            case 5:
+            case 4:
                 System.out.println("\n--- Students grouped by Department (A-Z) ---");
                 for (Faculty f : university.getFaculties()) {
                     for (Department d : f.getDepartments()) {
@@ -966,9 +964,36 @@ public class Main {
                 }
                 return;
 
-            case 6:
+            case 5:
                 resultStud = searchService.sortStudentsByGroup(allStudents);
                 break;
+            case 6:
+                resultTeach = searchService.sortTeachersByLastname(allTeachers);
+                break;
+            case 7:
+                System.out.println("\n--- Teachers grouped by Faculty (A-Z) ---");
+                for (Faculty f : university.getFaculties()) {
+                    System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
+
+                    List<Teacher> facTeachers = new ArrayList<>();
+
+                    if (f.getDecan() != null) facTeachers.add(f.getDecan());
+
+                    for (Department d : f.getDepartments()) {
+                        if (d.getHead() != null) facTeachers.add(d.getHead());
+                        if (d.getTeachers() != null) facTeachers.addAll(d.getTeachers());
+                    }
+
+                    List<Teacher> sortedTeachers = facTeachers.stream()
+                            .distinct()
+                            .sorted(java.util.Comparator.comparing(Person::getLastname))
+                            .toList();
+
+                    if (sortedTeachers.isEmpty()) System.out.println("  No teachers found in this faculty.");
+                    else sortedTeachers.forEach(t -> System.out.println("  " + t));
+                }
+                return;
+
             case 0:
                 return;
         }
