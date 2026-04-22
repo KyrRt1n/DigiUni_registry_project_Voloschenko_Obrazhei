@@ -447,9 +447,10 @@ public class Main {
             System.out.println("2. Remove user");
             System.out.println("3. Edit user");
             System.out.println("4. Show all users");
+            System.out.println("5. Add user");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 4);
+            int choice = input.readInt("Select option", 0, 5);
             switch (choice) {
                 case 1: adminBlockUnblock(); break;
                 case 2: adminRemoveUser(); break;
@@ -457,9 +458,40 @@ public class Main {
                 case 4:
                     for (User u : authService.getAllUsers()) System.out.println(u);
                     break;
+                case 5: adminAddUser(); break;
                 case 0: return;
             }
         }
+    }
+
+    private static void adminAddUser() {
+        System.out.println("\n--- Add user ---");
+
+        String login;
+        while (true) {
+            login = input.readString("Enter new user's login");
+            if (authService.findByLogin(login) != null) {
+                System.out.println("Error: user with login '" + login + "' already exists. Try another.");
+                continue;
+            }
+            break;
+        }
+
+        String password = input.readString("Enter password");
+
+        int roleChoice = input.readInt(
+                "Select role: 1. USER  2. MANAGER  3. ADMIN", 1, 3);
+        Role role = switch (roleChoice) {
+            case 1 -> Role.USER;
+            case 2 -> Role.MANAGER;
+            default -> Role.ADMIN;
+        };
+
+        User newUser = new User(login, password, role);
+        authService.addUser(newUser);
+        System.out.println("User '" + login + "' created with role " + role + ".");
+        log.info("Admin '{}' created new user '{}' with role {}",
+                currentUser.getLogin(), login, role);
     }
 
     private static void adminEditUser() {
