@@ -11,7 +11,11 @@ import ua.sopsany.auth.User;
 import ua.sopsany.models.University;
 
 import java.nio.file.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static ua.sopsany.Main.university;
 
@@ -20,8 +24,14 @@ public class FileStorageService {
     private ObjectMapper mapper;
 
     private final Path dataDir = Paths.get("data");
+    private final Path backupDir = Paths.get("data/backups");
     private final Path uniFilePath = Paths.get("data/university_data.json");
     private final Path usersFilePath = Paths.get("data/users_data.json");
+    private static final DateTimeFormatter TS_FMT =
+            DateTimeFormatter.ofPattern("yyyy-MM-dd_HH-mm-ss");
+
+    /** Скільки найсвіжіших бекапів тримаємо; решта автоматично видаляються. */
+    private static final int MAX_BACKUPS = 20;
 
     public FileStorageService() {
         mapper = new ObjectMapper();
@@ -32,6 +42,9 @@ public class FileStorageService {
         try {
             if (!Files.exists(dataDir)) {
                 Files.createDirectories(dataDir);
+            }
+            if (!Files.exists(backupDir)) {
+                Files.createDirectories(backupDir);
             }
         } catch (Exception e) {
             log.error("Failed to create data directory", e);
@@ -100,6 +113,62 @@ public class FileStorageService {
             log.info("Users loaded from file! ({} users)", data.size());
         } catch (Exception e) {
             log.error("Error loading users", e);
+        }
+    }
+
+    public Path createBackup(University uni, String reason) {
+        try {
+            if (!Files.exists(backupDir)) Files.createDirectories(backupDir);
+            String safe = reason == null ? "manual"
+                    : reason.replaceAll("[^a-zA-Z0-9_-]", "_");
+            String fileName = LocalDateTime.now().format(TS_FMT) + "_" + safe + ".json";
+            Path target = backupDir.resolve(fileName);
+            String json = mapper.writeValueAsString(uni);
+            Files.writeString(target, json);
+            log.info("Backup created: {}", target.toAbsolutePath());
+            pruneOldBackups();
+            return target;
+        } catch (Exception e) {
+            log.error("Failed to create backup", e);
+            return null;
+        }
+    }
+
+    public List<Path> listBackups() {
+        if (!Files.exists(backupDir)) return List.of();
+        try (Stream<Path> stream = Files.list(backupDir)) {
+            return stream
+                    .filter(p -> p.getFileName().toString().endsWith(".json"))
+                    .sorted(Comparator.comparing(Path::getFileName).reversed())
+                    .collect(Collectors.toList());
+        } catch (Exception e) {
+            log.error("Failed to list backups", e);
+            return List.of();
+        }
+    }
+
+    public University restoreFromBackup(Path backupFile) {
+        try {
+            String json = Files.readString(backupFile);
+            University restored = mapper.readValue(json, University.class);
+            log.info("Restored university from backup: {}", backupFile.getFileName());
+            return restored;
+        } catch (Exception e) {
+            log.error("Failed to restore from backup {}", backupFile, e);
+            return null;
+        }
+    }
+
+    private void pruneOldBackups() {
+        List<Path> all = listBackups();
+        if (all.size() <= MAX_BACKUPS) return;
+        for (Path p : all.subList(MAX_BACKUPS, all.size())) {
+            try {
+                Files.deleteIfExists(p);
+                log.debug("Old backup deleted: {}", p.getFileName());
+            } catch (Exception e) {
+                log.warn("Could not delete old backup {}: {}", p, e.getMessage());
+            }
         }
     }
 }

@@ -75,6 +75,9 @@ public class Main {
                 }
                 System.out.println("8. Reflection Demo (auto-built menu)");
                 System.out.println("9. Logout");
+                if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                    System.out.println("10. Restore from backup");
+                }
                 System.out.println("0. Exit Application");
 
                 int choice = input.readInt("Select option", 0, 10);
@@ -129,6 +132,11 @@ public class Main {
                             System.out.println("Logging out...");
                         }
                         currentUser = null;
+                        break;
+                    case 10:
+                        if (currentUser.getRole() == Role.MANAGER || currentUser.getRole() == Role.ADMIN) {
+                            restoreFromBackupMenu();
+                        } else System.out.println("Access denied.");
                         break;
                     case 0:
 
@@ -379,6 +387,12 @@ public class Main {
                         }
                     }
 
+                    java.nio.file.Path deptBackup = storage.createBackup(university,
+                            "remove_dept_" + deptToRemove.getName());
+                    if (deptBackup != null) {
+                        System.out.println("Backup saved: " + deptBackup.getFileName());
+                    }
+
                     int[] r = Repository.cascadeRemoveDepartment(deptToRemove);
                     System.out.println("Department '" + deptToRemove.getName()
                             + "' removed. Cascade removed: "
@@ -460,6 +474,12 @@ public class Main {
                             System.out.println("Cancelled.");
                             break;
                         }
+                    }
+
+                    java.nio.file.Path facBackup = storage.createBackup(university,
+                            "remove_fac_" + facToRemove.getShortName());
+                    if (facBackup != null) {
+                        System.out.println("Backup saved: " + facBackup.getFileName());
                     }
 
                     int[] fr = Repository.cascadeRemoveFaculty(university, facToRemove);
@@ -1271,5 +1291,53 @@ public class Main {
         System.out.println("\nDepartment: " + dept.getName()
                 + " (teachers: " + teachers.size() + ")");
         teachers.forEach(t -> System.out.println("  " + t));
+    }
+
+    private static void restoreFromBackupMenu() {
+        System.out.println("\n--- Restore from backup ---");
+        List<java.nio.file.Path> backups = storage.listBackups();
+        if (backups.isEmpty()) {
+            System.out.println("No backups available.");
+            return;
+        }
+
+        System.out.println("Available backups (newest first):");
+        for (int i = 0; i < backups.size(); i++) {
+            System.out.println(i + ". " + backups.get(i).getFileName());
+        }
+        System.out.println(backups.size() + ". Cancel");
+
+        int idx = input.readInt("Select backup", 0, backups.size());
+        if (idx == backups.size()) {
+            System.out.println("Cancelled.");
+            return;
+        }
+
+        java.nio.file.Path chosen = backups.get(idx);
+        System.out.println("Selected: " + chosen.getFileName());
+        System.out.println("WARNING: current in-memory state will be replaced with backup contents.");
+        if (!input.confirm("Proceed with restore?")) {
+            System.out.println("Cancelled.");
+            return;
+        }
+
+        storage.createBackup(university, "before_restore");
+
+        University restored = storage.restoreFromBackup(chosen);
+        if (restored == null) {
+            System.out.println("Restore failed (see logs).");
+            return;
+        }
+
+        university = restored;
+        Repository.syncRepos(university);
+        storage.saveUni(university);
+
+        System.out.println("Restored from: " + chosen.getFileName());
+        System.out.println("Faculties: " + university.getFaculties().size()
+                + " | Students: " + Repository.studentRepo.getAll().size()
+                + " | Teachers: " + Repository.teacherRepo.getAll().size());
+        log.info("User '{}' restored university from backup '{}'",
+                currentUser.getLogin(), chosen.getFileName());
     }
 }
