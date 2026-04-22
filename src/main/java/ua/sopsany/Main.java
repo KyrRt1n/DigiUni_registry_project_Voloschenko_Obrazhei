@@ -320,20 +320,10 @@ public class Main {
             int choice = input.readInt("Select option", 0, 4);
             switch (choice) {
                 case 1:
-                    List<Faculty> faculties = university.getFaculties();
-                    if (faculties.isEmpty()) {
-                        System.out.println("Error: No faculties exist. Please add a faculty first.");
-                        break;
-                    }
-
-                    System.out.println("Select faculty to add department to:");
-                    for (int i = 0; i < faculties.size(); i++) {
-                        System.out.println(i + ". " + faculties.get(i).getShortName() + " (" + faculties.get(i).getFullName() + ")");
-                    }
-                    int facIndex = input.readInt("Your choice", 0, faculties.size() - 1);
-                    Faculty selectedFac = faculties.get(facIndex);
-
                     System.out.println("--- Adding New Department ---");
+                    Faculty selectedFac = pickFaculty();
+                    if (selectedFac == null) break;
+
                     int deptId = input.readInt("Department ID");
                     String deptName = input.readString("Name (e.g. Software Engineering)");
                     String office = input.readString("Office (e.g. 1-225)");
@@ -352,31 +342,12 @@ public class Main {
 
                 case 2:
                     System.out.println("--- Removing Department ---");
-                    faculties = university.getFaculties();
-                    if (faculties.isEmpty()) {
-                        System.out.println("No faculties found.");
-                        break;
-                    }
-                    System.out.println("Select faculty:");
-                    for (int i = 0; i < faculties.size(); i++) {
-                        System.out.println(i + ". " + faculties.get(i).getShortName());
-                    }
-                    int fIndex = input.readInt("Your choice", 0, faculties.size() - 1);
-                    Faculty f = faculties.get(fIndex);
+                    Department deptToRemove = pickDepartment();
+                    if (deptToRemove == null) break;
 
-                    if (f.getDepartments().isEmpty()) {
-                        System.out.println("No departments in this faculty.");
-                        break;
+                    for (Faculty fac : university.getFaculties()) {
+                        if (fac.getDepartments().remove(deptToRemove)) break;
                     }
-
-                    System.out.println("Select department to remove:");
-                    for (int i = 0; i < f.getDepartments().size(); i++) {
-                        System.out.println(i + ". " + f.getDepartments().get(i).getName());
-                    }
-                    int dIndex = input.readInt("Your choice", 0, f.getDepartments().size() - 1);
-
-                    Department deptToRemove = f.getDepartments().get(dIndex);
-                    f.getDepartments().remove(deptToRemove);
 
                     try {
                         Repository.departmentRepo.remove(deptToRemove);
@@ -436,19 +407,9 @@ public class Main {
 
                 case 2:
                     System.out.println("--- Removing Faculty ---");
-                    List<Faculty> faculties = university.getFaculties();
-                    if (faculties.isEmpty()) {
-                        System.out.println("No faculties found.");
-                        break;
-                    }
+                    Faculty facToRemove = pickFaculty();
+                    if (facToRemove == null) break;
 
-                    System.out.println("Select faculty to remove:");
-                    for (int i = 0; i < faculties.size(); i++) {
-                        System.out.println(i + ". " + faculties.get(i).getFullName());
-                    }
-                    int facIndex = input.readInt("Your choice", 0, faculties.size() - 1);
-
-                    Faculty facToRemove = faculties.get(facIndex);
                     university.getFaculties().remove(facToRemove);
 
                     try {
@@ -724,10 +685,10 @@ public class Main {
         for (int i = 0; i < available.size(); i++) {
             Department d = available.get(i);
             String facShort = d.getFaculty() != null ? d.getFaculty().getShortName() : "?";
-            System.out.println(i + ". [" + facShort + "] " + d.getName());
+            System.out.println((i+1) + ". [" + facShort + "] " + d.getName());
         }
         int idx = input.readInt("Your choice", 0, available.size() - 1);
-        Department target = available.get(idx);
+        Department target = available.get(idx-1);
 
         try {
             Repository.transferStudent(student, currentDept, target);
@@ -766,10 +727,10 @@ public class Main {
         } else {
             System.out.println("Found multiple teachers with that lastname:");
             for (int i = 0; i < matches.size(); i++) {
-                System.out.println(i + ". " + matches.get(i));
+                System.out.println((i+1) + ". " + matches.get(i));
             }
-            int idx = input.readInt("Select which one", 0, matches.size() - 1);
-            target = matches.get(idx);
+            int idx = input.readInt("Select which one", 1, matches.size());
+            target = matches.get(idx-1);
         }
 
         System.out.println("Editing: " + target);
@@ -817,30 +778,8 @@ public class Main {
 
     private static void departmentUpdate() {
         System.out.println("=== Department info updater ===");
-        List<Faculty> faculties = university.getFaculties();
-        if (faculties.isEmpty()) {
-            System.out.println("No faculties found.");
-            return;
-        }
-
-        System.out.println("Select faculty:");
-        for (int i = 0; i < faculties.size(); i++) {
-            System.out.println(i + ". " + faculties.get(i).getShortName());
-        }
-        int fIdx = input.readInt("Your choice", 0, faculties.size() - 1);
-        Faculty fac = faculties.get(fIdx);
-
-        if (fac.getDepartments().isEmpty()) {
-            System.out.println("No departments in this faculty.");
-            return;
-        }
-
-        System.out.println("Select department to edit:");
-        for (int i = 0; i < fac.getDepartments().size(); i++) {
-            System.out.println(i + ". " + fac.getDepartments().get(i).getName());
-        }
-        int dIdx = input.readInt("Your choice", 0, fac.getDepartments().size() - 1);
-        Department target = fac.getDepartments().get(dIdx);
+        Department target = pickDepartment();
+        if (target == null) return;
 
         System.out.println("Editing: " + target);
         System.out.println("1. Name");
@@ -866,10 +805,10 @@ public class Main {
                 }
                 System.out.println("Select new head:");
                 for (int i = 0; i < allT.size(); i++) {
-                    System.out.println(i + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
+                    System.out.println((i+1) + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
                 }
-                int tIdx = input.readInt("Your choice", 0, allT.size() - 1);
-                target.setHead(allT.get(tIdx));
+                int tIdx = input.readInt("Your choice", 1, allT.size());
+                target.setHead(allT.get(tIdx-1));
                 System.out.println("Head updated.");
                 break;
             case 0:
@@ -881,18 +820,8 @@ public class Main {
 
     private static void facultyUpdate() {
         System.out.println("=== Faculty info updater ===");
-        List<Faculty> faculties = university.getFaculties();
-        if (faculties.isEmpty()) {
-            System.out.println("No faculties found.");
-            return;
-        }
-
-        System.out.println("Select faculty to edit:");
-        for (int i = 0; i < faculties.size(); i++) {
-            System.out.println(i + ". " + faculties.get(i));
-        }
-        int fIdx = input.readInt("Your choice", 0, faculties.size() - 1);
-        Faculty target = faculties.get(fIdx);
+        Faculty target = pickFaculty();
+        if (target == null) return;
 
         System.out.println("Editing: " + target);
         System.out.println("1. Contacts");
@@ -913,10 +842,10 @@ public class Main {
                 }
                 System.out.println("Select new dean:");
                 for (int i = 0; i < allT.size(); i++) {
-                    System.out.println(i + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
+                    System.out.println((i+1) + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
                 }
-                int tIdx = input.readInt("Your choice", 0, allT.size() - 1);
-                target.setDecan(allT.get(tIdx));
+                int tIdx = input.readInt("Your choice", 1, allT.size());
+                target.setDecan(allT.get(tIdx-1));
                 System.out.println("Dean updated.");
                 break;
             case 0:
@@ -955,25 +884,10 @@ public class Main {
     }
 
     private static void addStudent() {
-        System.out.println("Select faculty you want add Student to:");
-        List<Faculty> faculties = university.getFaculties();
-        for (int i = 0; i < faculties.size(); i++) {
-            System.out.print(i + ". " + faculties.get(i) + "\n");
-        }
-        int chosenFaculty = input.readInt("Your choice", 0 , faculties.size() - 1);
-
-        System.out.println("Now select department you want add Student to:");
-        Faculty chosenFac = university.getFaculties().get(chosenFaculty);
-        if (chosenFac.getDepartments().isEmpty()) {
-            System.out.println("There is no departments in this faculty. Please select another faculty.");
-            return;
-        }
-        for (int i = 0; i < chosenFac.getDepartments().size(); i++) {
-            System.out.println(i + ". " + chosenFac.getDepartments().get(i));
-        }
-        int chosenDepartment = input.readInt("Your choice", 0, chosenFac.getDepartments().size() - 1);
-
         System.out.println("--- Adding New Student ---");
+        Department targetDept = pickDepartment();
+        if (targetDept == null) return;
+
         String nameToAdd = input.readString("Name");
         String surnameToAdd = input.readString("Surname");
         String lastnameToAdd = input.readString("Lastname");
@@ -1007,13 +921,13 @@ public class Main {
             studStateEnum = Student.StudentState.DEDUCTED;
         }
 
-        Department targetDept = university.getFaculties().get(chosenFaculty).getDepartments().get(chosenDepartment);
         Student newStudent = new Student(nameToAdd, surnameToAdd, lastnameToAdd, birthDate, email, phone, id,
                 course, group, year, formEducationEnum, studStateEnum, studId);
 
         Repository.addStudent(targetDept, newStudent);
 
-        System.out.println("Student added successfully!");
+        System.out.println("Student added successfully to " + targetDept.getName() + "!");
+        log.info("Added new student '{}' to department '{}'", newStudent.getLastname(), targetDept.getName());
     }
 
     private static void printUniStructure() {
@@ -1182,11 +1096,11 @@ public class Main {
         }
         System.out.println("Select faculty:");
         for (int i = 0; i < faculties.size(); i++) {
-            System.out.println(i + ". " + faculties.get(i).getShortName()
+            System.out.println((i+1) + ". " + faculties.get(i).getShortName()
                     + " (" + faculties.get(i).getFullName() + ")");
         }
-        int fIdx = input.readInt("Your choice", 0, faculties.size() - 1);
-        Faculty fac = faculties.get(fIdx);
+        int fIdx = input.readInt("Your choice", 1, faculties.size());
+        Faculty fac = faculties.get(fIdx-1);
 
         if (fac.getDepartments().isEmpty()) {
             System.out.println("No departments in this faculty.");
@@ -1194,10 +1108,25 @@ public class Main {
         }
         System.out.println("Select department:");
         for (int i = 0; i < fac.getDepartments().size(); i++) {
-            System.out.println(i + ". " + fac.getDepartments().get(i).getName());
+            System.out.println((i+1) + ". " + fac.getDepartments().get(i).getName());
         }
-        int dIdx = input.readInt("Your choice", 0, fac.getDepartments().size() - 1);
-        return fac.getDepartments().get(dIdx);
+        int dIdx = input.readInt("Your choice", 1, fac.getDepartments().size());
+        return fac.getDepartments().get(dIdx-1);
+    }
+
+    private static Faculty pickFaculty() {
+        List<Faculty> faculties = university.getFaculties();
+        if (faculties.isEmpty()) {
+            System.out.println("No faculties in the system");
+            return null;
+        }
+        System.out.println("Select faculty:");
+        for (int i = 0; i < faculties.size(); i++) {
+            System.out.println((i+1) + ". " + faculties.get(i).getShortName()
+                    + " (" + faculties.get(i).getFullName() + ")");
+        }
+        int fIdx = input.readInt("Your choice", 1, faculties.size());
+        return faculties.get(fIdx-1);
     }
 
     private static void deptStudentsOfCourse() {
