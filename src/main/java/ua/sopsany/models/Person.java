@@ -1,6 +1,8 @@
 package ua.sopsany.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,12 +10,22 @@ import java.util.Objects;
 
 public sealed abstract class Person implements Identifiable<Integer> permits Teacher, Student {
 
+    @Getter
     private String name;
+    @Getter
     private String surname;
+    @Getter
     private String lastname;
+    @Getter
+    @Setter
     private LocalDate birthday;
+    @Getter
+    @Setter
     private String email;
+    @Getter
+    @Setter
     private String phone;
+    @Setter
     private int id;
 
     public Person(String surname, String name, String lastname, LocalDate birthday, String email, String phone, int id) {
@@ -33,46 +45,6 @@ public sealed abstract class Person implements Identifiable<Integer> permits Tea
     }
 
     public Person() {}
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public String getLastname() {
-        return lastname;
-    }
-
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
 
     @Override
     public Integer getId() {
