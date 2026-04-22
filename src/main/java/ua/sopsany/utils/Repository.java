@@ -54,6 +54,68 @@ public class Repository {
         toDept.addStudent(student);
     }
 
+    public static int[] cascadeRemoveDepartment(Department dept) {
+        int removedStudents = 0;
+        int removedTeachers = 0;
+
+        for (Student s : new java.util.ArrayList<>(dept.getStudents())) {
+            try {
+                studentRepo.remove(s);
+                removedStudents++;
+            } catch (EntityNotFoundException ignored) { /* вже нема — ок */ }
+        }
+        dept.getStudents().clear();
+
+        java.util.LinkedHashSet<Teacher> toDrop = new java.util.LinkedHashSet<>();
+        if (dept.getHead() != null) toDrop.add(dept.getHead());
+        if (dept.getTeachers() != null) toDrop.addAll(dept.getTeachers());
+        for (Teacher t : toDrop) {
+            try {
+                teacherRepo.remove(t);
+                removedTeachers++;
+            } catch (EntityNotFoundException ignored) { /* ок */ }
+        }
+        if (dept.getTeachers() != null) dept.getTeachers().clear();
+        dept.setHead(null);
+
+        if (dept.getFaculty() != null) {
+            dept.getFaculty().getDepartments().remove(dept);
+        }
+
+        try {
+            departmentRepo.remove(dept);
+        } catch (EntityNotFoundException ignored) { /* ок */ }
+
+        return new int[] { removedStudents, removedTeachers };
+    }
+
+    public static int[] cascadeRemoveFaculty(University uni, Faculty faculty) {
+        int removedStudents = 0;
+        int removedTeachers = 0;
+        int removedDepts = 0;
+
+        for (Department d : new java.util.ArrayList<>(faculty.getDepartments())) {
+            int[] r = cascadeRemoveDepartment(d);
+            removedStudents += r[0];
+            removedTeachers += r[1];
+            removedDepts++;
+        }
+
+        if (faculty.getDecan() != null) {
+            try {
+                teacherRepo.remove(faculty.getDecan());
+                removedTeachers++;
+            } catch (EntityNotFoundException ignored) { /* вже видалений */ }
+        }
+
+        uni.getFaculties().remove(faculty);
+        try {
+            facultyRepo.remove(faculty);
+        } catch (EntityNotFoundException ignored) { /* ок */ }
+
+        return new int[] { removedStudents, removedTeachers, removedDepts };
+    }
+
     public static University createUniversity() {
 
         University university = new University("Національний Університет Києво-Могилянська Академія", "НаУКМА", "Київ", "Сковороди 2");

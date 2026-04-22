@@ -11,6 +11,9 @@ import ua.sopsany.exceptions.*;
 import ua.sopsany.reflection.*;
 import org.slf4j.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Duration;
+import java.util.Optional;
 import ua.sopsany.network.UniversityServer;
 
 public class Main {
@@ -113,7 +116,18 @@ public class Main {
                         new MenuDispatcher(input).runMenu(ReflectionDemo.class, currentUser, "Reflection Demo");
                         break;
                     case 9:
-                        System.out.println("Logging out...");
+                        if (currentUser != null && currentUser.getLastLogin() != null) {
+                            Duration session = Duration.between(currentUser.getLastLogin(), LocalDateTime.now());
+                            long hours = session.toHours();
+                            long minutes = session.toMinutesPart();
+                            long seconds = session.toSecondsPart();
+                            System.out.printf("Logging out... Session duration: %dh %dm %ds%n",
+                                    hours, minutes, seconds);
+                            log.info("User '{}' logged out. Session duration: {}h {}m {}s",
+                                    currentUser.getLogin(), hours, minutes, seconds);
+                        } else {
+                            System.out.println("Logging out...");
+                        }
                         currentUser = null;
                         break;
                     case 0:
@@ -160,9 +174,12 @@ public class Main {
             System.out.println("6. Sorted Students by Course");
             System.out.println("7. Full Student Report (DTO)");
             System.out.println("8. Students of a Department by given Course (plain + A-Z)");
+            System.out.println("9. Students of a Department (by course)");
+            System.out.println("10. Teachers of a Faculty (A-Z)");
+            System.out.println("11. Teachers of a Department (A-Z)");
             System.out.println("0. Go back");
 
-            int choice = input.readInt("Select option", 0, 8);
+            int choice = input.readInt("Select option", 0, 11);
             switch (choice) {
                 case 1: printUniStructure(); break;
                 case 2: findPerson(); break;
@@ -200,6 +217,9 @@ public class Main {
                     break;
 
                 case 8: deptStudentsOfCourse(); break;
+                case 9: deptStudentsByCourse(); break;
+                case 10: facultyTeachersAlpha(); break;
+                case 11: deptTeachersAlpha(); break;
 
                 case 0: return;
             }
@@ -345,16 +365,26 @@ public class Main {
                     Department deptToRemove = pickDepartment();
                     if (deptToRemove == null) break;
 
-                    for (Faculty fac : university.getFaculties()) {
-                        if (fac.getDepartments().remove(deptToRemove)) break;
+                    int stCount = deptToRemove.getStudents() == null ? 0 : deptToRemove.getStudents().size();
+                    int headCount = deptToRemove.getHead() == null ? 0 : 1;
+                    int teacherCount = (deptToRemove.getTeachers() == null ? 0 : deptToRemove.getTeachers().size()) + headCount;
+
+                    if (stCount + teacherCount > 0) {
+                        System.out.println("\nWARNING: Department '" + deptToRemove.getName()
+                                + "' contains " + stCount + " student(s) and " + teacherCount
+                                + " teacher(s) (including head). They will ALL be removed with the department.");
+                        if (!input.confirm("Are you sure you want to proceed?")) {
+                            System.out.println("Cancelled.");
+                            break;
+                        }
                     }
 
-                    try {
-                        Repository.departmentRepo.remove(deptToRemove);
-                        System.out.println("Department removed successfully!");
-                    } catch (Exception e) {
-                        System.out.println("Error: " + e.getMessage());
-                    }
+                    int[] r = Repository.cascadeRemoveDepartment(deptToRemove);
+                    System.out.println("Department '" + deptToRemove.getName()
+                            + "' removed. Cascade removed: "
+                            + r[0] + " student(s), " + r[1] + " teacher(s).");
+                    log.info("Cascade removed department '{}' by {}: {} students, {} teachers",
+                            deptToRemove.getName(), currentUser.getLogin(), r[0], r[1]);
                     break;
 
                 case 3:
@@ -410,14 +440,36 @@ public class Main {
                     Faculty facToRemove = pickFaculty();
                     if (facToRemove == null) break;
 
-                    university.getFaculties().remove(facToRemove);
-
-                    try {
-                        Repository.facultyRepo.remove(facToRemove);
-                        System.out.println("Faculty " + facToRemove.getShortName() + " removed successfully!");
-                    } catch (Exception e) {
-                        System.out.println("Error: " + e.getMessage());
+                    int facDeptCount = facToRemove.getDepartments() == null ? 0 : facToRemove.getDepartments().size();
+                    int facStudents = 0, facTeachers = 0;
+                    if (facToRemove.getDepartments() != null) {
+                        for (Department d : facToRemove.getDepartments()) {
+                            facStudents += (d.getStudents() == null ? 0 : d.getStudents().size());
+                            facTeachers += (d.getTeachers() == null ? 0 : d.getTeachers().size());
+                            if (d.getHead() != null) facTeachers++;
+                        }
                     }
+                    if (facToRemove.getDecan() != null) facTeachers++;
+
+                    if (facDeptCount + facStudents + facTeachers > 0) {
+                        System.out.println("\nWARNING: Faculty '" + facToRemove.getShortName()
+                                + "' contains " + facDeptCount + " department(s), "
+                                + facStudents + " student(s), " + facTeachers
+                                + " teacher(s) (including dean and heads). All will be removed.");
+                        if (!input.confirm("Are you sure you want to proceed?")) {
+                            System.out.println("Cancelled.");
+                            break;
+                        }
+                    }
+
+                    int[] fr = Repository.cascadeRemoveFaculty(university, facToRemove);
+                    System.out.println("Faculty '" + facToRemove.getShortName()
+                            + "' removed. Cascade removed: "
+                            + fr[2] + " department(s), "
+                            + fr[0] + " student(s), "
+                            + fr[1] + " teacher(s).");
+                    log.info("Cascade removed faculty '{}' by {}: {} depts, {} students, {} teachers",
+                            facToRemove.getShortName(), currentUser.getLogin(), fr[2], fr[0], fr[1]);
                     break;
 
                 case 3:
@@ -1175,5 +1227,49 @@ public class Main {
         List<Student> alpha = searchService.getDeptStudentsByCourseAlpha(dept, course);
         System.out.println("\n[Alphabetical, A-Z by lastname]");
         alpha.forEach(s -> System.out.println("  " + s));
+    }
+
+    private static void deptStudentsByCourse() {
+        System.out.println("\n--- Students of a Department (by course) ---");
+        Department dept = pickDepartment();
+        if (dept == null) return;
+
+        List<Student> sorted = searchService.getDeptStudentsSortedByCourse(dept);
+        if (sorted.isEmpty()) {
+            System.out.println("No students in department '" + dept.getName() + "'.");
+            return;
+        }
+        System.out.println("\nDepartment: " + dept.getName() + " (students: " + sorted.size() + ")");
+        sorted.forEach(s -> System.out.println("  " + s));
+    }
+
+    private static void facultyTeachersAlpha() {
+        System.out.println("\n--- Teachers of a Faculty (A-Z) ---");
+        Faculty fac = pickFaculty();
+        if (fac == null) return;
+
+        List<Teacher> teachers = searchService.getFacultyTeachersAlpha(fac);
+        if (teachers.isEmpty()) {
+            System.out.println("No teachers in faculty '" + fac.getShortName() + "'.");
+            return;
+        }
+        System.out.println("\nFaculty: " + fac.getShortName()
+                + " (teachers: " + teachers.size() + ")");
+        teachers.forEach(t -> System.out.println("  " + t));
+    }
+
+    private static void deptTeachersAlpha() {
+        System.out.println("\n--- Teachers of a Department (A-Z) ---");
+        Department dept = pickDepartment();
+        if (dept == null) return;
+
+        List<Teacher> teachers = searchService.getDeptTeachersAlpha(dept);
+        if (teachers.isEmpty()) {
+            System.out.println("No teachers in department '" + dept.getName() + "'.");
+            return;
+        }
+        System.out.println("\nDepartment: " + dept.getName()
+                + " (teachers: " + teachers.size() + ")");
+        teachers.forEach(t -> System.out.println("  " + t));
     }
 }

@@ -78,4 +78,14 @@ public class InputHandler {
         }
     }
 
+    public boolean confirm(String prompt) {
+        while (true) {
+            System.out.print(prompt + " (y/n): ");
+            String raw = scanner.nextLine().trim().toLowerCase();
+            if (raw.equals("y") || raw.equals("yes") || raw.equals("так") || raw.equals("т")) return true;
+            if (raw.equals("n") || raw.equals("no")  || raw.equals("ні")  || raw.equals("н")) return false;
+            System.out.println("Please enter y/n.");
+        }
+    }
+
 }

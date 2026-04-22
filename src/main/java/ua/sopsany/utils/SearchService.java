@@ -124,4 +124,32 @@ public class SearchService {
                 .sorted(Comparator.comparing(Person::getLastname))
                 .toList();
     }
+
+    public List<Student> getDeptStudentsSortedByCourse(Department dept) {
+        return dept.getStudents().stream()
+                .sorted(Comparator.comparing(Student::getCourse)
+                        .thenComparing(Person::getLastname))
+                .toList();
+    }
+
+    public List<Teacher> getFacultyTeachersAlpha(Faculty faculty) {
+        java.util.LinkedHashSet<Teacher> collected = new java.util.LinkedHashSet<>();
+        if (faculty.getDecan() != null) collected.add(faculty.getDecan());
+        for (Department d : faculty.getDepartments()) {
+            if (d.getHead() != null) collected.add(d.getHead());
+            if (d.getTeachers() != null) collected.addAll(d.getTeachers());
+        }
+        return collected.stream()
+                .sorted(Comparator.comparing(Person::getLastname))
+                .toList();
+    }
+
+    public List<Teacher> getDeptTeachersAlpha(Department dept) {
+        java.util.LinkedHashSet<Teacher> collected = new java.util.LinkedHashSet<>();
+        if (dept.getHead() != null) collected.add(dept.getHead());
+        if (dept.getTeachers() != null) collected.addAll(dept.getTeachers());
+        return collected.stream()
+                .sorted(Comparator.comparing(Person::getLastname))
+                .toList();
+    }
 }
