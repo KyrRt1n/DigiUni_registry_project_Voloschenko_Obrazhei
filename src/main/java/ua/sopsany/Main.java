@@ -950,10 +950,11 @@ public class Main {
         System.out.println("2. Sort students by course");
         System.out.println("3. Sort students by faculty");
         System.out.println("4. Sort students by department");
-        System.out.println("5. Sort students by group");
-        System.out.println("6. Sort teachers by lastname");
-        System.out.println("7. Sort teachers by faculty (A-Z)");
-        System.out.println("8. Sort teachers by department (A-Z)");
+        System.out.println("5. Sort students by department (Course)");
+        System.out.println("6. Sort students by group");
+        System.out.println("7. Sort teachers by lastname");
+        System.out.println("8. Sort teachers by faculty (A-Z)");
+        System.out.println("9. Sort teachers by department (A-Z)");
         System.out.println("0. Go back");
 
         List<Student> allStudents = Repository.studentRepo.getAll();
@@ -961,7 +962,7 @@ public class Main {
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
 
-        int sortOption = input.readInt("Your choice", 0, 8);
+        int sortOption = input.readInt("Your choice", 0, 9);
 
         switch (sortOption) {
             case 1:
@@ -990,7 +991,7 @@ public class Main {
                     for (Department d : f.getDepartments()) {
                         System.out.println("\n[Dept: " + d.getName() + " | Fac: " + f.getShortName() + "]");
                         List<Student> depStudents = d.getStudents().stream()
-                                .sorted(comparing(Person::getLastname))
+                                .sorted(comparing(Student::getCourse))
                                 .toList();
 
                         if (depStudents.isEmpty()) System.out.println("  No students found.");
@@ -998,14 +999,27 @@ public class Main {
                     }
                 }
                 return;
-
             case 5:
+                System.out.println("\n--- Students grouped by Department (Course) ---");
+                for (Faculty f : university.getFaculties()) {
+                    for (Department d : f.getDepartments()) {
+                        System.out.println("\n[Dept: " + d.getName() + " | Fac: " + f.getShortName() + "]");
+                        List<Student> depStudents = d.getStudents().stream()
+                                .sorted(comparing(Student::getCourse))
+                                .toList();
+
+                        if (depStudents.isEmpty()) System.out.println("  No students found.");
+                        else depStudents.forEach(s -> System.out.println("  " + s));
+                    }
+                }
+                return;
+            case 6:
                 resultStud = searchService.sortStudentsByGroup(allStudents);
                 break;
-            case 6:
+            case 7:
                 resultTeach = searchService.sortTeachersByLastname(allTeachers);
                 break;
-            case 7:
+            case 8:
                 System.out.println("\n--- Teachers grouped by Faculty (A-Z) ---");
                 for (Faculty f : university.getFaculties()) {
                     System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
@@ -1028,7 +1042,7 @@ public class Main {
                     else sortedTeachers.forEach(t -> System.out.println("  " + t));
                 }
                 return;
-            case 8:
+            case 9:
                 System.out.println("\n--- Teachers grouped by Department (A-Z) ---");
                 for (Faculty f : university.getFaculties()) {
                     for (Department d : f.getDepartments()) {
