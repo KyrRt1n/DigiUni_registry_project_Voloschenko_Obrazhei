@@ -11,9 +11,6 @@ import ua.sopsany.exceptions.*;
 import ua.sopsany.reflection.*;
 import org.slf4j.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Duration;
-import java.util.Optional;
 import ua.sopsany.network.UniversityServer;
 
 public class Main {
@@ -116,18 +113,7 @@ public class Main {
                         new MenuDispatcher(input).runMenu(ReflectionDemo.class, currentUser, "Reflection Demo");
                         break;
                     case 9:
-                        if (currentUser != null && currentUser.getLastLogin() != null) {
-                            Duration session = Duration.between(currentUser.getLastLogin(), LocalDateTime.now());
-                            long hours = session.toHours();
-                            long minutes = session.toMinutesPart();
-                            long seconds = session.toSecondsPart();
-                            System.out.printf("Logging out... Session duration: %dh %dm %ds%n",
-                                    hours, minutes, seconds);
-                            log.info("User '{}' logged out. Session duration: {}h {}m {}s",
-                                    currentUser.getLogin(), hours, minutes, seconds);
-                        } else {
-                            System.out.println("Logging out...");
-                        }
+                        System.out.println("Logging out...");
                         currentUser = null;
                         break;
                     case 0:
@@ -280,21 +266,25 @@ public class Main {
                 case 2:
                     System.out.println("--- Removing Teacher ---");
                     String lastNameToRemove = input.readString("Enter teacher's lastname to remove");
+                    Teacher teacherToRemove = null;
 
-                    Optional<Teacher> teacherOpt = Repository.teacherRepo
-                            .findBy(t -> t.getLastname().equalsIgnoreCase(lastNameToRemove));
+                    for (Teacher t : Repository.teacherRepo.getAll()) {
+                        if (t.getLastname().equalsIgnoreCase(lastNameToRemove)) {
+                            teacherToRemove = t;
+                            break;
+                        }
+                    }
 
-                    teacherOpt.ifPresentOrElse(
-                            t -> {
-                                try {
-                                    Repository.teacherRepo.remove(t);
-                                    System.out.println("Teacher " + t.getLastname() + " removed successfully!");
-                                } catch (Exception e) {
-                                    System.out.println("Error: " + e.getMessage());
-                                }
-                            },
-                            () -> System.out.println("Teacher not found.")
-                    );
+                    if (teacherToRemove != null) {
+                        try {
+                            Repository.teacherRepo.remove(teacherToRemove);
+                            System.out.println("Teacher " + teacherToRemove.getLastname() + " removed successfully!");
+                        } catch (Exception e) {
+                            System.out.println("Error: " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("Teacher not found.");
+                    }
                     break;
 
                 case 3:
@@ -961,7 +951,6 @@ public class Main {
         System.out.println("5. Sort students by group");
         System.out.println("6. Sort teachers by lastname");
         System.out.println("7. Sort teachers by faculty (A-Z)");
-        System.out.println("8. Sort teachers by department (A-Z)");
         System.out.println("0. Go back");
 
         List<Student> allStudents = Repository.studentRepo.getAll();
@@ -969,7 +958,7 @@ public class Main {
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
 
-        int sortOption = input.readInt("Your choice", 0, 8);
+        int sortOption = input.readInt("Your choice", 0, 7);
 
         switch (sortOption) {
             case 1:
@@ -1036,26 +1025,7 @@ public class Main {
                     else sortedTeachers.forEach(t -> System.out.println("  " + t));
                 }
                 return;
-            case 8:
-                System.out.println("\n--- Teachers grouped by Department (A-Z) ---");
-                for (Faculty f : university.getFaculties()) {
-                    for (Department d : f.getDepartments()) {
-                        System.out.println("\n[Dept: " + d.getName() + " | Fac: " + f.getShortName() + "]");
 
-                        List<Teacher> depTeachers = new ArrayList<>();
-                        if (d.getHead() != null) depTeachers.add(d.getHead());
-                        if (d.getTeachers() != null) depTeachers.addAll(d.getTeachers());
-
-                        List<Teacher> sortedDepTeachers = depTeachers.stream()
-                                .distinct() // not to see doubled pearson
-                                .sorted(java.util.Comparator.comparing(Person::getLastname))
-                                .toList();
-
-                        if (sortedDepTeachers.isEmpty()) System.out.println("  No teachers found in this department.");
-                        else sortedDepTeachers.forEach(t -> System.out.println("  " + t));
-                    }
-                }
-                return;
             case 0:
                 return;
         }
