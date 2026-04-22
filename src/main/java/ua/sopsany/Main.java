@@ -951,6 +951,7 @@ public class Main {
         System.out.println("5. Sort students by group");
         System.out.println("6. Sort teachers by lastname");
         System.out.println("7. Sort teachers by faculty (A-Z)");
+        System.out.println("8. Sort teachers by department (A-Z)");
         System.out.println("0. Go back");
 
         List<Student> allStudents = Repository.studentRepo.getAll();
@@ -958,7 +959,7 @@ public class Main {
         List<Teacher> allTeachers = Repository.teacherRepo.getAll();
         List<Teacher> resultTeach = List.of();
 
-        int sortOption = input.readInt("Your choice", 0, 7);
+        int sortOption = input.readInt("Your choice", 0, 8);
 
         switch (sortOption) {
             case 1:
@@ -1025,7 +1026,26 @@ public class Main {
                     else sortedTeachers.forEach(t -> System.out.println("  " + t));
                 }
                 return;
+            case 8:
+                System.out.println("\n--- Teachers grouped by Department (A-Z) ---");
+                for (Faculty f : university.getFaculties()) {
+                    for (Department d : f.getDepartments()) {
+                        System.out.println("\n[Dept: " + d.getName() + " | Fac: " + f.getShortName() + "]");
 
+                        List<Teacher> depTeachers = new ArrayList<>();
+                        if (d.getHead() != null) depTeachers.add(d.getHead());
+                        if (d.getTeachers() != null) depTeachers.addAll(d.getTeachers());
+
+                        List<Teacher> sortedDepTeachers = depTeachers.stream()
+                                .distinct() // not to see doubled pearson
+                                .sorted(java.util.Comparator.comparing(Person::getLastname))
+                                .toList();
+
+                        if (sortedDepTeachers.isEmpty()) System.out.println("  No teachers found in this department.");
+                        else sortedDepTeachers.forEach(t -> System.out.println("  " + t));
+                    }
+                }
+                return;
             case 0:
                 return;
         }
