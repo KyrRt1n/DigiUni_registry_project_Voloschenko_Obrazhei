@@ -7,10 +7,20 @@ import java.time.Period;
 
 public final class Teacher extends Person {
 
+    @lombok.Getter
+    @lombok.Setter
     private String position;
+    @lombok.Getter
+    @lombok.Setter
     private String academicDegree;
+    @lombok.Getter
+    @lombok.Setter
     private String academicTitle;
+    @lombok.Getter
+    @lombok.Setter
     private LocalDate dateOfEmployment;
+    @lombok.Getter
+    @lombok.Setter
     private int workLoad;
 
     public Teacher(String name, String surname, String lastname, LocalDate birthday, String email, String phone, int id,
@@ -28,46 +38,6 @@ public final class Teacher extends Person {
     }
 
     public Teacher() {}
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public void setAcademicDegree(String academicDegree) {
-        this.academicDegree = academicDegree;
-    }
-
-    public void setAcademicTitle(String academicTitle) {
-        this.academicTitle = academicTitle;
-    }
-
-    public void setDateOfEmployment(LocalDate dateOfEmployment) {
-        this.dateOfEmployment = dateOfEmployment;
-    }
-
-    public void setWorkLoad(int workLoad) {
-        this.workLoad = workLoad;
-    }
-
-    public int getWorkLoad() {
-        return workLoad;
-    }
-
-    public LocalDate getDateOfEmployment() {
-        return dateOfEmployment;
-    }
-
-    public String getAcademicTitle() {
-            return academicTitle;
-    }
-
-    public String getAcademicDegree() {
-        return academicDegree;
-    }
-
-    public String getPosition() {
-        return position;
-    }
 
     @JsonIgnore
     public int getYearsOfWork() {
