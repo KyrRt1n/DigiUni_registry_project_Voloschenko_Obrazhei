@@ -1305,17 +1305,17 @@ public class Main {
 
         System.out.println("Available backups (newest first):");
         for (int i = 0; i < backups.size(); i++) {
-            System.out.println(i + ". " + backups.get(i).getFileName());
+            System.out.println((i+1) + ". " + backups.get(i).getFileName());
         }
-        System.out.println(backups.size() + ". Cancel");
+        System.out.println(0 + ". Cancel");
 
-        int idx = input.readInt("Select backup", 0, backups.size());
-        if (idx == backups.size()) {
+        int idx = input.readInt("Select backup", 0, backups.size()+1);
+        if (idx == 0) {
             System.out.println("Cancelled.");
             return;
         }
 
-        java.nio.file.Path chosen = backups.get(idx);
+        java.nio.file.Path chosen = backups.get(idx-1);
         System.out.println("Selected: " + chosen.getFileName());
         System.out.println("WARNING: current in-memory state will be replaced with backup contents.");
         if (!input.confirm("Proceed with restore?")) {

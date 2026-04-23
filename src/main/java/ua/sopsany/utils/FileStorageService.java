@@ -53,7 +53,7 @@ public class FileStorageService {
 
     public void saveUni(University uni){
         try {
-            String json = mapper.writeValueAsString(university);
+            String json = mapper.writeValueAsString(uni);
             Files.writeString(uniFilePath, json);
             log.info("University data saved successfully to {}", uniFilePath.toAbsolutePath());
         } catch (Exception e) {
