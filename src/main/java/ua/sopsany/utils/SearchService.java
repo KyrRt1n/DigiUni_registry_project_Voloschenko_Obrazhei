@@ -7,6 +7,7 @@ import ua.sopsany.models.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 public class SearchService {
 
@@ -106,7 +107,7 @@ public class SearchService {
                 .toList();
     }
 
-    public java.util.Set<String> getAllUniqueGroups(List<Student> students) {
+    public Set<String> getAllUniqueGroups(List<Student> students) {
         return students.stream()
                 .map(Student::getGroup)
                 .collect(java.util.stream.Collectors.toSet());
