@@ -1,0 +1,16 @@
+[ {
+  "login" : "manager",
+  "passwordHash" : -1075822310,
+  "role" : "MANAGER",
+  "isBlocked" : false
+}, {
+  "login" : "admin",
+  "passwordHash" : -969161597,
+  "role" : "ADMIN",
+  "isBlocked" : false
+}, {
+  "login" : "user",
+  "passwordHash" : -147178873,
+  "role" : "USER",
+  "isBlocked" : false
+} ]

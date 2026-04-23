@@ -1,0 +1,368 @@
+2026-04-21 18:01:30 [main] INFO  ua.sopsany.Main - User user successfully logged in with role USER
+2026-04-21 18:02:10 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 18:02:10 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 18:02:17 [main] INFO  ua.sopsany.Main - User user successfully logged in with role USER
+2026-04-21 18:02:26 [main] INFO  ua.sopsany.reflection.MenuDispatcher - Menu item 'Show total counts (all roles)' executed successfully
+2026-04-21 18:02:34 [main] INFO  ua.sopsany.reflection.MenuDispatcher - Menu item 'Show all students (USER+)' executed successfully
+2026-04-21 18:03:08 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 18:03:08 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 18:03:12 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-21 18:04:08 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 18:04:08 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 18:04:12 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-21 18:04:30 [main] INFO  ua.sopsany.reflection.MenuDispatcher - Menu item 'DANGER: print university pointer (ADMIN only)' executed successfully
+2026-04-21 18:04:55 [main] INFO  ua.sopsany.reflection.MenuDispatcher - Menu item 'Validate first student (MANAGER+)' executed successfully
+2026-04-21 18:05:04 [main] INFO  ua.sopsany.reflection.MenuDispatcher - Menu item 'Show all teachers (MANAGER+)' executed successfully
+2026-04-21 18:05:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:05:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:06:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:06:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:06:59 [main] INFO  ua.sopsany.Main - Student 123321321231231 transferred: Software Engineering -> Management
+2026-04-21 18:07:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:07:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:07:10 [main] INFO  ua.sopsany.Main - Student 123321321231231 transferred: Management -> Marketing
+2026-04-21 18:08:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:08:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:08:15 [main] INFO  ua.sopsany.Main - Teacher 'Hlybovets' updated (option 3)
+2026-04-21 18:09:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:09:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:09:30 [main] INFO  ua.sopsany.Main - Teacher 'Hlybovets' updated (option 1)
+2026-04-21 18:10:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:10:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:10:43 [main] INFO  ua.sopsany.Main - Teacher 'Hlybovets' updated (option 3)
+2026-04-21 18:11:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:11:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:11:14 [main] INFO  ua.sopsany.Main - Teacher 'Hlybovets' updated (option 3)
+2026-04-21 18:11:35 [main] INFO  ua.sopsany.Main - Teacher 'Hlybovets' updated (option 1)
+2026-04-21 18:12:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:12:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:13:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:13:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:14:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:14:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:15:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:15:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:15:40 [main] INFO  ua.sopsany.Main - Teacher 'oleGovna' updated (option 1)
+2026-04-21 18:16:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:16:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:17:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:17:08 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:25:13 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-21 18:25:13 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-21 18:25:13 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 18:25:13 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 18:25:58 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP client connected: /0:0:0:0:0:0:0:1
+2026-04-21 18:26:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:26:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:27:12 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP client connected: /192.168.1.71
+2026-04-21 18:27:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:27:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:27:55 [TCP-Client] INFO  ua.sopsany.network.UniversityServer - TCP client disconnected
+2026-04-21 18:28:01 [TCP-Client] INFO  ua.sopsany.network.UniversityServer - TCP client disconnected
+2026-04-21 18:28:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:28:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:29:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 18:29:13 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 18:32:19 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-21 18:32:19 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-21 18:32:19 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 18:32:19 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 18:32:22 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP client connected: /127.0.0.1
+2026-04-21 18:32:28 [TCP-Client] INFO  ua.sopsany.network.UniversityServer - TCP command received: 'help'
+2026-04-21 18:32:53 [TCP-Client] INFO  ua.sopsany.network.UniversityServer - TCP command received: 'exit'
+2026-04-21 18:32:53 [TCP-Client] INFO  ua.sopsany.network.UniversityServer - TCP client disconnected
+2026-04-21 19:03:33 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-21 19:03:33 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-21 19:03:33 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 19:03:33 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 19:04:33 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:04:33 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:05:10 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-21 19:05:10 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-21 19:05:10 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-21 19:05:10 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-21 19:06:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:06:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:07:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:07:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:08:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:08:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:09:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:09:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:10:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:10:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:11:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:11:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:12:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:12:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:13:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:13:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:14:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:14:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:15:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:15:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:16:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:16:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:17:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:17:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:18:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:18:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:19:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:19:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:20:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:20:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:21:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:21:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:22:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:22:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:23:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:23:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:24:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:24:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:25:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:25:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:26:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:26:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:27:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:27:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:28:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:28:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:29:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:29:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:30:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:30:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:31:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:31:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:32:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:32:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:33:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:33:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:34:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:34:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:35:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:35:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:36:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:36:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-21 19:37:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-21 19:37:10 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:31:57 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 16:31:57 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 16:31:57 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 16:31:57 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 16:32:12 [main] INFO  ua.sopsany.Main - User manager successfully logged in with role MANAGER
+2026-04-22 16:32:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:32:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:33:38 [main] INFO  ua.sopsany.Main - Faculty 'FI' updated (option 1)
+2026-04-22 16:33:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:33:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:34:53 [main] INFO  ua.sopsany.Main - Department 'Software Engineering' updated (option 0)
+2026-04-22 16:34:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:34:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:35:08 [main] INFO  ua.sopsany.Main - Department 'Defense of The Ancients' updated (option 3)
+2026-04-22 16:35:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:35:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:36:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:36:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:37:43 [main] INFO  ua.sopsany.Main - Department 'Management' updated (option 0)
+2026-04-22 16:37:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:37:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:38:45 [main] INFO  ua.sopsany.Main - Department 'Management' updated (option 3)
+2026-04-22 16:38:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:38:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:39:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:39:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:40:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:40:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:41:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:41:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:42:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:42:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:43:35 [main] INFO  ua.sopsany.Main - Teacher 'Hrynchyshyn' updated (option 1)
+2026-04-22 16:43:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:43:57 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:49:04 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 16:49:04 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 16:49:04 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 16:49:04 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 16:49:10 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-22 16:49:21 [main] INFO  ua.sopsany.Main - Student 235346456 transferred: Management -> Marketing
+2026-04-22 16:50:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:50:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:51:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:51:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:51:22 [main] INFO  ua.sopsany.Main - Student 235346456 transferred: Marketing -> Management
+2026-04-22 16:51:34 [main] INFO  ua.sopsany.Main - Student 235346456 transferred: Management -> Marketing
+2026-04-22 16:52:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:52:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:53:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:53:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:54:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:54:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:55:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:55:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:56:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:56:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:57:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:57:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:58:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:58:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 16:59:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 16:59:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:00:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:00:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:01:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:01:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:02:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:02:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:03:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:03:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:04:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:04:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:05:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:05:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:06:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:06:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:07:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:07:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:08:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:08:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:09:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:09:04 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:10:45 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 17:10:46 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 17:10:46 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 17:10:46 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 17:11:07 [main] WARN  ua.sopsany.Main - Failed login attempt for user 'admin', with 'admnin123'. Reason: Invalid login or password
+2026-04-22 17:11:10 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-22 17:11:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:11:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:12:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:12:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:13:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:13:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:14:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:14:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:15:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:15:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:16:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:16:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:17:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:17:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:18:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:18:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:19:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:19:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:20:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:20:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:21:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:21:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:22:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:22:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:23:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:23:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:24:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:24:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:25:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:25:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:26:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:26:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:27:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:27:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:28:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:28:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:29:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:29:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:30:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:30:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:31:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:31:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:32:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:32:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:33:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:33:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:34:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:34:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:35:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:35:46 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:36:47 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 17:36:47 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 17:36:47 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 17:36:47 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 17:36:50 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-22 17:56:28 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 17:56:28 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 17:56:28 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 17:56:28 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 17:56:31 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-22 17:57:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:57:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:58:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:58:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 17:59:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 17:59:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:00:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:00:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:01:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:01:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:02:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:02:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:03:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:03:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:04:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:04:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:05:28 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 18:05:28 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 18:05:28 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 18:05:28 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 18:05:44 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-22 18:06:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:06:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:07:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:07:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:08:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:08:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:09:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:09:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:10:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:10:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:11:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:11:28 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:12:15 [main] INFO  ua.sopsany.utils.FileStorageService - University data loaded from data\university_data.json
+2026-04-22 18:12:15 [main] INFO  ua.sopsany.utils.FileStorageService - Users loaded from file! (3 users)
+2026-04-22 18:12:15 [TCP-Server] INFO  ua.sopsany.network.UniversityServer - TCP server started on port 9090
+2026-04-22 18:12:15 [main] INFO  ua.sopsany.Main - AutoSave background thread started (saves every 60 sec)
+2026-04-22 18:12:22 [main] INFO  ua.sopsany.Main - User admin successfully logged in with role ADMIN
+2026-04-22 18:13:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:13:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:14:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:14:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:15:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:15:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:16:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:16:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:17:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:17:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:18:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:18:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:19:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:19:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:20:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:20:15 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:21:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:21:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:22:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:22:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:23:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:23:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:24:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:24:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:25:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:25:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:26:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:26:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:27:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:27:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:28:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:28:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
+2026-04-22 18:29:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - University data saved successfully to C:\UKMA\Jaba\DigiUni\data\university_data.json
+2026-04-22 18:29:16 [AutoSaveThread] INFO  ua.sopsany.utils.FileStorageService - Users saved successfully to C:\UKMA\Jaba\DigiUni\data\users_data.json
