@@ -146,11 +146,17 @@ public class Main {
     }
     private static void startAutoSaveThread() {
         Thread autoSave = new Thread(() -> {
+            int mins = 0;
             while (true) {
                 try {
                     Thread.sleep(60_000); // 60 секунд
+                    mins++;
                     storage.saveUni(university);
                     storage.saveUsers(authService);
+                    if(mins%5 == 0){
+                        storage.createBackup(university, "autosave");
+                        log.info("Automatic backup created in background.");
+                    }
                 } catch (InterruptedException e) {
                     log.warn("AutoSave thread interrupted");
                     break;
