@@ -70,11 +70,11 @@
 | `manager` | `mgr123`   | MANAGER (CRUD без керування користувачами) |
 | `admin`   | `admin123` | ADMIN (повний доступ)                      |
 
-Запустити TCP-клієнт можна запустивши файл /network.UniversityClient, що автоматично вас під'єднає за потрібною адресою, або використати будь-який TCP-клієнт (telnet / PuTTY / netcat) за адресою `localhost:9090`.
 
 ## TCP протокол
+Запустити TCP-клієнт можна запустивши файл /network.UniversityClient.java, що автоматично вас під'єднає за потрібною адресою, або можна використати будь-який TCP-клієнт (telnet / PuTTY / netcat) за адресою `localhost:9090`.
 
-Сервер стартує автоматично на порту *9090*. Доступно такі команди, кожна з яких зевершується маркером END в кінці:
+Доступно такі команди, кожна з яких зевершується маркером END в кінці:
 
 | Команда                   | Опис                                   |
 |---------------------------|----------------------------------------|
@@ -86,50 +86,62 @@
 | `EXIT`                    | Вийти з мережного режиму               |
 
 
-
+Дерево каталогів та файлів:
 ```
-DigiUni Registry
-├── main
-│   └── java
-│       └── ua.sopsany
-│           ├── Main.java
-│           ├── university_data.json
-│           ├── user_data.json
-│           │
-│           ├── auth
-│           │   ├── AuthService.java
-│           │   ├── Role.java
-│           │   └── User.java
-│           │
-│           ├── dto
-│           │   └── FacultyStatsRecord.java
-│           │   └── StudentDTO.java
-│           │
-│           ├── exceptions
-│           │   ├── DuplicateIdException.java
-│           │   ├── EntityNotFoundException.java
-│           │   └── UnauthorizedExcpetion.java
-│           │
-│           ├── models
-│           │   ├── Department.java
-│           │   ├── Faculty.java
-│           │   ├── Person.java
-│           │   ├── Student.java
-│           │   ├── Teacher.java
-│           │   └── University.java
-│           │
-│           └── utils
-│               ├── FileStorageService.java
-│               ├── GenericRepository.java
-│               ├── InputHandler.java
-│               ├── Repository.java
-│               └── SearchService.java
-└── test
-    └── java
-        └── ua.sopsany
-              └── UniversityTest.java
+DigiUni Registry/
+├── pom.xml
+├── README.md
+├── Звіт.docx
+├── data
+│   ├── university_data.json
+│   ├── users_data.json
+│   └── backups
+├── logs
+│   └── app.log
+└── src
+    ├── main
+    │   ├── java/ua/sopsany
+    │   │   ├── Main.java
+    │   │   ├── auth
+    │   │   │   ├── AuthService.java
+    │   │   │   ├── Role.java
+    │   │   │   └── User.java
+    │   │   ├── dto
+    │   │   │   ├── FacultyStatsRecord.java
+    │   │   │   └── StudentDTO.java
+    │   │   ├── exceptions
+    │   │   │   ├── DuplicateIdException.java
+    │   │   │   ├── EntityNotFoundException.java
+    │   │   │   └── UnauthorizedException.java
+    │   │   ├── models
+    │   │   │   ├── Department.java
+    │   │   │   ├── Faculty.java
+    │   │   │   ├── Identifiable.java
+    │   │   │   ├── Person.java
+    │   │   │   ├── Student.java
+    │   │   │   ├── Teacher.java
+    │   │   │   └── University.java
+    │   │   ├── network
+    │   │   │   ├── UniversityClient.java
+    │   │   │   └── UniversityServer.java
+    │   │   ├── reflection
+    │   │   │   ├── MenuDispatcher.java
+    │   │   │   ├── MenuItem.java
+    │   │   │   ├── ReflectionDemo.java
+    │   │   │   ├── Validate.java
+    │   │   │   └── Validator.java
+    │   │   └── utils
+    │   │       ├── FileStorageService.java
+    │   │       ├── GenericRepository.java
+    │   │       ├── InputHandler.java
+    │   │       ├── Repository.java
+    │   │       └── SearchService.java
+    │   └── resources
+    │       └── log4j2.xml
+    └── test/java/ua/sopsany
+        └── UniversityTest.java
 ```
-<a href="https://tree.nathanfriend.com/?s=(%27options!(%27fancy!true~fullPat3trailingSlas3rootDot!true)~5(%275%27DigiUni%20Registry0main478ua.sopsany*Main2utils6InputHandler-Repository2Models6Departm9Faculty-Person-Stud9Teacher-University-6%27)~version!%271%27)*8%20-2%200%5Cn%202.7*3h!false~40%205source!6*%207java84%209ent-%01987654320-*">
+<a href="https://tree.nathanfriend.com/?s=(%27opZs!(%27fancy!true~fullPathQ~trailingSlashQ~rootDotQ)~W!(%27W!%27DigiUni%20Registry%2FBpom.xmlBREADME.mdB%D0%97%D0%B2%D1%96%D1%82.docxBdata0*u6LusKsLbackupsBlogs0*app.logBsrc0*main079*7Main5auth0*7AuthX-*7Role-*7UsK5dto03FacultyStatsRecordJStudqDTO5e8s03%20DuplicateIdE8-\t**EntityNotFoundE8-*7UnauthorizedE85models03DepartmqJFacultyJIdqifiableJPKsonJStudqJTeachKJU65network03U6CliqJU6SKvK5reflecZ03MenuDispatchKJMenuItemJReflecZDemoJValidateJValidator5utils03FileStorageXJGenKicYInputHandlKJYSearchX-7reWs0**log4j2.xml0*test%2F97U6Test-%27)~vKsion!%271%27)7%20-.java00\n3****5-\t76nivKsity7*%208xcepZ9java%2Fua%2Fsopsany0B0%20J-3KerL_data.json0*Q!falseWsourceXSKviceYRepositoryJZtionqent%01qZYXWQLKJB9876530-*">
   <img src="https://static.wikia.nocookie.net/terraria_gamepedia/images/a/ac/Tree.png" alt="fancy tree" width="30">
 </a>
 
