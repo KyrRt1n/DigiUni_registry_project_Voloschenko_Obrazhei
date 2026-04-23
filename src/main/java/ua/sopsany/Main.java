@@ -886,6 +886,7 @@ public class Main {
                 }
                 int tIdx = input.readInt("Your choice", 1, allT.size());
                 target.setHead(allT.get(tIdx-1));
+                allT.get(tIdx-1).setPosition("Head of " + target.getName());
                 System.out.println("Head updated.");
                 break;
             case 0:
