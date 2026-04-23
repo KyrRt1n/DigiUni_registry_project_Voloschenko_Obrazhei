@@ -23,7 +23,6 @@ public class FileStorageService {
     private static final Logger log = LoggerFactory.getLogger(FileStorageService.class); // Логування
     private ObjectMapper mapper;
 
-    private final Path dataDir = Paths.get("data");
     private final Path backupDir = Paths.get("data/backups");
     private final Path uniFilePath = Paths.get("data/university_data.json");
     private final Path usersFilePath = Paths.get("data/users_data.json");
@@ -40,6 +39,7 @@ public class FileStorageService {
         mapper.enable(SerializationFeature.INDENT_OUTPUT);
 
         try {
+            Path dataDir = Paths.get("data");
             if (!Files.exists(dataDir)) {
                 Files.createDirectories(dataDir);
             }

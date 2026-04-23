@@ -898,7 +898,7 @@ public class Main {
 
         System.out.println("Editing: " + target);
         System.out.println("1. Contacts");
-        System.out.println("2. Dean (assign from existing teachers)");
+        System.out.println("2. Decan (assign from existing teachers)");
         System.out.println("0. Cancel");
         int opt = input.readInt("Select option", 0, 2);
 
@@ -913,13 +913,14 @@ public class Main {
                     System.out.println("No teachers available. Add a teacher first.");
                     return;
                 }
-                System.out.println("Select new dean:");
+                System.out.println("Select new decan:");
                 for (int i = 0; i < allT.size(); i++) {
                     System.out.println((i+1) + ". " + allT.get(i).getLastname() + " " + allT.get(i).getName());
                 }
                 int tIdx = input.readInt("Your choice", 1, allT.size());
                 target.setDecan(allT.get(tIdx-1));
-                System.out.println("Dean updated.");
+                allT.get(tIdx-1).setPosition("Decan of " + target.getShortName());
+                System.out.println("Decan updated.");
                 break;
             case 0:
                 System.out.println("Update cancelled.");
