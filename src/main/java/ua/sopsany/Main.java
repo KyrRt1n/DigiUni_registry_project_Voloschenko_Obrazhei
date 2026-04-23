@@ -1044,6 +1044,8 @@ public class Main {
             case 3:
                 System.out.println("\n--- Students grouped by Faculty (A-Z) ---");
                 for (Faculty f : university.getFaculties()) {
+//              Faculty f = pickFaculty();
+//              if (f == null) return;
                     System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
                     List<Student> facStudents = f.getDepartments().stream()
                             .flatMap(d -> d.getStudents().stream())
