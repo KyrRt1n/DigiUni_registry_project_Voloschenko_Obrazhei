@@ -267,6 +267,8 @@ public class Main {
             switch (choice) {
                 case 1:
                     System.out.println("--- Adding New Teacher ---");
+                    Department targetDept = pickDepartment();
+                    if (targetDept == null) return;
                     String name = input.readString("Name");
                     String surname = input.readString("Surname");
                     String lastname = input.readString("Lastname");
@@ -285,7 +287,10 @@ public class Main {
 
                     try {
                         Repository.teacherRepo.add(newTeacher);
+                        if (targetDept.getTeachers() == null)
+                            targetDept.setTeachers(new ArrayList<>());
                         System.out.println("Teacher added successfully!");
+                        log.info("New teacher '{}' added to dept '{}'", newTeacher.getLastname(), targetDept.getName());
                     } catch (Exception e) {
                         System.out.println("Error: " + e.getMessage());
                     }
