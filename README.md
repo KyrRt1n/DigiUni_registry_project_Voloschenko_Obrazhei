@@ -186,8 +186,7 @@ DigiUni Registry/
    - [x] Колекції та дженеріки: Репозиторії Repository<T, ID>, обґрунтований вибір List/Set/Map, коректні equals()/hashCode().
    - [x] Stream API: Фільтрація, сортування, групування через стріми та лямбди.
    - [x] Дата та час: Використання LocalDate, LocalDateTime, розрахунок стажу/віку через Period/Duration.
-   - [x] Сучасна Java: Використання record (для Read-only даних), sealed класів, 
-   - Lombok.
+   - [x] Сучасна Java: Використання record (для Read-only даних), sealed класів, Lombok.
    - [x] Власні винятки (Exceptions), 
    - [x] логування через SLF4J + Log4j2 (у файл).
    - [x] Тестування: Не менше 20 unit-тестів (JUnit), включаючи параметризовані.
