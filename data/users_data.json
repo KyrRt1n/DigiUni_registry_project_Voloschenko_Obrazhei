@@ -1,4 +1,9 @@
 [ {
+  "login" : "Artem",
+  "passwordHash" : -1232331769,
+  "role" : "ADMIN",
+  "isBlocked" : true
+}, {
   "login" : "manager",
   "passwordHash" : -1075822310,
   "role" : "MANAGER",

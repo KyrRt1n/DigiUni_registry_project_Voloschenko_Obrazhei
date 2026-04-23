@@ -765,7 +765,7 @@ public class Main {
             String facShort = d.getFaculty() != null ? d.getFaculty().getShortName() : "?";
             System.out.println((i+1) + ". [" + facShort + "] " + d.getName());
         }
-        int idx = input.readInt("Your choice", 0, available.size() - 1);
+        int idx = input.readInt("Your choice", 0, available.size());
         Department target = available.get(idx-1);
 
         try {
@@ -1049,18 +1049,18 @@ public class Main {
                 break;
             case 3:
                 System.out.println("\n--- Students grouped by Faculty (A-Z) ---");
-                for (Faculty f : university.getFaculties()) {
-//              Faculty f = pickFaculty();
-//              if (f == null) return;
-                    System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
-                    List<Student> facStudents = f.getDepartments().stream()
+//                for (Faculty f : university.getFaculties()) {
+              Faculty fac = pickFaculty();
+              if (fac == null) return;
+                    System.out.println("\n[" + fac.getShortName() + " - " + fac.getFullName() + "]");
+                    List<Student> facStudents = fac.getDepartments().stream()
                             .flatMap(d -> d.getStudents().stream())
                             .sorted(java.util.Comparator.comparing(Person::getLastname))
                             .toList();
 
                     if (facStudents.isEmpty()) System.out.println("  No students found.");
                     else facStudents.forEach(s -> System.out.println("  " + s));
-                }
+//                }
                 return;
 
             case 4:

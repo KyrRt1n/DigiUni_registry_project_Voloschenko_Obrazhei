@@ -278,6 +278,20 @@
         "studentID" : "250007",
         "educationForm" : "BUDGET",
         "studentState" : "STUDYING"
+      }, {
+        "name" : "Hryn",
+        "surname" : "Hryn",
+        "lastname" : "Hryn",
+        "birthday" : "2007-07-07",
+        "email" : "av@av",
+        "phone" : "7891237893",
+        "id" : 768213,
+        "course" : 1,
+        "group" : "IPZ-B",
+        "entryYear" : 2025,
+        "studentID" : "123123",
+        "educationForm" : "BUDGET",
+        "studentState" : "STUDYING"
       } ],
       "teachers" : [ {
         "name" : "Mykola",
@@ -580,6 +594,20 @@
         "studentID" : "250014",
         "educationForm" : "BUDGET",
         "studentState" : "STUDYING"
+      }, {
+        "name" : "Vlad",
+        "surname" : "Sergiyovich",
+        "lastname" : "Hryn",
+        "birthday" : "2007-09-25",
+        "email" : "LuxonGames@gmail",
+        "phone" : "+380973274136",
+        "id" : 973274136,
+        "course" : 1,
+        "group" : "MANEG-A",
+        "entryYear" : 2025,
+        "studentID" : "973274136",
+        "educationForm" : "BUDGET",
+        "studentState" : "STUDYING"
       } ],
       "teachers" : [ {
         "name" : "Tetyana",
@@ -627,20 +655,6 @@
         "workLoad" : 24
       },
       "students" : [ {
-        "name" : "Vlad",
-        "surname" : "Sergiyovich",
-        "lastname" : "Hryn",
-        "birthday" : "2007-09-25",
-        "email" : "LuxonGames@gmail",
-        "phone" : "+380973274136",
-        "id" : 235346456,
-        "course" : 1,
-        "group" : "MANEG-A",
-        "entryYear" : 2025,
-        "studentID" : "235346456",
-        "educationForm" : "BUDGET",
-        "studentState" : "STUDYING"
-      }, {
         "name" : "Ihor",
         "surname" : "Bohdanovych",
         "lastname" : "Khomenko",
@@ -887,7 +901,7 @@
         "email" : "n.horobets@ukma.edu.ua",
         "phone" : "+380631222008",
         "id" : 30000008,
-        "position" : "Senior Lecturer",
+        "position" : "Head of Sociology",
         "academicDegree" : "Candidate of Sciences",
         "academicTitle" : "Associate Professor",
         "dateOfEmployment" : "2014-09-01",
@@ -900,7 +914,7 @@
         "email" : "o.chumak@ukma.edu.ua",
         "phone" : "+380631222009",
         "id" : 30000009,
-        "position" : "Professor",
+        "position" : "Decan of FoS",
         "academicDegree" : "Doctor of Economics",
         "academicTitle" : "Professor",
         "dateOfEmployment" : "2007-09-01",
