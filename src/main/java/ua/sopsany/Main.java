@@ -1,20 +1,15 @@
 package ua.sopsany;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import ua.sopsany.dto.*;
-import ua.sopsany.models.*;
-import ua.sopsany.utils.*;
 import ua.sopsany.auth.*;
+import ua.sopsany.dto.*;
 import ua.sopsany.exceptions.*;
+import ua.sopsany.models.*;
+import ua.sopsany.network.*;
 import ua.sopsany.reflection.*;
+import ua.sopsany.utils.*;
 import org.slf4j.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Duration;
-import java.util.Optional;
-import ua.sopsany.network.UniversityServer;
+import java.time.*;
+import java.util.*;
 
 public class Main {
 
@@ -1170,9 +1165,9 @@ public class Main {
                 return;
         }
 
-        if (!resultStud.isEmpty() && resultStud.size() >= 1)
+        if (!resultStud.isEmpty())
             resultStud.forEach(s -> System.out.println("FOUND: " + s));
-        else if(!resultTeach.isEmpty() && resultTeach.size() >= 1)
+        else if(!resultTeach.isEmpty())
             resultTeach.forEach(t -> System.out.println("FOUND: " + t));
         else
             System.out.println("Person not found.");
