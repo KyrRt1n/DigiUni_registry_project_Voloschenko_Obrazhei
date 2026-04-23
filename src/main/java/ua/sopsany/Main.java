@@ -1079,24 +1079,29 @@ public class Main {
             case 7:
                 System.out.println("\n--- Teachers grouped by Faculty (A-Z) ---");
                 for (Faculty f : university.getFaculties()) {
-                    System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
+//                Faculty f = pickFaculty();
+//                if (f == null) return;
 
-                    List<Teacher> facTeachers = new ArrayList<>();
 
-                    if (f.getDecan() != null) facTeachers.add(f.getDecan());
+                System.out.println("\n[" + f.getShortName() + " - " + f.getFullName() + "]");
 
-                    for (Department d : f.getDepartments()) {
-                        if (d.getHead() != null) facTeachers.add(d.getHead());
-                        if (d.getTeachers() != null) facTeachers.addAll(d.getTeachers());
-                    }
+                List<Teacher> facTeachers = new ArrayList<>();
 
-                    List<Teacher> sortedTeachers = facTeachers.stream()
-                            .distinct()
-                            .sorted(java.util.Comparator.comparing(Person::getLastname))
-                            .toList();
+                if (f.getDecan() != null) facTeachers.add(f.getDecan());
 
-                    if (sortedTeachers.isEmpty()) System.out.println("  No teachers found in this faculty.");
-                    else sortedTeachers.forEach(t -> System.out.println("  " + t));
+                for (Department d : f.getDepartments()) {
+                    if (d.getHead() != null) facTeachers.add(d.getHead());
+                    if (d.getTeachers() != null) facTeachers.addAll(d.getTeachers());
+                }
+
+                List<Teacher> sortedTeachers = facTeachers.stream()
+                        .distinct()
+                        .sorted(java.util.Comparator.comparing(Person::getLastname))
+                        .toList();
+
+                if (sortedTeachers.isEmpty())
+                    System.out.println("  No teachers found in this faculty.");
+                else sortedTeachers.forEach(t -> System.out.println("  " + t));
                 }
                 return;
 
@@ -1304,9 +1309,9 @@ public class Main {
         }
 
         System.out.println("Available backups (newest first):");
-        for (int i = 0; i < backups.size(); i++) {
+        for (int i = 0; i < backups.size(); i++)
             System.out.println((i+1) + ". " + backups.get(i).getFileName());
-        }
+
         System.out.println(0 + ". Cancel");
 
         int idx = input.readInt("Select backup", 0, backups.size()+1);
